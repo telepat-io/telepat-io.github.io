@@ -1,0 +1,15 @@
+extends layouts/_default
+block content
+  .text-center.padded
+    img.faded(src="/images/github.png" width=256 height=256)
+    h1 Coming soon on Github
+    form.form-inline(method="post" action="http://appscend.us2.list-manage.com/subscribe/post?u=de3298de9232b91872f2c5529&amp;id=2cf33c9443")
+      div(style="position: absolute; left: -5000px;")
+        input(type="text" name="b_de3298de9232b91872f2c5529_2cf33c9443" tabindex="-1" value="")
+      .form-group
+        input.form-control(type="email" id="header_email" name="EMAIL" placeholder="Your email address" required)
+      .form-group
+        button.btn.btn-default(type="submit" name="subscribe") Get notified
+
+block scripts
+  script(src="scripts/intro-menu.js")

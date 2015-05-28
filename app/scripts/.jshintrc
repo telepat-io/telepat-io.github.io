@@ -1,0 +1,7 @@
+{
+  "jquery": true,
+  "predef": [
+    "Modernizr",
+    "define"
+  ]
+}
