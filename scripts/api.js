@@ -10,6 +10,8 @@ require([
     'bootstrap',
     'pathToRegexp'
 ], function($, _, locale, Handlebars, prettyPrint, apiProject, apiData, sampleRequest) {
+    $('ul.sidebar-nav.first a').removeClass('selected');
+    $('#gamma-menu').addClass('selected');
 
     // load google web fonts
     loadGoogleFontCss();
