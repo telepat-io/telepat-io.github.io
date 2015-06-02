@@ -36,14 +36,14 @@
 <body>
   <div id="wrapper">
     <div id="sidebar-wrapper"><a href="http://telepat.io" title="Telepat Real-Time Backend">
-        <div data-height="60" data-stroke-color="#000000" class="telepat-logo"></div></a>
+        <div data-height="70" data-stroke-color="#000000" class="telepat-logo"></div></a>
       <script type="text/javascript" src="http://telepat.io/js/telepat-logo.js"></script>
       <ul class="sidebar-nav first">
-        <li><a id="alpha-menu" href="/" class="alpha selected">Introduction</a></li>
+        <li><a id="alpha-menu" href="/" class="alpha">Introduction</a></li>
         <li><a id="beta-menu" href="/intro.html" class="beta">Getting started</a></li>
         <li><a id="gamma-menu" href="/api.html" class="gamma">
              
-            API reference <sup><span class="label label-warning">preview</span></sup></a></li>
+            API reference <span style="color: black" class="label label-warning">preview</span></a></li>
       </ul>
     </div>
     <div id="page-content-wrapper">
@@ -209,4 +209,13 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
   <script src="/scripts/require.config.js"></script>
+  <script src="scripts/home-menu.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-21406959-6', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>

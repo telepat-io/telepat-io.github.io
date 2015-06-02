@@ -4,6 +4,7 @@ block content
     .row
       .col-lg-3
         script#template-sidenav(type="text/x-handlebars-template").
+          <div id="second-navbar-container" style="overflow: scroll">
           <ul class="sidebar-nav second">
           {{#foreach nav}}
             {{#if title}}
@@ -30,6 +31,7 @@ block content
             {{/if}}
           {{/foreach}}
           </ul>
+          </div>
 
         script#template-project(type="text/x-handlebars-template").
           <div class="pull-left">

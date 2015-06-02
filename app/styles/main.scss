@@ -101,7 +101,7 @@ html,body {
 }
 
 ul.sidebar-nav {
-  margin: 30px 10px 5px 0;
+  margin: 30px 0px 5px 0;
   padding: 0;
   list-style: none;
 
@@ -171,7 +171,6 @@ ul.sidebar-nav {
 }
 
 ul.sidebar-nav.second {
-  margin-top: 105px;
   li {
     a {
       color: #6f6f6f;
@@ -315,6 +314,10 @@ table {
     padding: 2px 8px;
     border: #e0e0e0 1px solid;
   }
+}
+
+img.pull-right {
+  margin-left: 20px;
 }
 
 @media(min-width:768px) {

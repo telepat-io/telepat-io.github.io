@@ -10,7 +10,8 @@ require.config({
     locales: '../locales/locale',
     pathToRegexp: 'pathtoregexp/pathtoregexp',
     utilsSampleRequest: '../scripts/send_sample_request',
-    prettify: 'google-code-prettify/src/prettify'
+    prettify: 'google-code-prettify/src/prettify',
+    stickUp: 'stickUp2/build/js/stickUp.min'
   },
   shim: {
     bootstrap: {
@@ -28,6 +29,9 @@ require.config({
     },
     prettify: {
       exports: 'prettyPrint'
+    },
+    stickUp: {
+      deps: ['jquery']
     }
   },
   urlArgs: 'v=' + (new Date()).getTime(),

@@ -5,58 +5,58 @@ block content
       .col-lg-3
         ul.sidebar-nav.second
           li
-            a.alpha.selected(href="/") Introduction
+            a.alpha(href="#introduction") Introduction
             ul
               li
-                a.alpha(href="/#introduction") Open source
+                a.alpha(href="#open-source") Open source
               li
-                a.alpha(href="/#open-source") Backend stack
+                a.alpha(href="#backend-stack") Backend stack
               li
-                a.alpha(href="/#real-time") Real time
+                a.alpha(href="#real-time") Real time
               li
-                a.alpha(href="/#flexible-deployment") Flexible deployment
+                a.alpha(href="#flexible-deployment") Flexible deployment
               li
-                a.alpha(href="/#simple-scaling") Simple scaling
+                a.alpha(href="#simple-scaling") Simple scaling
           li
-            a.beta(href="/#objectives") Objectives
+            a.beta(href="#objectives") Objectives
           li
-            a.gamma(href="/#information-design") Information design
+            a.gamma(href="#information-design") Information design
           li
-            a.delta(href="/#architecture") Architecture
+            a.delta(href="#architecture") Architecture
             ul
               li
-                a.delta(href="/#the-front-facing-endpoint") The front-facing endpoint
+                a.delta(href="#the-front-facing-endpoint") The front-facing endpoint
               li
-                a.delta(href="/#the-datamessaging-queue") The messaging queue
+                a.delta(href="#the-datamessaging-queue") The messaging queue
               li
-                a.delta(href="/#the-aggregation-layer") The aggregation layer
+                a.delta(href="#the-aggregation-layer") The aggregation layer
               li
-                a.delta(href="/#the-persistence-layer") The persistence layer
+                a.delta(href="#the-persistence-layer") The persistence layer
               li
-                a.delta(href="/#the-synchronization-layer") The synchronization layer
+                a.delta(href="#the-synchronization-layer") The synchronization layer
           li
-            a.epsilon(href="/#use-cases") Use cases
+            a.epsilon(href="#use-cases") Use cases
       #main-content.col-lg-9
         img.main-logo(width=202 height=123 src="/images/logo_telepat_light@2x.png")
-        h1#introduction Introduction
+        h1.section#introduction Introduction
         p Telepat is an open-source backend stack, designed to deliver information and information updates in real-time to clients, while allowing for flexible deployment and simple scaling.
         p Let&rsquo;s break that down:
-        h3#open-source Open-source
+        h3.section#open-source Open-source
         p
           | We believe that the massive proliferation of free software we&rsquo;ve witnessed in the last decades is changing the face of the world as we know it. Today&rsquo;s open source components - created, tested and maintained by international communities - are the main driver that stands behind the rise of a myriad of new products and services, that could have never iterated or scaled with such agility without relying on the solid foundations that such components provide.
-        h3#backend-stack Backend stack
+        h3.section#backend-stack Backend stack
         p
           | The operations of storing, retrieving and manipulating data constitute the core layer for most of today&rsquo;s software products. While this layer is basically an orchestrator between various database services and transport services, there is significant effort required in setting up all the connecting boilerplate code. This amount of boilerplate needed makes it unfeasible to test several database components, for example, to find the perfect fit for specific use cases. And while there are now many services and stacks that significantly accelerate this part of development, most of them don&rsquo;t provide any choice as to the specific components used behind the scenes.
-        h3#real-time Real time
+        h3.section#real-time Real time
         p
           | The standard model that has powered web services for years now is pull-based - that is, clients ask the server for the information they need and the server responds with a static snapshot of the data that marks the end of the transaction. Refreshing this stale data means the client needs to request all of the information yet again, in another transaction. While this has been sufficient in most cases until now, the rise of the social web and on-demand economy is marking the transition to a new paradigm, where data needs to be actively pushed from the backend to all subscribing clients in real-time.
-        h3#flexible-deployment Flexible deployment
+        h3.section#flexible-deployment Flexible deployment
         p
           | Software components that handle backend services have a great value offering for developers, as they significantly reduce the effort required for setting up a new project. However, an equal amount of attention needs to be given to taking those projects from early development to later production stages, where apps need to be deployed on various infrastructures, from self-managed machines to cloud providers. Modularization and flexibility in component choice needs to be complemented by flexibility in deployment options, in order to provide safety and simplicity for the whole project lifecycle.
-        h3#simple-scaling Simple scaling
+        h3.section#simple-scaling Simple scaling
         p
           | Probably the most important aspect in the design of a system that has real-time ambitions is the ability to rapidly and easily scale each level of the architecture in a mode that&rsquo;s responsive to the workload the system is instantly under. From the database to the workers serving requests, all of the nodes that make up the system need to have reliable underlying scaling strategies that focus on uptime and availability even in the situation of rapid traffic surges.
-        h1#objectives Objectives
+        h1.section#objectives Objectives
         p
           | Telepat is designed as a multi-layer system, with the following main objectives in mind:
         ul
@@ -88,7 +88,7 @@ block content
           li
             | Client libraries should also use a local persistence layer for offline availability.
           li The system should implement access control lists for objects.
-        h1#information-design Information design
+        h1.section#information-design Information design
         ul
           li
             | All information in the Telepat system is encoded using 
@@ -129,9 +129,11 @@ block content
           li
             strong ACLs
             |  are defined for each object type. Read or write permissions can be assigned to anonymous devices, logged-in users or administrators.
-        h1#architecture Architecture
+        h1.section#architecture Architecture
+
         p The layers that make up the architecture of Telepat are:
-        h3#the-front-facing-endpoint The front-facing endpoint
+        h3.section#the-front-facing-endpoint The front-facing endpoint
+        img.pull-right(src='/images/schema_01@2x.png' width=250)
         p
           | Powered by 
           a(href='http://expressjs.com') Express
@@ -155,7 +157,9 @@ block content
             | The persistence layer, to instantly serve the current information snapshot to clients that make requests
           li
             | The data queue, where all object updates received from clients are stored for aggregation
-        h3#the-datamessaging-queue The data/messaging queue
+        .clearfix
+        h3.section#the-datamessaging-queue The data/messaging queue
+        img.pull-right(src='/images/schema_03@2x.png' width=221)
         p
           | The data queue layer communicates with the front-end and the aggregation layers, and has multiple purposes within Telepat:
         ul
@@ -166,19 +170,25 @@ block content
           li
             | It also works as an internal job dispatching queue, for tasks that need to be executed asynchronously, without blocking the system (for example, sending aggregated updates back to clients).
         p This layer is implemented using 3rd party components or services.
-        h3#the-aggregation-layer The aggregation layer
+        .clearfix
+        h3.section#the-aggregation-layer The aggregation layer
+        img.pull-right(src='/images/schema_02@2x.png' width=221)
         p
           | The aggregation layer is a core part of Telepat, implemented using 
           a(href='https://nodejs.org/') Node.js
           | . It continuously fetches data updates enqueued on the data layer, and merges them into larger chunks that constantly reflect the latest object states and are ready for persisting and sending to subscribing clients. The chunks are also temporarily stored using the persistence layer.
         p
           | This layer also uses the data queue to send a signal to the synchronization layer whenever new information updates are available and ready for deployment.
-        h3#the-persistence-layer The persistence layer
+        .clearfix
+        h3.section#the-persistence-layer The persistence layer
+        img.pull-right(src='/images/schema_05@2x.png' width=221)
         p
           | This layer is implemented using 3rd party components or services, and handles storing and retrieving all information that runs though Telepat. The constraint imposed by this layer is using components that support storing JSON objects in a key-value fashion.
         p
           | Also, depending on the types of filtering that the application will require, some components may have better performance than others (in doing, for example, full text searches over stored objects).
-        h3#the-synchronization-layer The synchronization layer
+        .clearfix
+        h3.section#the-synchronization-layer The synchronization layer
+        img.pull-right(src='/images/schema_04@2x.png' width=260)
         p
           | This is also a core part of Telepat, implemented using 
           a(href='https://nodejs.org/') Node.js
@@ -196,7 +206,7 @@ block content
             | Permanent transports - basically nodes that send push notification to devices that are able to receive them. These allow performing data synchronization within apps that are not in current active use, such as mobile applications that are backgrounded or inactive.
           li
             | Volatile transports, implementing communication using websockets for applications that are currently active or within platforms that do not support push notifications, such as websites.
-        h1#use-cases Use cases
+        h1.section#use-cases Use cases
         p Telepat is designed to be a best fit for applications that:
         ul
           li Are data-driven
@@ -218,3 +228,6 @@ block content
           li Geotracking
           li Real-time bookings or bidding
           li Social gaming
+
+block scripts
+  script(src="scripts/home.js")
