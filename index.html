@@ -75,6 +75,7 @@
                       </ul>
                     </li>
                     <li><a href="#use-cases" class="epsilon">Use cases</a></li>
+                    <li><a href="#comparison" class="zeta">Comparison</a></li>
                   </ul>
                 </div>
                 <div id="main-content" class="col-lg-9"><img width="202" height="123" src="/images/logo_telepat_light@2x.png" class="main-logo">
@@ -191,15 +192,90 @@
                     <li>Require flexibility regarding the infrastructure chosen for production</li>
                   </ul>
                   <p>Some examples of applications that can make good use of Telepat are:</p>
+                  <h3>Messaging and chat</h3>
+                  <p>Making a public, many to many chat app is simple. But what if you want to build a chat system to allow users to talk 1-on-1 with their Facebook friends? Let's consider an example of two friends, Alice and Bob, doing just that using Telepat. We'll name devices after their users, just to keep thing simple.</p>
                   <ul>
-                    <li>Messaging and chat</li>
-                    <li>On-demand economy</li>
-                    <li>Social platforms</li>
-                    <li>Second-screen companion apps</li>
-                    <li>Geotracking</li>
-                    <li>Real-time bookings or bidding</li>
-                    <li>Social gaming</li>
+                    <li>First, Bob logs in to Facebook, and he receives his authentication token.</li>
+                    <li>Bob then logs in to Telepat, using the authentication token from Facebook.</li>
+                    <li>When connected, Bob gets a list of his Facebook friends that also have Telepat user accounts (i.e. friends of his that have already logged in to Telepat)</li>
+                    <li>To initiate a conversation, Bob creates a new "conversation" object, then adds Alice to the array of object owners for the new object. The permissions are set so that the object is only visible for the owners.</li>
+                    <li>If Alice is also connected (and subscribed to her conversations on Telepat), she is instantly notified about the new conversation with Bob. Here, you could use a boolean on the conversation object to allow Alice to "accept" the request before chatting.</li>
+                    <li>Two booleans on the conversation object could indicate if anyone is typing at the moment. The second Bob starts typing, he also sets his boolean to true, and that's instantly reflected in Alice's local version of the object, and then in the interface.</li>
+                    <li>When Bob finishes typing, he'll add a new "message" object to Telepat. Conversations are connected to messages with a "has many" relationship, so Bob will set the parent_id of the new message to the conversation object id.</li>
+                    <li>Alice is not only subscribed to her conversations, but also to messages for each of those conversations, so she instantly gets a callback notifying her of the new message. Since messages are generic JSON objects, they can be used to encapsulate not just text but also images, videos, maps or any other content.</li>
+                    <li>Alice also gets notified whenever any object changes, so you might as well allow users to edit their messages as a bonus feature!</li>
                   </ul>
+                  <h3>Social gaming</h3>
+                  <p>But after hooking up their conversation, why not let them engage more? Here's how Bob and Alice could play a fast game of tic-tac-toe together, using Telepat:</p>
+                  <ul>
+                    <li>After logging in with Facebook and connecting to Alice like in the chat example, Bob adds a new message with a specific "type" property value, indicating that he wants to play tic-tac-toe.</li>
+                    <li>The object has additional properties, modeling each space being marked (and by who) on not. Also, Alice is added to the message object owners, allowing her to make edits on the object.</li>
+                    <li>Bob and Alice take turns editing properties of the shared object as they mark spaces. They each get instantly notified on any edits to the object, and are able to update the game interface smoothly.</li>
+                    <li>When one of them wins, why not add some properties on the main conversation object, allowing them to persistently keep score of the games they played?</li>
+                  </ul>
+                  <h3>On-demand economy</h3>
+                  <p>So how would you build your basic Uber-like service, where demand meets supply in real time, over Telepat? Let's look at the flow of data.</p>
+                  <ul>
+                    <li>Users log in to Telepat using their Facebook accounts. Every user has access to the object representing his own profile - it's here where you can hold a variable to distinguish "buyers" from "sellers".</li>
+                    <li>Buyers place orders by creating "order" objects in Telepat. An order contains basic identification information about the customer, plus additional details about the order (like the buyer's geocoordinates, or preferences).</li>
+                    <li>All sellers are subscribed to orders, and learn about new ones in real time. They could also use a filter on orders, to only get ones issued near them for example.</li>
+                    <li>Any seller can add "offer" objects in Telepat, containing identification information and offer details. Orders are related to offers with a "has many" relationship, so the offer object will need to have the parent_id value set to the proper order object id.</li>
+                    <li>Buyers subscribe to offers related to their own orders, and are notified instantly about new ones.</li>
+                    <li>When a buyer decides for an offer, he can delete the original order object or he can close it, using a status variable - in both cases, all sellers get callbacks about the change, so they know the order has expired.</li>
+                    <li>The buyer then creates a new "booking" object in Telepat, makes it private and adds the seller user id to the list of the booking's owners. Buyers subscribe to bookings, so the lucky winner instantly knows about his new deal.</li>
+                    <li>The booking object is then shared between the two users, facilitating real-time exchange between them until the service has been delivered and the process is done.</li>
+                  </ul>
+                  <h3>Second-screen companion apps</h3>
+                  <p>Telepat shines when it comes to traffic spikes like ones you get during a popular live tv show, in a companion app that allows interaction. Here's an example of handling common usage scenarios for second-screen apps:</p>
+                  <ul>
+                    <li>Users log in to Telepat using their Facebook accounts. Shows are represented by contexts inside Telepat, so after login, users start listening for global context changes, as that would signal that a new show is currently available for "check-in".</li>
+                    <li>Once a context becomes available, users can subscribe to "event" objects on that specific context - that's basically the "check-in" process, after the subscribe, users will be notified of any new events, as they happen live.</li>
+                    <li>Admins publish events on Telepat, marking importent moments in the show timeline. Events are generic JSON objects, they can be used to encapsulate not just text but also images, videos, maps or any other content.</li>
+                    <li>Besides being able to push second-screen content in real-time to viewers, admins can also allow them to interact by participating on polls. Polls can be special types of events, and could also have a series of extra properties to store the possible answers and each answer count.</li>
+                    <li>When receiving this special type of event, users are able to vote by sending increment operations on properties holding vote counts.</li>
+                    <li>Increments are scalably queued and aggregated by Telepat, and updated values are sent to all subscribers that are able to see the massive voting results in real-time.</li>
+                  </ul>
+                  <h3>IoT, sensor tracking, geo tracking</h3>
+                  <p>Any device that talks HTTP can also talk to Telepat. Basic communication (registering, logging in, administration tasks and data objects CRUD) is classically implemented using client-server HTTP requests. Real-time data object updates are sent via platform-specific adapters, but any device can fallback to HTTP long-polling. </p>
+                  <p>Sensors can individually or collaboratively work on data objects that are replicated in real-time to all subscribing devices, allowing Telepat to become:</p>
+                  <ul>
+                    <li>An inter-device synchronization and communication layer, allowing the implementation of logic like blinking a LED when values read from a sensor exceed a certain threshold.</li>
+                    <li>A data management layer, allowing the collection and search of generic JSON data objects according to rules described by a schema. Telepat can also be scaled to handle large, enterprise-level data volumes coming from many individual sensors.</li>
+                    <li>A real-time data visualization layer, built for the web using the Telepat JavaScript client.</li>
+                  </ul>
+                  <h1 id="comparison" class="section">Comparison</h1>
+                  <p>Like other software components out there, open-source or web services, Telepat is also meant to accelerate the development of modern web and mobile applications, while focusing on providing real-time data update functionalities to developers. Many of these components are easy to use, elegant and solid, but there are a lot of aspects that set them apart, so it always makes sense to investigate what the best solution is for your specific requirements.</p>
+                  <p>Let's take a look at what sets Telepat apart from the most popular existing solutions.</p>
+                  <hr><img src="/images/meteor-logo.png" width="150">
+                  <p><br>
+                    <ul>
+                      <li>Meteor is a solution for both frontend and backend development, while Telepat focuses on backend functionality.</li>
+                      <li>When using Meteor in the backend, you also need to use it in your frontend app. Telepat lets you use any frontend framework.</li>
+                      <li>Meteor is a solution for creating webapps, and running on mobile devices works only via webviews. Telepat enables native clients and native functionality for mobile or embedded.</li>
+                      <li>Meteor uses database polling or oplog tailing to provide real-time updates. Telepat monitors and aggregates updates before adding them to the database, thus achieving greater database and overall performance.</li>
+                      <li>Telepat is focused on creating individually scalable service layers.</li>
+                      <li>Telepat allows using adapters for 3rd party databases, messaging queues and push transports.</li>
+                    </ul>
+                  </p>
+                  <hr><img src="/images/deployd-logo.png" width="120">
+                  <p><br>
+                    <ul>
+                      <li>Deployd is close to Telepat's design. It's focused on the backend functionality, it's unopinionated on the frontend and can have native clients for specific platforms.</li>
+                      <li>Like Telepat, Deployd also helps with data management (by allowing devs to define a schema), and offers an open-source web management dashboard.</li>
+                      <li>However, unlike Telepat, real-time functionality is provided via database polling, and that is very problematic at scale.</li>
+                      <li>Also, Deployd doesn't aim to provide full, real-time object replication but exposes a simple, ready to use pub-sub implementation.</li>
+                      <li>Unlike Telepat, Deployd has no straightforward scaling strategy, and does not allow the use of 3rd party adapters.</li>
+                    </ul>
+                  </p>
+                  <hr><img src="/images/derby-logo.png" width="150">
+                  <p><br>
+                    <ul>
+                      <li>Like Meteor and unlike Telepat, DerbyJS is a full-stack framework for writing webapps. It dictates the way you develop your app, from backend to frontend. Telepat lets you use any frontend framework, and enables native clients and native functionality for mobile or embedded.</li>
+                      <li>Like Telepat, DerbyJS allows using 3rd party database components via livedb.</li>
+                      <li>Unlike Telepat, DerbyJS doesn't directly provide a scaling strategy.</li>
+                      <li>Telepat allows using adapters for 3rd party databases, messaging queues and push transports.</li>
+                    </ul>
+                  </p>
                 </div>
               </div>
             </div>

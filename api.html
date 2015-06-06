@@ -153,9 +153,9 @@
                             <strong>{{article.version}}</strong> <span class="caret"></span>
                           </button>
                           <ul class="versions dropdown-menu open-left">
-                            <li class="disabled"><a href="#">{{__ "compare changes to:"}}</a></li>
+                            <li class="disabled"><a class="skip-link" href="#">{{__ "compare changes to:"}}</a></li>
                     {{#each versions}}
-                            <li class="version"><a href="#">{{this}}</a></li>
+                            <li class="version"><a class="skip-link" href="#">{{this}}</a></li>
                     {{/each}}
                           </ul>
                         </div>

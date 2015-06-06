@@ -210,7 +210,7 @@ define({ "api": [
     "groupTitle": "Admin"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/admin/apps",
     "title": "Applications",
     "description": "<p>Lists the application for the current admin</p> ",
@@ -493,7 +493,7 @@ define({ "api": [
     "groupTitle": "Admin"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/admin/me",
     "title": "Me",
     "description": "<p>Gets information about the logged admin</p> ",
@@ -759,7 +759,7 @@ define({ "api": [
     "groupTitle": "Context"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/context/all",
     "title": "GetContexts",
     "description": "<p>Get all contexsts</p> ",
@@ -1081,7 +1081,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Client Request",
-        "content": "{\n\t\t\"id\": 1,\n\t\t\"context\": 1,\n\t\t\"model\": \"comment\",\n\t\t\"filters\": {\n\t\t\t\"user\": 2,\n\t\t\t\"event_id\": 1,\n\t\t\t\"query\": {\n\t\t\t\t\"or\": [\n\t\t\t\t\t{\n\t\t\t\t\t  \"and\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t  \"is\": {\n\t\t\t\t\t\t\t\"gender\": \"male\",\n\t\t\t\t\t\t\t\"age\": 23\n\t\t\t\t\t\t  }\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t  \"range\": {\n\t\t\t\t\t\t\t\"experience\": {\n\t\t\t\t\t\t\t  \"gte\": 1,\n\t\t\t\t\t\t\t  \"lte\": 6\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t  }\n\t\t\t\t\t\t}\n\t\t\t\t\t  ]\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t  \"and\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t  \"like\": {\n\t\t\t\t\t\t\t\"image_url\": \"png\",\n\t\t\t\t\t\t\t\"website\": \"png\"\n\t\t\t\t\t\t  }\n\t\t\t\t\t\t}\n\t\t\t\t\t  ]\n\t\t\t\t\t}\n\t\t\t\t  ]\n\t\t\t}\n\t\t}\n}",
+        "content": "{\n\t\t\"channel\": {\n\t\t\t\"id\": 1,\n\t\t\t\"context\": 1,\n\t\t\t\"model\": \"comment\",\n\t\t\t\"parent\": {\n\t\t\t\t\"id\": 1,\n\t\t\t\t\"model\": \"event\"\n\t\t\t},\n\t\t\t\"user\": 2\n\t\t}\n\t\t\"filters\": {\n\t\t\t\"or\": [\n\t\t\t\t{\n\t\t\t\t\t\"and\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t  \"is\": {\n\t\t\t\t\t\t\t\"gender\": \"male\",\n\t\t\t\t\t\t\t\"age\": 23\n\t\t\t\t\t\t  }\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t  \"range\": {\n\t\t\t\t\t\t\t\"experience\": {\n\t\t\t\t\t\t\t  \"gte\": 1,\n\t\t\t\t\t\t\t  \"lte\": 6\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t  }\n\t\t\t\t\t\t}\n\t\t\t\t\t  ]\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t  \"and\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t  \"like\": {\n\t\t\t\t\t\t\t\"image_url\": \"png\",\n\t\t\t\t\t\t\t\"website\": \"png\"\n\t\t\t\t\t\t  }\n\t\t\t\t\t\t}\n\t\t\t\t\t  ]\n\t\t\t\t\t}\n\t\t\t\t  ]\n\t\t}\n}",
         "type": "json"
       }
     ],
