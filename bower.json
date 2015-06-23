@@ -9,6 +9,7 @@
     "handlebars": "~3.0.3",
     "lodash": "~3.9.3",
     "google-code-prettify": "~1.0.4",
-    "stickUp2": "~2.2.0"
+    "stickUp2": "~2.2.0",
+    "pathtoregexp": "~1.0.3"
   }
 }

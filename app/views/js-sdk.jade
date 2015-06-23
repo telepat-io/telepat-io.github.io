@@ -1,0 +1,8 @@
+extends layouts/_default
+block content
+  .container-fluid(style="margin:0px;padding:0px;")
+    iframe(src="javascript-sdk/lib/telepat.js.html" frameborder=0 onload="this.width=screen.width-270;this.height=screen.height-100;")
+        
+        
+block scripts
+  script(src="scripts/js-sdk.js")
