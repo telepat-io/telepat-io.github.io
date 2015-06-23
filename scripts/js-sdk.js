@@ -3,7 +3,7 @@ require(['jquery'], function($) {
     var file = window.location.hash.replace('#', '');
     if (file === '')
       file = 'telepat';
-    $('#iframe').attr('src', 'javascript-sdk/lib/' + file + '.js.html');
+    $('#iframe').attr('src', 'javascript-sdk/' + file + '.js.html');
   }
 
   $('#delta-menu').addClass('selected');
