@@ -1,4 +1,14 @@
 require(['jquery'], function($) {
+  function updateFile() {
+    var file = window.location.hash.replace('#', '');
+    if (file === '')
+      file = 'telepat';
+    $('#iframe').attr('src', 'javascript-sdk/lib/' + file + '.js.html');
+  }
+
   $('#delta-menu').addClass('selected');
-  frames[0].window.eval($(frames[0].document.getElementsByClassName("dir")[0]).addClass('open'));
+  updateFile();
+  $(window).on('hashchange', function() {
+    updateFile();
+  });
 });
