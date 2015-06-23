@@ -3,13 +3,13 @@
 <head>
   <title>channel.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" media="all" href="doc-style.css" />
-  <script src="doc-filelist.js"></script>
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "", thisFile = "projects/Telepat/javascript-sdk//channel.js", defaultSidebar = true;
+    var relativeDir = "../", thisFile = "projects/Telepat/javascript-sdk/lib/channeljs", defaultSidebar = true;
   </script>
-  <script src="doc-script.js"></script>
-  <link rel="stylesheet" href="custom.css" />
+  <script src="../doc-script.js"></script>
+  <link rel="stylesheet" href="../custom.css" />
 </head>
 <body>
   <div id="sidebar_wrapper">
@@ -20,7 +20,7 @@
     <div id="tree"></div>
     <div id="headings">
       <div class="heading h1">
-        <a href="#telepat%20channel%20object">Telepat Channel Object</a>
+        <a href="#telepat%20channel%20class">Telepat Channel Class</a>
       </div>
       <div class="heading h2">
         <a href="#channel%20constructor">Channel Constructor</a>
@@ -60,10 +60,10 @@
   <tbody>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="telepat%20channel%20object">
+<div class="pilwrap" id="telepat%20channel%20class">
   <h1>
-    <a href="#telepat%20channel%20object" name="telepat%20channel%20object" class="pilcrow">&#182;</a>
-    Telepat Channel Object
+    <a href="#telepat%20channel%20class" name="telepat%20channel%20class" class="pilcrow">&#182;</a>
+    Telepat Channel Class
   </h1>
 </div>
 
@@ -496,7 +496,7 @@
 </div>
 
 
-<p>Use the <code>Channel.on('update', ...)</code> function to subscribe to object updates. This will only notify you of changes made from the 'outside' - don't expect events to be triggered on changes you make to objects.</p>
+<p>Use the <code>Channel.on('update', ...)</code> function to subscribe to object updates. This will only notify you of changes received from the 'outside' - you'll only see events when the backend notifies the client that there are updates available, either made by you or by someone else.</p>
 
 
 <div class="highlight"><pre><code><span class="nx">Channel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">parentId</span><span class="p">,</span> <span class="nx">parentObject</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{</span>
