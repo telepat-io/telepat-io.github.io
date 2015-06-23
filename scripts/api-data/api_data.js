@@ -12,21 +12,21 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "email",
             "description": "<p>Admin e-mail</p> "
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "password",
             "description": "<p>The password</p> "
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "name",
             "description": "<p>Real name of the admin</p> "
@@ -122,7 +122,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "appId",
             "description": "<p>The ID of the app to remove</p> "
@@ -144,7 +144,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "Error",
-            "description": "<p>Application with that ID doesn&#39;t exist or internal server error.</p> "
+            "description": "<p>Application with that ID doesn't exist or internal server error.</p> "
           }
         ]
       },
@@ -172,7 +172,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "appId",
             "description": "<p>ID of the app to update</p> "
@@ -194,7 +194,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "Error",
-            "description": "<p>Application with that ID doesn&#39;t exist or internal server error.</p> "
+            "description": "<p>Application with that ID doesn't exist or internal server error.</p> "
           }
         ]
       },
@@ -242,14 +242,14 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "email",
             "description": "<p>Email of admin</p> "
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "password",
             "description": "<p>Password of admin</p> "
@@ -308,7 +308,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "appId",
             "description": "<p>ID of the application</p> "
@@ -367,7 +367,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
             "description": "<p>ID of the context to get</p> "
@@ -465,7 +465,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "appId",
             "description": "<p>ID of the app from which to get the context</p> "
@@ -525,7 +525,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
             "description": "<p>ID of the context to remove</p> "
@@ -584,7 +584,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "Error",
-            "description": "<p>Admin account with that e-mail address doesn&#39;t exist or internal server error.</p> "
+            "description": "<p>Admin account with that e-mail address doesn't exist or internal server error.</p> "
           }
         ]
       },
@@ -612,7 +612,7 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
             "description": "<p>ID of the context to update</p> "
@@ -662,14 +662,14 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "appId",
             "description": "<p>ID of the app of the schema to update</p> "
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "<p>Object</p> ",
             "optional": false,
             "field": "props",
             "description": "<p>Updated schema object</p> "
@@ -691,7 +691,7 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "404",
-            "description": "<p>NotFound If the App ID doesn&#39;t exist</p> "
+            "description": "<p>NotFound If the App ID doesn't exist</p> "
           }
         ]
       }
@@ -706,13 +706,13 @@ define({ "api": [
     "description": "<p>Retrieves a context</p> ",
     "name": "GetContext",
     "group": "Context",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
             "description": "<p>ID of the context to get</p> "
@@ -765,7 +765,7 @@ define({ "api": [
     "description": "<p>Get all contexsts</p> ",
     "name": "GetContexts",
     "group": "Context",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "success": {
       "examples": [
         {
@@ -801,14 +801,14 @@ define({ "api": [
     "type": "post",
     "url": "/device/register",
     "title": "Register",
-    "description": "<p>Registers a new device or updates an already existing one.</p> ",
+    "description": "<p>Registers a new device or updates an already existing one. If device udid is supplied in info it will try to search for a device with this udid and return the device id.</p> ",
     "name": "DeviceRegister",
     "group": "Device",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "examples": [
       {
         "title": "Register new device",
-        "content": "{\n\t\t\"info\": {\n\t\t\t\"os\": \"Android\",\n\t\t\t\"version\": \"4.4.3\",\n\t\t\t\"sdk_level\": 19,\n\t\t\t\"manufacturer\": \"HTC\",\n\t\t\t\"model\": \"HTC One_M8\"\n\t\t}\n\t\t\"persistent\": {\n  \t\t\"type\": \"android\",\n  \t\t\"token\": \"android pn token\"\n\t\t}\n}",
+        "content": "{\n\t\t\"info\": {\n\t\t\t\"os\": \"Android\",\n\t\t\t\"version\": \"4.4.3\",\n\t\t\t\"sdk_level\": 19,\n\t\t\t\"manufacturer\": \"HTC\",\n\t\t\t\"model\": \"HTC One_M8\",\n\t\t\t\"udid\": \"some unique identifier\"\n\t\t}\n\t\t\"persistent\": {\n  \t\t\"type\": \"android\",\n  \t\t\"token\": \"android pn token\"\n\t\t}\n}",
         "type": "json"
       },
       {
@@ -841,30 +841,23 @@ define({ "api": [
     "description": "<p>Gets the object count of a certain filter/subscription</p> ",
     "name": "ObjectCount",
     "group": "Object",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "context",
-            "description": "<p>Context of the object</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "model",
-            "description": "<p>The type of object to subscribe to</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "Object",
+            "type": "<p>Object</p> ",
             "optional": false,
             "field": "channel",
-            "description": "<p>asdsadas</p> "
+            "description": "<p>The object reperesenting a channel</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "filters",
+            "description": "<p>Additional filters to the subscription channel</p> "
           }
         ]
       }
@@ -875,20 +868,20 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotAuthenticated",
-            "description": "<p>Only authenticated users may access this endpoint.</p> "
+            "field": "402",
+            "description": "<p><code>NotAuthenticated</code>  Only authenticated users may access this endpoint.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotFound",
-            "description": "<p>If <code>id</code> was supplied but object not found.</p> "
+            "field": "404",
+            "description": "<p><code>NotFound</code> If <code>id</code> was supplied but object not found.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "PermissionDenied",
-            "description": "<p>If the model requires other permissions other than the ones provided.</p> "
+            "field": "403",
+            "description": "<p><code>PermissionDenied</code> If the model requires other permissions other than the ones provided.</p> "
           }
         ]
       }
@@ -903,20 +896,20 @@ define({ "api": [
     "description": "<p>Creates a new object</p> ",
     "name": "ObjectCreate",
     "group": "Object",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "model",
             "description": "<p>The type of object to subscribe to</p> "
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "<p>Object</p> ",
             "optional": false,
             "field": "content",
             "description": "<p>Content of the object</p> "
@@ -927,7 +920,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Client Request",
-        "content": "{\n\t\t\"model\": \"comment\",\n\t\t\"content\": {\n\t\t\t//object properties\n\t\t}\n}",
+        "content": "{\n\t\t\"model\": \"comment\",\n\t\t\"context\": 1,\n\t\t\"content\": {\n\t\t\t//object properties\n\t\t}\n}",
         "type": "json"
       }
     ],
@@ -935,7 +928,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success Response",
-          "content": "{\n\t\"status\": 201,\n\t\"message\": \"Created\"\n}",
+          "content": "{\n\t\"status\": 202,\n\t\"message\": \"Created\"\n}",
           "type": "json"
         }
       ]
@@ -946,20 +939,26 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotAuthenticated",
-            "description": "<p>Only authenticated users may access this endpoint.</p> "
+            "field": "402",
+            "description": "<p><code>NotAuthenticated</code>  Only authenticated users may access this endpoint.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotFound",
-            "description": "<p>If <code>id</code> was supplied but object not found.</p> "
+            "field": "404",
+            "description": "<p><code>NotFound</code> If application object model doesn't exist</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "PermissionDenied",
-            "description": "<p>If the model requires other permissions other than the ones provided.</p> "
+            "field": "403",
+            "description": "<p><code>PermissionDenied</code> If the model requires other permissions other than the ones provided.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p><code>RequestedContextMissing</code> If context id is missing from the request body</p> "
           }
         ]
       }
@@ -974,27 +973,27 @@ define({ "api": [
     "description": "<p>Deletes an object</p> ",
     "name": "ObjectDelete",
     "group": "Object",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
             "description": "<p>ID of the object (optional)</p> "
           },
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "context",
             "description": "<p>Context of the object</p> "
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "model",
             "description": "<p>The type of object to delete</p> "
@@ -1015,20 +1014,26 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotAuthenticated",
-            "description": "<p>Only authenticated users may access this endpoint.</p> "
+            "field": "402",
+            "description": "<p><code>NotAuthenticated</code>  Only authenticated users may access this endpoint.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotFound",
-            "description": "<p>If <code>id</code> was supplied but object not found.</p> "
+            "field": "404",
+            "description": "<p><code>NotFound</code> If <code>id</code> was supplied but object not found.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "PermissionDenied",
-            "description": "<p>If the model requires other permissions other than the ones provided.</p> "
+            "field": "403",
+            "description": "<p><code>PermissionDenied</code> If the model requires other permissions other than the ones provided.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p><code>RequestedContextMissing</code> If context id is missing from the request body</p> "
           }
         ]
       }
@@ -1040,37 +1045,23 @@ define({ "api": [
     "type": "post",
     "url": "/object/subscribe",
     "title": "Subscribe",
-    "description": "<p>Subscribe to an object or a collection of objects (by a filter)</p> ",
+    "description": "<p>Subscribe to an object or a collection of objects (by a filter). Returns a the resulting object(s). Subsequent subscription on the same channel and filter will have no effect but will return the objects.</p> ",
     "name": "ObjectSubscribe",
     "group": "Object",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Object</p> ",
             "optional": false,
-            "field": "id",
-            "description": "<p>ID of the object (optional)</p> "
+            "field": "channel",
+            "description": "<p>Object representing the channel</p> "
           },
           {
             "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "context",
-            "description": "<p>Context of the object</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "model",
-            "description": "<p>The type of object to subscribe to</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "Object",
+            "type": "<p>Object</p> ",
             "optional": false,
             "field": "filters",
             "description": "<p>Author or parent model filters by ID.</p> "
@@ -1101,19 +1092,19 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "402",
-            "description": "<p>NotAuthenticated  Only authenticated users may access this endpoint.</p> "
+            "description": "<p><code>NotAuthenticated</code> Only authenticated users may access this endpoint.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "404",
-            "description": "<p>NotFound If <code>id</code> was supplied but object not found or device is not registered.</p> "
+            "description": "<p><code>NotFound</code> If <code>id</code> was supplied but object not found or device is not registered.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "400",
-            "description": "<p>RequestedContextMissing If context id has been provided</p> "
+            "description": "<p><code>RequestedContextMissing</code> If context id is missing from the request body</p> "
           }
         ]
       }
@@ -1128,34 +1119,20 @@ define({ "api": [
     "description": "<p>Unsubscribe to an object or a collection of objects (by a filter)</p> ",
     "name": "ObjectUnsubscribe",
     "group": "Object",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Object</p> ",
             "optional": false,
-            "field": "id",
-            "description": "<p>ID of the object (optional)</p> "
+            "field": "channel",
+            "description": "<p>Object representing the channel</p> "
           },
           {
             "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "context",
-            "description": "<p>Context of the object</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "model",
-            "description": "<p>The type of object to subscribe to</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "Object",
+            "type": "<p>Object</p> ",
             "optional": false,
             "field": "filters",
             "description": "<p>Author or parent model filters by ID.</p> "
@@ -1186,13 +1163,19 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "402",
-            "description": "<p>NotAuthenticated  Only authenticated users may access this endpoint.</p> "
+            "description": "<p><code>NotAuthenticated</code>  Only authenticated users may access this endpoint.</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "404",
-            "description": "<p>NotFound If subscription doesn&#39;t exist.</p> "
+            "description": "<p><code>NotFound</code> If device hasn't subscribed to this channel or if application model is not valid (doesn't exist)</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p><code>RequestedContextMissing</code> If context id is missing from the request body</p> "
           }
         ]
       }
@@ -1207,34 +1190,34 @@ define({ "api": [
     "description": "<p>Updates an existing object</p> ",
     "name": "ObjectUpdate",
     "group": "Object",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
             "description": "<p>ID of the object (optional)</p> "
           },
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "<p>Number</p> ",
             "optional": false,
             "field": "context",
             "description": "<p>Context of the object</p> "
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "model",
             "description": "<p>The type of object to subscribe to</p> "
           },
           {
             "group": "Parameter",
-            "type": "Array",
+            "type": "<p>Array</p> ",
             "optional": false,
             "field": "patch",
             "description": "<p>An array of patches that modifies the object</p> "
@@ -1245,7 +1228,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Client Request",
-        "content": "{\n\t\t\"model\": \"comment\",\n\t\t\"id\": 1,\n\t\t\"context\": 1,\n\t\t\"patch\": [\n\t\t\t{\n\t\t\t\t\"op\": \"replace\",\n\t\t\t\t\"path\": \"text\",\n\t\t\t\t\"value\": \"some edited text\"\n\t\t\t},\n\t\t\t...\n\t\t],\n}",
+        "content": "{\n\t\t\"model\": \"comment\",\n\t\t\"id\": 1,\n\t\t\"context\": 1,\n\t\t\"patch\": [\n\t\t\t{\n\t\t\t\t\"op\": \"replace\",\n\t\t\t\t\"path\": \"comment/1/text\",\n\t\t\t\t\"value\": \"some edited text\"\n\t\t\t},\n\t\t\t...\n\t\t],\n}",
         "type": "json"
       }
     ],
@@ -1253,7 +1236,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success Response",
-          "content": "{\n\t\"status\": 201,\n\t\"message\": \"Created\"\n}",
+          "content": "{\n\t\"status\": 202,\n\t\"message\": \"Created\"\n}",
           "type": "json"
         }
       ]
@@ -1264,20 +1247,26 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotAuthenticated",
-            "description": "<p>Only authenticated users may access this endpoint.</p> "
+            "field": "402",
+            "description": "<p><code>NotAuthenticated</code>  Only authenticated users may access this endpoint</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotFound",
-            "description": "<p>If <code>id</code> was supplied but object not found.</p> "
+            "field": "404",
+            "description": "<p><code>NotFound</code> If <code>id</code> was supplied but object not found or application model doesn't exist</p> "
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "PermissionDenied",
-            "description": "<p>If the model requires other permissions other than the ones provided.</p> "
+            "field": "403",
+            "description": "<p><code>PermissionDenied</code> If the model requires other permissions other than the ones provided</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p><code>RequestedContextMissing</code> If context id is missing from the request body</p> "
           }
         ]
       }
@@ -1289,10 +1278,10 @@ define({ "api": [
     "type": "post",
     "url": "/user/refresh_token",
     "title": "Refresh Token",
-    "description": "<p>Sends a new authentification token to the user. The old token must be provide (and it may or not may not be aleady expired.</p> ",
+    "description": "<p>Sends a new authentification token to the user. The old token must be provide (and it may or not may not be aleady expired).</p> ",
     "name": "RefreshToken",
     "group": "User",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "success": {
       "examples": [
         {
@@ -1331,26 +1320,35 @@ define({ "api": [
     "description": "<p>Deletes a user</p> ",
     "name": "UserDelete",
     "group": "User",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "number",
+            "type": "<p>number</p> ",
             "optional": false,
             "field": "id",
             "description": "<p>ID of the user</p> "
           },
           {
             "group": "Parameter",
-            "type": "string",
+            "type": "<p>string</p> ",
             "optional": false,
             "field": "email",
             "description": "<p>Email of the user</p> "
           }
         ]
       }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "{\n\tstatus: 202,\n\tmessage: \"User deleted\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "filename": "./controllers/user.js",
     "groupTitle": "User"
@@ -1359,16 +1357,16 @@ define({ "api": [
     "type": "post",
     "url": "/user/login",
     "title": "Login",
-    "description": "<p>Log in the user and create it if it doesn&#39;t exist in database.</p> ",
+    "description": "<p>Log in the user and create it if it doesn't exist in database.</p> ",
     "name": "UserLogin",
     "group": "User",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "access_token",
             "description": "<p>Facebook access token.</p> "
@@ -1392,6 +1390,18 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p><code>InsufficientFacebookPermissions</code> User email is not publicly available (insufficient facebook permissions)</p> "
+          }
+        ]
+      }
+    },
     "filename": "./controllers/user.js",
     "groupTitle": "User"
   },
@@ -1402,7 +1412,7 @@ define({ "api": [
     "description": "<p>Logs out the user removing the device from his array of devices.</p> ",
     "name": "UserLogout",
     "group": "User",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "success": {
       "examples": [
         {
@@ -1434,19 +1444,28 @@ define({ "api": [
     "description": "<p>Updates the user information</p> ",
     "name": "UserUpdate",
     "group": "User",
-    "version": "0.0.1",
+    "version": "0.1.2",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Object[]",
+            "type": "<p>Object[]</p> ",
             "optional": false,
             "field": "patches",
             "description": "<p>Array of patches that describe the modifications</p> "
           }
         ]
       }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "{\n\tstatus: 202,\n\tmessage: \"User updated\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "filename": "./controllers/user.js",
     "groupTitle": "User"
@@ -1463,7 +1482,7 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "<p>String</p> ",
             "optional": false,
             "field": "varname2",
             "description": "<p>With type.</p> "
