@@ -1,0 +1,145 @@
+extends layouts/_default
+block content
+  .container-fluid
+    .row
+      .col-lg-3
+        ul.sidebar-nav.second
+          li
+            a.alpha(href="#api") Server Components
+            ul
+              li
+                a.alpha(href="#api-implemented") Implemented
+              li
+                a.alpha(href="#api-soon") Coming soon
+              li
+                a.alpha(href="#api-planned") Planned
+          li
+            a.beta(href="#js") JS Client
+            ul
+              li
+                a.beta(href="#js-implemented") Implemented
+              li
+                a.beta(href="#js-soon") Coming soon
+              li
+                a.beta(href="#js-planned") Planned
+          
+      #main-content.col-lg-9
+        h1#api.section Server Components
+        h2#api-implemented.section Implemented
+        ul
+          li 
+            | Front-facing endpoint. Implemented using 
+            a(href="http://expressjs.com") Express
+            | , exposes the following functionality:
+            ul
+              li Administration tasks:
+                ul
+                  li Creating a new administrator account
+                  li Logging in as administrator
+                  li CRUD for Telepat apps
+                  li CRUD for contexts
+                  li CRUD for schemas and ACL
+              li Registering new and existing devices (browsers or mobile devices)
+              li Retrieving app contexts
+              li User management tasks:
+                ul
+                  li Logging users in using a Facebook token
+                  li Logging users out
+                  li Updating a user profile
+                  li Deleting a user profile
+              li Object management tasks:
+                ul
+                  li Subscribing and unsubscribing to basic object channels
+                  li Restricting access to object read/write based on user status (anonymous, authenticated, admin)
+                  li CRUD for objects
+          li 
+            | The messaging queue layer, currently implemented using 
+            a(href="http://kafka.apache.org") Apache Kafka
+            | .
+          li
+            | The aggregation queue layer, implemented using 
+            a(href="https://nodejs.org")
+            | . Currently supports "replace" operations on object properties.
+          li 
+            | The persistence layer, currently implemented using 
+            a(href="http://www.couchbase.com/") Couchbase
+            | .
+          li The synchronization layer, using the following available transports:
+            ul
+              li
+                a(href="https://developers.google.com/cloud-messaging/") Google Cloud Messaging
+              li
+                a(href="http://socket.io/") Socket.io
+        h2#api-soon.section Coming soon
+        ul
+          li Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
+          li Real-time access to a list of a user's currently logged in friends
+          li Apple Push Notifications transport implementation
+          li
+            a(href="https://www.elastic.co/") Elasticsearch
+            |  persistence layer implementation
+          li Support for "increment" operation, as well as operations for array editing
+          li Support for limits/offsets in object subscriptions
+          li Support for 3rd party adapters for the messaging queue layer, persistence layer and synchronization transports
+        h2#api-planned.section Planned
+        ul
+          li Allowing objects to have multiple owners and to be access-restricted to their owners
+          li Real-time access to channel metadata, like instant subscriber or object count
+          li Real-time access to a count of all related objects (know how many objects belong to the current one, as defined in the schema)
+          li The ability to define "actions" (like, view, bump etc.) that can be executed by users on objects
+          li Real-time access to action-related metadata on objects and channels
+          li Exposing hooks to allow data-manipulation at the aggregation level
+          li Support for developer-defined services
+          li Support for login with Google, Twitter, GitHub or custom login workflows
+          li Telepat adapters for:
+            ul
+              li
+                a(href="http://aws.amazon.com/sqs/") Amazon SQS
+              li
+                a(href="http://azure.microsoft.com/en-us/services/service-bus/") Azure Service Bus
+              li
+                a(href="http://www.pubnub.com") PubNub
+              li
+                a(href="http://azure.microsoft.com/en-us/services/documentdb/") Azure DocumentDB
+              li
+                a(href="http://aws.amazon.com/dynamodb/") Amazon DynamoDB
+              li
+                a(href="https://www.mongodb.org/") MongoDB
+              li
+                a(href="http://rethinkdb.com/") RethinkDB
+              li
+                a(href="https://parse.com/") Parse
+              li
+                a(href="https://www.rabbitmq.com/") RabbitMQ
+
+        h1#js.section JavaScript Client
+        h2#js-implemented.section Implemented
+        ul
+          li Registering new and existing devices
+          li Retrieving app contexts
+          li User management tasks:
+            ul
+              li Logging users in using a Facebook token
+              li Logging users out
+          li Object management tasks:
+            ul
+              li Subscribing and unsubscribing to basic object channels
+              li CRUD for objects
+          li Update notifications emitted by channel object
+        h2#js-soon.section Coming soon
+        ul
+          li Offline data access and synchronization
+          li Update notifications emitted by objects themselves
+          li Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
+          li Real-time access to a list of a user's currently logged in friends
+          li Support for "increment" operation, as well as operations for array editing
+          li Support for limits/offsets in object subscriptions
+        h2#js-planned.section Planned
+        ul
+          li Real-time access to channel metadata, like instant subscriber or object count
+          li Real-time access to a count of all related objects (know how many objects belong to the current one, as defined in the schema)
+          li The ability to define "actions" (like, view, bump etc.) that can be executed by users on objects
+          li Real-time access to action-related metadata on objects and channels
+block scripts
+  script(src="scripts/roadmap.js")
+  script(src="scripts/menu-highlight.js")

@@ -1,7 +1,4 @@
-require(['stickUp'], function(stickUp) {
-  $('ul.sidebar-nav.first a').removeClass('selected');
-  $('#alpha-menu').addClass('selected');
-
+require(['jquery', 'stickUp'], function($, stickUp) {
   $('.sidebar-nav.second').stickUp({
     topMargin: 20
   });
