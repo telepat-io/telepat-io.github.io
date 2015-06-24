@@ -7,7 +7,7 @@ require(['jquery'], function($) {
       $('#iframe').attr('src', 'javascript-sdk/lib/' + file + '.js.html');
   }
 
-  $('#delta-menu').addClass('selected');
+  $('#epsilon-menu').addClass('selected');
   updateFile();
   $(window).on('hashchange', function() {
     updateFile();
