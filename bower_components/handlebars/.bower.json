@@ -12,6 +12,5 @@
   },
   "_source": "git://github.com/components/handlebars.js.git",
   "_target": "~3.0.3",
-  "_originalSource": "handlebars",
-  "_direct": true
+  "_originalSource": "handlebars"
 }

@@ -19,6 +19,5 @@
   },
   "_source": "git://github.com/tanaka-de-silva/google-diff-match-patch-js.git",
   "_target": "~1.0.0",
-  "_originalSource": "google-diff-match-patch-js",
-  "_direct": true
+  "_originalSource": "google-diff-match-patch-js"
 }

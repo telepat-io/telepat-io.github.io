@@ -4,8 +4,8 @@ require([
     'locales',
     'handlebarsExtended',
     'prettify',
-    './scripts/api-data/api_project.js',
-    './scripts/api-data/api_data.js',
+    './scripts/api_project.js',
+    './scripts/api_data.js',
     'utilsSampleRequest',
     'bootstrap',
     'pathToRegexp'
