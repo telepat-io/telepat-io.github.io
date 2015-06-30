@@ -5,7 +5,7 @@ var path = require('path');
 var app = 'app';
 var tmp = '.tmp';
 var dist = 'dist';
-var bowerDir = 'bower_components';
+var bowerDir = 'dist/bower_components';
 
 // Default paths in app folder
 var data = 'data';
@@ -71,7 +71,7 @@ module.exports.buildSize = {
 
 // Clean task config
 // Be carefull what you cleaning!
-module.exports.clean = [tmp, dist];
+module.exports.clean = [tmp, dist + '/' + styles];
 
 // Copy fonts task config
 module.exports.copyFonts = {
@@ -82,10 +82,9 @@ module.exports.copyFonts = {
 // Copy extras task config
 module.exports.copyExtras = {
   src: [
-    app + '/*.*',
-    '!' + app + '/*.html'
+    app + '/locales/**',
   ],
-  dest: dist,
+  dest: dist + '/locales',
   cfg: {
     dot: true
   }
@@ -153,7 +152,7 @@ module.exports.scripts = {
     path.join(app, scripts, '*.js'),
     path.join(app, scripts, 'modules/**/*.js')
   ],
-  dest: path.join(tmp, scripts)
+  dest: dist + '/scripts'
 };
 
 // Styles task config

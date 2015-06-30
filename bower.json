@@ -1,6 +1,6 @@
 {
   "name": "telepat-docs",
-  "directory": "bower_components",
+  "directory": "dist/bower_components",
   "private": true,
   "dependencies": {
     "bootstrap-sass": "~3.3.4",

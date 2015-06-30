@@ -222,7 +222,7 @@ block content
           li Require flexibility regarding the choice of software components
           li Require flexibility regarding the infrastructure chosen for production
         p Some examples of applications that can make good use of Telepat are:
-        h3 Messaging and chat
+        h3#use-cases-messaging Messaging and chat
         p Making a public, many to many chat app is simple. But what if you want to build a chat system to allow users to talk 1-on-1 with their Facebook friends? Let's consider an example of two friends, Alice and Bob, doing just that using Telepat. We'll name devices after their users, just to keep thing simple.
         ul
           li First, Bob logs in to Facebook, and he receives his authentication token.
@@ -241,7 +241,7 @@ block content
           li The object has additional properties, modeling each space being marked (and by who) on not. Also, Alice is added to the message object owners, allowing her to make edits on the object.
           li Bob and Alice take turns editing properties of the shared object as they mark spaces. They each get instantly notified on any edits to the object, and are able to update the game interface smoothly.
           li When one of them wins, why not add some properties on the main conversation object, allowing them to persistently keep score of the games they played?
-        h3 On-demand economy
+        h3#use-cases-ondemand On-demand economy
         p So how would you build your basic Uber-like service, where demand meets supply in real time, over Telepat? Let's look at the flow of data.
         ul
           li Users log in to Telepat using their Facebook accounts. Every user has access to the object representing his own profile - it's here where you can hold a variable to distinguish "buyers" from "sellers".
@@ -252,7 +252,7 @@ block content
           li When a buyer decides for an offer, he can delete the original order object or he can close it, using a status variable - in both cases, all sellers get callbacks about the change, so they know the order has expired.
           li The buyer then creates a new "booking" object in Telepat, makes it private and adds the seller user id to the list of the booking's owners. Buyers subscribe to bookings, so the lucky winner instantly knows about his new deal.
           li The booking object is then shared between the two users, facilitating real-time exchange between them until the service has been delivered and the process is done.
-        h3 Second-screen companion apps
+        h3#use-cases-secondscreen Second-screen companion apps
         p Telepat shines when it comes to traffic spikes like ones you get during a popular live tv show, in a companion app that allows interaction. Here's an example of handling common usage scenarios for second-screen apps:
         ul
           li Users log in to Telepat using their Facebook accounts. Shows are represented by contexts inside Telepat, so after login, users start listening for global context changes, as that would signal that a new show is currently available for "check-in".
@@ -261,7 +261,7 @@ block content
           li Besides being able to push second-screen content in real-time to viewers, admins can also allow them to interact by participating on polls. Polls can be special types of events, and could also have a series of extra properties to store the possible answers and each answer count.
           li When receiving this special type of event, users are able to vote by sending increment operations on properties holding vote counts.
           li Increments are scalably queued and aggregated by Telepat, and updated values are sent to all subscribers that are able to see the massive voting results in real-time.
-        h3 IoT, sensor tracking, geo tracking
+        h3#use-cases-iot IoT, sensor tracking, geo tracking
         p Any device that talks HTTP can also talk to Telepat. Basic communication (registering, logging in, administration tasks and data objects CRUD) is classically implemented using client-server HTTP requests. Real-time data object updates are sent via platform-specific adapters, but any device can fallback to HTTP long-polling. 
         p Sensors can individually or collaboratively work on data objects that are replicated in real-time to all subscribing devices, allowing Telepat to become:
         ul
