@@ -65,7 +65,7 @@ block content
           li
             | The main focus of the system is orchestrating CRUD operations on data, and persisting as well as replicating changes as soon as possible on all subscribed clients.
           li
-            | All data in the system should be retrievable by object type. Real-time filtration based on object property values (e.g. comment.post_id = 5 or text searches like comment.text contains &ldquo;word&rdquo;) should also be available.
+            | All data in the system should be retrievable by object type. Real-time filtering based on object property values (e.g. comment.post_id = 5 or text searches like comment.text contains &ldquo;word&rdquo;) should also be available.
           li The system should be able to ingest large volumes of operations on data.
           li
             | Large spikes in the number of operations over short time intervals should be handled gracefully, without any data loss and without causing the public facing layer to become unresponsive.
@@ -99,7 +99,7 @@ block content
           li
             | All updates of objects are retrieved from and sent to clients using a variant of 
             a(href='https://tools.ietf.org/html/rfc6902')
-              strong JSON Schema
+              strong JSON Patch
             |  that also supports value incrementation and decrementation.
           li
             | Objects exist in the scope of 
@@ -116,10 +116,10 @@ block content
           li
             | The schema may also define object 
             strong properties
-            | . While this is optional (objects are processed and stored as JSON), properties need to be defined if filtration is needed at a level deeper than just object type.
+            | . While this is optional (objects are processed and stored as JSON), properties need to be defined if filtering is needed at a level deeper than just object type.
           li
             strong Relationships
-            |  between objects (e.g. &ldquo;has many&rdquo;) may also be defined for filtration purposes.
+            |  between objects (e.g. &ldquo;has many&rdquo;) may also be defined for filtering purposes.
           li
             | A basic 
             strong subscribe
