@@ -100,7 +100,7 @@
                   <p>Telepat is designed as a multi-layer system, with the following main objectives in mind:</p>
                   <ul>
                     <li>The main focus of the system is orchestrating CRUD operations on data, and persisting as well as replicating changes as soon as possible on all subscribed clients.</li>
-                    <li>All data in the system should be retrievable by object type. Real-time filtration based on object property values (e.g. comment.post_id = 5 or text searches like comment.text contains &ldquo;word&rdquo;) should also be available.</li>
+                    <li>All data in the system should be retrievable by object type. Real-time filtering based on object property values (e.g. comment.post_id = 5 or text searches like comment.text contains &ldquo;word&rdquo;) should also be available.</li>
                     <li>The system should be able to ingest large volumes of operations on data.</li>
                     <li>Large spikes in the number of operations over short time intervals should be handled gracefully, without any data loss and without causing the public facing layer to become unresponsive.</li>
                     <li>Layers that handle specific tasks, like the data queue or the persistence layer, should be abstracted away from the actual implementation, thus allowing the use of many components such as open-source solutions or cloud services.</li>
@@ -121,11 +121,11 @@
                   <h1 id="information-design" class="section">Information design</h1>
                   <ul>
                     <li>All information in the Telepat system is encoded using <strong>JSON objects</strong>.</li>
-                    <li>All updates of objects are retrieved from and sent to clients using a variant of <a href="https://tools.ietf.org/html/rfc6902"><strong>JSON Schema</strong></a> that also supports value incrementation and decrementation.</li>
+                    <li>All updates of objects are retrieved from and sent to clients using a variant of <a href="https://tools.ietf.org/html/rfc6902"><strong>JSON Patch</strong></a> that also supports value incrementation and decrementation.</li>
                     <li>Objects exist in the scope of <strong>applications</strong> and <strong>contexts</strong>. A single application can contain multiple contexts, and contexts contain multiple objects.</li>
                     <li>All objects belong to specific <strong>types</strong>, defined by an app-level <strong>schema</strong>.</li>
-                    <li>The schema may also define object <strong>properties</strong>. While this is optional (objects are processed and stored as JSON), properties need to be defined if filtration is needed at a level deeper than just object type.</li>
-                    <li><strong>Relationships</strong> between objects (e.g. &ldquo;has many&rdquo;) may also be defined for filtration purposes.</li>
+                    <li>The schema may also define object <strong>properties</strong>. While this is optional (objects are processed and stored as JSON), properties need to be defined if filtering is needed at a level deeper than just object type.</li>
+                    <li><strong>Relationships</strong> between objects (e.g. &ldquo;has many&rdquo;) may also be defined for filtering purposes.</li>
                     <li>A basic <strong>subscribe</strong> binds a client to a specific object type, within a specific context.</li>
                     <li>Advanced <strong>filtering</strong> may be performed on objects, based on defined properties and relationships. The performance of running advanced filters depends on the component chosen to implement the persistence layer.</li>
                     <li><strong>ACLs</strong> are defined for each object type. Read or write permissions can be assigned to anonymous devices, logged-in users or administrators.</li>
@@ -196,7 +196,7 @@
                     <li>Require flexibility regarding the infrastructure chosen for production</li>
                   </ul>
                   <p>Some examples of applications that can make good use of Telepat are:</p>
-                  <h3>Messaging and chat</h3>
+                  <h3 id="use-cases-messaging">Messaging and chat</h3>
                   <p>Making a public, many to many chat app is simple. But what if you want to build a chat system to allow users to talk 1-on-1 with their Facebook friends? Let's consider an example of two friends, Alice and Bob, doing just that using Telepat. We'll name devices after their users, just to keep thing simple.</p>
                   <ul>
                     <li>First, Bob logs in to Facebook, and he receives his authentication token.</li>
@@ -217,7 +217,7 @@
                     <li>Bob and Alice take turns editing properties of the shared object as they mark spaces. They each get instantly notified on any edits to the object, and are able to update the game interface smoothly.</li>
                     <li>When one of them wins, why not add some properties on the main conversation object, allowing them to persistently keep score of the games they played?</li>
                   </ul>
-                  <h3>On-demand economy</h3>
+                  <h3 id="use-cases-ondemand">On-demand economy</h3>
                   <p>So how would you build your basic Uber-like service, where demand meets supply in real time, over Telepat? Let's look at the flow of data.</p>
                   <ul>
                     <li>Users log in to Telepat using their Facebook accounts. Every user has access to the object representing his own profile - it's here where you can hold a variable to distinguish "buyers" from "sellers".</li>
@@ -229,7 +229,7 @@
                     <li>The buyer then creates a new "booking" object in Telepat, makes it private and adds the seller user id to the list of the booking's owners. Buyers subscribe to bookings, so the lucky winner instantly knows about his new deal.</li>
                     <li>The booking object is then shared between the two users, facilitating real-time exchange between them until the service has been delivered and the process is done.</li>
                   </ul>
-                  <h3>Second-screen companion apps</h3>
+                  <h3 id="use-cases-secondscreen">Second-screen companion apps</h3>
                   <p>Telepat shines when it comes to traffic spikes like ones you get during a popular live tv show, in a companion app that allows interaction. Here's an example of handling common usage scenarios for second-screen apps:</p>
                   <ul>
                     <li>Users log in to Telepat using their Facebook accounts. Shows are represented by contexts inside Telepat, so after login, users start listening for global context changes, as that would signal that a new show is currently available for "check-in".</li>
@@ -239,7 +239,7 @@
                     <li>When receiving this special type of event, users are able to vote by sending increment operations on properties holding vote counts.</li>
                     <li>Increments are scalably queued and aggregated by Telepat, and updated values are sent to all subscribers that are able to see the massive voting results in real-time.</li>
                   </ul>
-                  <h3>IoT, sensor tracking, geo tracking</h3>
+                  <h3 id="use-cases-iot">IoT, sensor tracking, geo tracking</h3>
                   <p>Any device that talks HTTP can also talk to Telepat. Basic communication (registering, logging in, administration tasks and data objects CRUD) is classically implemented using client-server HTTP requests. Real-time data object updates are sent via platform-specific adapters, but any device can fallback to HTTP long-polling. </p>
                   <p>Sensors can individually or collaboratively work on data objects that are replicated in real-time to all subscribing devices, allowing Telepat to become:</p>
                   <ul>
