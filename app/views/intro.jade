@@ -60,13 +60,57 @@ block content
             | )
         p
           | Each of these repos provide usage instructions on their respective README files; generally it's a matter of setting the correct ENV variables for linking to Couchbase, Elasticsearch, Redis and Kafka and then starting the NodeJS apps.
-        h1.section#initial-configuration Initial configuration
+        h1.section#configuration Initial configuration
         p
           | Along with the docker-compose recipes, the telepat-docker-compose-files repo also contains a bash script that can help seed initial data to your Telepat instance (stuff like creating an admin user and an initial app). While in the root folder of the cloned repo, run these two commands:
-        pre chmod +x telepat.sh
-          | ./telepat.sh
+        pre ./telepat.sh
         p You can then follow the on-screen instructions for running the various tasks.
-
+        p The sample schema installed by the script is:
+        pre {
+          | "appId": "'$APP_ID'",
+          | "schema": {
+          |   "comments": {
+          |     "namespace": "comments",
+          |     "type": "comments",
+          |     "properties": {
+          |       "text": {
+          |         "type": "string"
+          |       }
+          |     },
+          |     "belongsTo": [
+          |       {
+          |         "parentModel": "events",
+          |         "relationType": "hasMany"
+          |       }
+          |     ],
+          |     "read_acl": 6,
+          |     "write_acl": 6,
+          |     "meta_read_acl": 6
+          |   },
+          |   "events": {
+          |     "namespace": "events",
+          |     "type": "events",
+          |     "properties": {
+          |       "text": {
+          |         "type": "string"
+          |       },
+          |       "image": {
+          |         "type": "string"
+          |       },
+          |       "options": {
+          |         "type": "object"
+          |       }
+          |     },
+          |     "hasMany": [
+          |       "comments"
+          |     ],
+          |     "read_acl": 7,
+          |     "write_acl": 7,
+          |     "meta_read_acl": 4,
+          |     "icon": "fa-image"
+          |   }
+          | }
+          | }
 block scripts
   script(src="scripts/intro.js")
   script(src="scripts/menu-highlight.js")
