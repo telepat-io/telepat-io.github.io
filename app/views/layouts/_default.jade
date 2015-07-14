@@ -44,6 +44,12 @@ head
   link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css')
 
 body
+  img#to-top(src="images/up-arrow-icon.png" onClick="window.scrollTo(0, 0);")
+  #top-menu
+    .pull-left
+      span.glyphicon.glyphicon-list(onClick="$('#wrapper').toggleClass('toggled')")
+    .pull-right Telepat.io Docs
+    .clear
   #wrapper
     #sidebar-wrapper
       include ../modules/_menu

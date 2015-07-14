@@ -14,6 +14,15 @@ $kappa-color: #00a98f;
 // bower:scss
 @import "../../dist/bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot');
+  src: url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2') format('woff2'), 
+    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff') format('woff'), 
+    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'), 
+    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg'); 
+}
 
 html,body {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -32,14 +41,12 @@ html,body {
   padding-left: 200px;
 
   #sidebar-wrapper {
-    width: 0 !important;
-    left: 0 !important;
+    width: 200px !important;
+    left: 200px !important;
   }
 
   #page-content-wrapper {
-    position: absolute;
-    margin-right: -200px;
-    left: 0;
+
   }
 }
 
@@ -56,12 +63,15 @@ html,body {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  z-index: 10;
 }
 
 #page-content-wrapper {
   width: 100%;
   background: #f5f5f5;
-
+      position: absolute;
+    margin-right: -200px;
+    left: 0;
   .padded {
     padding-top: 100px;
   }
@@ -98,6 +108,36 @@ html,body {
 
 .margin-auto {
   margin: auto;
+}
+
+.clear {
+  clear: both;
+}
+
+#to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#top-menu {
+  background: black;
+  padding: 10px 30px;
+  color: white;
+  font-size: 24px;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 10;
+  span {
+    cursor: pointer;
+  }
 }
 
 ul.sidebar-nav {
@@ -320,6 +360,16 @@ img.pull-right {
   margin-left: 20px;
 }
 
+@media(max-width:767px) {
+  #sidebar-wrapper {
+    margin-top: 50px;
+  }
+
+  #page-content-wrapper {
+    padding-top: 50px;
+  }
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 200px;
@@ -340,5 +390,9 @@ img.pull-right {
     #sidebar-wrapper {
         width: 200px;
         left: 200px;
+    }
+
+    #to-top, #top-menu {
+      display: none;
     }
 }
