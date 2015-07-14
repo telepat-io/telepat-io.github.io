@@ -69,9 +69,7 @@ html,body {
 #page-content-wrapper {
   width: 100%;
   background: #f5f5f5;
-      position: absolute;
-    margin-right: -200px;
-    left: 0;
+
   .padded {
     padding-top: 100px;
   }
@@ -367,6 +365,9 @@ img.pull-right {
 
   #page-content-wrapper {
     padding-top: 50px;
+    position: absolute;
+    margin-right: -200px;
+    left: 0;
   }
 }
 
