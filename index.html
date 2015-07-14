@@ -30,10 +30,15 @@
   <meta name="msapplication-wide310x150logo" content="images/favicon/mstile-310x150.png">
   <meta name="msapplication-square310x310logo" content="images/favicon/mstile-310x310.png">
   
-  <link rel="stylesheet" href="styles/main.min-82092813.css">
+  <link rel="stylesheet" href="styles/main.min-a2ee049e.css">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body><img id="to-top" src="images/up-arrow-icon.png" onClick="window.scrollTo(0, 0);">
+  <div id="top-menu">
+    <div class="pull-left"><span onClick="$('#wrapper').toggleClass('toggled')" class="glyphicon glyphicon-list"></span></div>
+    <div class="pull-right">Telepat.io Docs</div>
+    <div class="clear"></div>
+  </div>
   <div id="wrapper">
     <div id="sidebar-wrapper"><a href="http://telepat.io" title="Telepat Real-Time Backend">
         <div data-height="70" data-stroke-color="#000000" class="telepat-logo"></div></a>
@@ -56,7 +61,7 @@
           <div class="col-lg-12">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-lg-3">
+                <div class="col-md-3">
                   <ul class="sidebar-nav second">
                     <li><a href="#introduction" class="alpha">Introduction</a>
                       <ul>
@@ -82,7 +87,7 @@
                     <li><a href="#comparison" class="zeta">Comparison</a></li>
                   </ul>
                 </div>
-                <div id="main-content" class="col-lg-9"><img width="202" height="123" src="/images/logo_telepat_light@2x.png" class="main-logo">
+                <div id="main-content" class="col-md-9"><img width="202" height="123" src="/images/logo_telepat_light@2x.png" class="main-logo">
                   <h1 id="introduction" class="section">Introduction</h1>
                   <p>Telepat is an open-source backend stack, designed to deliver information and information updates in real-time to clients, while allowing for flexible deployment and simple scaling.</p>
                   <p>Let&rsquo;s break that down:</p>
