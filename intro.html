@@ -79,84 +79,94 @@
                   <ul class="sidebar-nav second">
                     <li><a href="#installation" class="alpha">Installation</a>
                       <ul>
-                        <li><a href="#using-docker" class="alpha">Using Docker</a></li>
-                        <li><a href="#installation-from-source" class="alpha">From source</a></li>
+                        <li><a href="#booting-up-docker" class="alpha">Booting up with Docker</a></li>
+                        <li><a href="#booting-up-manually" class="alpha">Starting things manually</a></li>
                       </ul>
                     </li>
-                    <li><a href="#configuration" class="beta">Configuration</a></li>
+                    <li><a href="#creating-an-app" class="beta">Creating an app</a></li>
+                    <li><a href="#js-example" class="gamma">Connecting the JS client</a></li>
                   </ul>
                 </div>
                 <div id="main-content" class="col-lg-9">
                   <h1 id="installation" class="section">Getting started with Telepat</h1>
-                  <p>There are two main ways you can get Telepat running on your infrastructure: using Docker containers or by cloning the source code off Github and running the NodeJS applications yourself.</p>
-                  <h3 id="using-docker" class="section">Using Docker containers</h3>
-                  <p>We provide official docker-compose recipes for running Telepat and its dependencies (Couchbase, Elasticsearch, Redis and Apache Kafka). The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have <a href="https://docs.docker.com/installation/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a> installed on your machine, here are the steps to get everything running:</p>
+                  <h3 id="booting-up-docker" class="section">Booting up with Docker</h3>
+                  <p>We provide official docker-compose recipes for running Telepat and its dependencies (Elasticsearch, Redis and Apache Kafka). The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have <a href="https://docs.docker.com/installation/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a> installed on your machine, here are the steps to get everything running:</p>
                   <pre>git clone https://github.com/telepat-io/telepat-docker-compose-files
 cd telepat-docker-compose-files/shared
 sudo docker-compose up</pre>
-                  <p>Wait for things to boot up and when the logs stabilize, open a new terminal windows and start up the Telepat instance:</p>
+                  <p>This will start up all the infrastructure components. Next, you need to launch the Telepat API and all the other services:</p>
                   <pre>cd telepat-docker-compose-files/telepat
 sudo docker-compose up</pre>
-                  <p>Right now everything should be up and running. The API instance is available on the same IP as your docker client (if you're running the Docker instance locally, it's localhost. If you're running on a Mac with boot2docker, you can find the IP by running:</p>
-                  <pre>boot2docker ip</pre>
-                  <p>The Sync API is running on port 3000 by default and the websockets endpoint runs on port 80 by default.</p>
-                  <h3 id="installation-from-source" class="section">Installing from source</h3>
+                  <p>Right now everything should be up and running. The API instance is available on the same IP as your docker client. If you're running the Docker instance locally, it's localhost. If you're running on a Mac with Docker Quickstart Terminal, you need to note the IP that's shown in the terminal window when launching.</p>
+                  <p>The default ports are 3000 for the API and 80 for the websocket service.</p>
+                  <h3 id="booting-up-manually" class="section">Installing from source</h3>
                   <p>The Telepat backend stack is made up of two components:</p>
                   <ul>
-                    <li>The Sync API (<a href="https://github.com/telepat-io/telepat-api">https://github.com/telepat-io/telepat-api</a>)</li>
-                    <li>The background workers (<a href="https://github.com/telepat-io/telepat-worker">https://github.com/telepat-io/telepat-worker</a>)</li>
+                    <li>The API (<a href="https://github.com/telepat-io/telepat-api">https://github.com/telepat-io/telepat-api</a>). To start this, simply run <pre>./bin/www</pre> You can also set the PORT environment variable to make the API listen on a port different than the default 3000.</li>
+                    <li>The services (<a href="https://github.com/telepat-io/telepat-worker">https://github.com/telepat-io/telepat-worker</a>). To start, run <pre>node index.js -t topic_name -i worker_index</pre>
+                      <p>For built-in services, these are the commands to start up:</p>
+                      <ul>
+                        <li>node telepat-worker/index.js -t aggregation -i 0 </li>
+                        <li>node telepat-worker/index.js -t write -i 0 </li>
+                        <li>node telepat-worker/index.js -t track -i 0 </li>
+                        <li>node telepat-worker/index.js -t android_transport -i 0 </li>
+                        <li>node telepat-worker/index.js -t ios_transport -i 0 </li>
+                        <li>node telepat-worker/index.js -t sockets_transport -i 0 </li>
+                      </ul>
+                    </li>
                   </ul>
-                  <p>Each of these repos provide usage instructions on their respective README files; generally it's a matter of setting the correct ENV variables for linking to Couchbase, Elasticsearch, Redis and Kafka and then starting the NodeJS apps.</p>
-                  <h1 id="configuration" class="section">Initial configuration</h1>
-                  <p>Along with the docker-compose recipes, the telepat-docker-compose-files repo also contains a bash script that can help seed initial data to your Telepat instance (stuff like creating an admin user and an initial app). While in the root folder of the cloned repo, run these two commands:</p>
-                  <pre>./telepat.sh</pre>
-                  <p>You can then follow the on-screen instructions for running the various tasks.</p>
-                  <p>The sample schema installed by the script is:</p>
-                  <pre>{
-"appId": "'$APP_ID'",
-"schema": {
-  "comments": {
-    "namespace": "comments",
-    "type": "comments",
-    "properties": {
-      "text": {
-        "type": "string"
-      }
-    },
-    "belongsTo": [
-      {
-        "parentModel": "events",
-        "relationType": "hasMany"
-      }
-    ],
-    "read_acl": 6,
-    "write_acl": 6,
-    "meta_read_acl": 6
-  },
-  "events": {
-    "namespace": "events",
-    "type": "events",
-    "properties": {
-      "text": {
-        "type": "string"
-      },
-      "image": {
-        "type": "string"
-      },
-      "options": {
-        "type": "object"
-      }
-    },
-    "hasMany": [
-      "comments"
-    ],
-    "read_acl": 7,
-    "write_acl": 7,
-    "meta_read_acl": 4,
-    "icon": "fa-image"
-  }
-}
-}</pre>
+                  <p>Here are the environment vars that you can set:
+                    <ul>
+                      <li>TP_KFK_HOST: Kafka (zooekeeper) server</li>
+                      <li>TP_KFK_PORT: Kafka (zooekeeper) server port</li>
+                      <li>TP_KFK_CLIENT: Name for the kafka client</li>
+                      <li>TP_REDIS_HOST: Redis database server</li>
+                      <li>TP_REDIS_PORT: Redis server port</li>
+                      <li>TP_MAIN_DB: Name of the main database which to use. Should be the same as the exported variable in telepat-models</li>
+                      <li>TP_ES_HOST: Elasticsearch server (if you are using the ES database adapter)</li>
+                      <li>TP_ES_PORT: Elasticsearch server port (if you are using the ES database adapter)</li>
+                    </ul>
+                  </p>
+                  <h1 id="creating-an-app" class="section">Creating an app</h1>
+                  <p>After bootup, you need to create a new administration user account. Telepat has a tool that can help you setup your new app in no time - to install, simply run:
+                    <pre>npm install telepat-cli</pre>
+                  </p>
+                  <p>Here are the steps you need to take to create a new app:
+                    <ul>
+                      <li>Configure Elasticsearch
+                        <pre>telepat configure elasticsearch</pre>
+                      </li>
+                      <li>Register a new admin:
+                        <pre>telepat add admin --email EMAIL --password PASSWORD</pre>
+                      </li>
+                      <li>Create the app:
+                        <pre>telepat add app --name APP_NAME --apiKey API_KEY</pre>
+                      </li>
+                      <li>Create at least one context (as a container for your objects):
+                        <pre>telepat add context --contextName CONTEXT_NAME</pre>
+                      </li>
+                      <li>Create a schema file, and feed it into your app, so Telepat knows the types of objects you'll be working with. You need to have a schema that defines at the very least the types of objects; you can optionally also add information about object parameter names or relationships.
+                        <pre>telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY</pre>
+                      </li>
+                    </ul>
+                  </p>
+                  <h1 id="js-example" class="section">Connecting the JS client</h1>
+                  <p>There's a Telepat example app that you can quickly run to test out your deployment. To do that, you need to clone the JavaScript client repository:</p>
+                  <pre>git clone https://github.com/telepat-io/telepat-js.git</pre>
+                  <p>Then you need to install all dependencies, so run:</p>
+                  <pre>npm install</pre>
+                  <p>Now let's configure the connection to the local instance of Telepat. Go to example/script.js and edit your connect options:</p>
+                  <pre>var connectOptions = {
+ apiKey: 'APIKEY',
+ appId: 'APPID',
+ apiEndpoint: 'http://localhost:3000',
+ socketEndpoint: 'http://localhost',
+ timerInterval: 150
+};</pre>
+                  <p>The apiEndpoint and socketEndpoint are probably fine if you're running Telepat locally (unless you're running in Docker on a Mac, you need to use the Docker IP), so you need to enter the API key and app ID you set up earlier.</p>
+                  <p>All you need to do next is run the example:</p>
+                  <pre>gulp serve</pre>
+                  <p>Then navigate to /example in the tab that gets opened in your browser. That's it! You've successfully deployed your first Telepat instance.</p>
                 </div>
               </div>
             </div>
