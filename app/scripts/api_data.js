@@ -78,7 +78,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/admin/add/app",
+    "url": "/admin/app/add",
     "title": "AppCreate",
     "description": "<p>Creates a app for the admin. The request body should contain the app itself.</p> ",
     "name": "AdminAppAdd",
