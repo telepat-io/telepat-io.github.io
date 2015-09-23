@@ -94,7 +94,11 @@
                   <pre>git clone https://github.com/telepat-io/telepat-docker-compose-files
 cd telepat-docker-compose-files/shared
 sudo docker-compose up</pre>
-                  <p>This will start up all the infrastructure components. Next, you need to launch the Telepat API and all the other services:</p>
+                  <p>This will start up all the infrastructure components. Also, you need to install a CLI that can help you with Telepat management tasks:</p>
+                  <pre>npm install telepat-cli</pre>
+                  <p>After installing the CLI and booting up Elasticsearch, you need to configure it:</p>
+                  <pre>telepat configure elasticsearch</pre>
+                  <p> Next, you need to launch the Telepat API and all the other services:</p>
                   <pre>cd telepat-docker-compose-files/telepat
 sudo docker-compose up</pre>
                   <p>Right now everything should be up and running. The API instance is available on the same IP as your docker client. If you're running the Docker instance locally, it's localhost. If you're running on a Mac with Docker Quickstart Terminal, you need to note the IP that's shown in the terminal window when launching.</p>
@@ -128,14 +132,8 @@ sudo docker-compose up</pre>
                     </ul>
                   </p>
                   <h1 id="creating-an-app" class="section">Creating an app</h1>
-                  <p>After bootup, you need to create a new administration user account. Telepat has a tool that can help you setup your new app in no time - to install, simply run:
-                    <pre>npm install telepat-cli</pre>
-                  </p>
-                  <p>Here are the steps you need to take to create a new app:
+                  <p>After bootup, you need to create a new administration user account - Telepat CLI can help you setup your new app in no time. Here are the steps you need to take to create a new app:
                     <ul>
-                      <li>Configure Elasticsearch
-                        <pre>telepat configure elasticsearch</pre>
-                      </li>
                       <li>Register a new admin:
                         <pre>telepat add admin --email EMAIL --password PASSWORD</pre>
                       </li>
