@@ -40,7 +40,12 @@ block content
           | cd telepat-docker-compose-files/shared
           | sudo docker-compose up
         p
-          | This will start up all the infrastructure components. Next, you need to launch the Telepat API and all the other services:
+          | This will start up all the infrastructure components. Also, you need to install a CLI that can help you with Telepat management tasks:
+        pre npm install telepat-cli
+        p After installing the CLI and booting up Elasticsearch, you need to configure it:
+        pre telepat configure elasticsearch
+
+        p  Next, you need to launch the Telepat API and all the other services:
         pre cd telepat-docker-compose-files/telepat
           | sudo docker-compose up
         p
@@ -79,12 +84,8 @@ block content
 
         h1.section#creating-an-app Creating an app
         p
-          | After bootup, you need to create a new administration user account. Telepat has a tool that can help you setup your new app in no time - to install, simply run:
-          pre npm install telepat-cli
-        p Here are the steps you need to take to create a new app:
+          | After bootup, you need to create a new administration user account - Telepat CLI can help you setup your new app in no time. Here are the steps you need to take to create a new app:
           ul
-            li Configure Elasticsearch
-              pre telepat configure elasticsearch
             li Register a new admin:
               pre telepat add admin --email EMAIL --password PASSWORD
             li Create the app:
