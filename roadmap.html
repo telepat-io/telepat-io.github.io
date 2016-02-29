@@ -104,7 +104,11 @@
                         <li>Retrieving app contexts</li>
                         <li>User management tasks:
                           <ul>
-                            <li>Logging users in using a Facebook token</li>
+                            <li>Authenticating users using Facebook</li>
+                            <li>Authenticating users using Twitter</li>
+                            <li>Authenticating users using username/password</li>
+                            <li>Verifiying account email address by sending email</li>
+                            <li>Resetting the password with email validation</li>
                             <li>Logging users out</li>
                             <li>Updating a user profile</li>
                             <li>Deleting a user profile</li>
@@ -121,27 +125,30 @@
                     </li>
                     <li>
                        
-                      The messaging queue layer, currently implemented using <a href="http://kafka.apache.org">Apache Kafka</a>.
+                      The messaging queue layer, currently offering adapters for <a href="http://kafka.apache.org">Apache Kafka</a> and <a href="https://www.rabbitmq.com/" target="_blank">RabbitMQ</a>.
                     </li>
                     <li>The aggregation queue layer, implemented using <a href="https://nodejs.org"></a>. Currently supports "replace" operations on object properties.</li>
                     <li>
                        
-                      The persistence layer, currently implemented using <a href="http://www.couchbase.com/">Couchbase</a>.
+                      The persistence layer, currently offering an adapter for <a href="https://www.elastic.co/" target="_blank">Elasticsearch</a>.
                     </li>
                     <li>The synchronization layer, using the following available transports:
                       <ul>
                         <li><a href="https://developers.google.com/cloud-messaging/">Google Cloud Messaging</a></li>
                         <li><a href="http://socket.io/">Socket.io</a></li>
+                        <li><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html">Apple PN Service</a></li>
                       </ul>
                     </li>
                   </ul>
                   <h2 id="api-soon" class="section">Coming soon</h2>
                   <ul>
-                    <li>Unit testing!</li>
+                    <li>More unit testing!</li>
+                    <li>Scalability benchmark and guide to scaling Telepat</li>
                     <li>Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)</li>
                     <li>Real-time access to a list of a user's currently logged in friends</li>
-                    <li>Apple Push Notifications transport implementation</li>
-                    <li><a href="https://www.elastic.co/">Elasticsearch</a> persistence layer implementation</li>
+                    <li>Exposing hooks to allow data-manipulation at the aggregation level</li>
+                    <li>Support for developer-defined services</li>
+                    <li><a href="http://www.couchbase.com/">Couchbase</a> persistence layer implementation</li>
                     <li>Support for "increment" operation, as well as operations for array editing</li>
                     <li>Support for limits/offsets in object subscriptions</li>
                     <li>Support for 3rd party adapters for the messaging queue layer, persistence layer and synchronization transports</li>
@@ -153,9 +160,7 @@
                     <li>Real-time access to a count of all related objects (know how many objects belong to the current one, as defined in the schema)</li>
                     <li>The ability to define "actions" (like, view, bump etc.) that can be executed by users on objects</li>
                     <li>Real-time access to action-related metadata on objects and channels</li>
-                    <li>Exposing hooks to allow data-manipulation at the aggregation level</li>
-                    <li>Support for developer-defined services</li>
-                    <li>Support for login with Google, Twitter, GitHub or custom login workflows</li>
+                    <li>Support for login with Google and GitHub</li>
                   </ul>
                   <h2 id="api-considered" class="section">Considered</h2>
                   <ul>
@@ -169,7 +174,6 @@
                         <li><a href="https://www.mongodb.org/">MongoDB</a></li>
                         <li><a href="http://rethinkdb.com/">RethinkDB</a></li>
                         <li><a href="https://parse.com/">Parse</a></li>
-                        <li><a href="https://www.rabbitmq.com/">RabbitMQ</a></li>
                       </ul>
                     </li>
                   </ul>
