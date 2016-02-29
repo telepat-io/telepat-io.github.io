@@ -1,16 +1,5 @@
 extends layouts/_default
 block content
-  .text-center.padded(style="display:none")
-    img.faded(src="/images/github.png" width=256 height=256)
-    h1 Coming soon on Github
-    form.form-inline(method="post" action="http://appscend.us2.list-manage.com/subscribe/post?u=de3298de9232b91872f2c5529&amp;id=2cf33c9443")
-      div(style="position: absolute; left: -5000px;")
-        input(type="text" name="b_de3298de9232b91872f2c5529_2cf33c9443" tabindex="-1" value="")
-      .form-group
-        input.form-control(type="email" id="header_email" name="EMAIL" placeholder="Your email address" required)
-      .form-group
-        button.btn.btn-default(type="submit" name="subscribe") Get notified
-
   .container-fluid
     .row
       .col-lg-3
@@ -18,6 +7,8 @@ block content
           li
             a.alpha(href="#installation") Installation
             ul
+              li
+                a.alpha(href="#installation-repositories") Repositories
               li
                 a.alpha(href="#installation-dependencies") Dependencies
               li
@@ -30,13 +21,80 @@ block content
             a.beta(href="#creating-an-app") Creating an app
           li
             a.gamma(href="#js-example") Connecting the JS client
+          li
+            a.delta(href="#status") Status
       #main-content.col-lg-9
         h1.section#installation Getting started with Telepat
         
+        h3.section#installation-repositories Repositories guide
+        ul
+          li
+            strong
+              a(href='https://github.com/telepat-io/telepat-models' target='_blank') Telepat models
+            p The Telepat models library holds core functionality, and exposes a method API that other components (like the endpoint, and the services) can use to interact with the system. Unless developing the core or working on additional services, you sholdn't need to work with this library directly.
+            p
+              em Available on npm as 'telepat-models'.
+          li
+            strong
+              a(href='https://github.com/telepat-io/telepat-api' target='_blank') Telepat API
+            p Built on top of 
+              a(href='http://expressjs.com/' target='_blank') Express
+              | , the API provides web endpoints that allow interacting with Telepat from web and mobile applications. This is a required part of the Telepat stack.
+            p
+              em Available on npm as 'telepat-api'.
+          li
+            strong
+              a(href='https://github.com/telepat-io/telepat-worker' target='_blank') Telepat services
+            p This repo is a container for all the services that come pre-packaged with Telepat:
+            ul
+              li The aggregation service, that actively monitors data changes and generates patches;
+              li The persistence service, that stores updates in the datastore and sends them off to synchronization;
+              li The synchronization services, handling transport for individual platforms.
+            p The aggregation and persistence services are required parts of the Telepat stack. If no synchronization service is started, Telepat will act like a traditional, non-real-time API platform and simply deliver data snapshots on-demand.
+            p
+              em Available on npm as 'telepat-worker'.
+          li
+            strong
+              a(href='https://github.com/telepat-io/telepat-cli' target='_blank') Telepat CLI
+            p A command-line interface that helps with configuring a Telepat instance and managing applications.
+            p
+              em Available on npm as 'telepat-cli'.
+          li
+            strong
+              a(href='https://github.com/telepat-io/telepat-docker-compose-files') Telepat Docker files
+            p A set of Docker Compose files for accelerating the deployment of Telepat as well as its dependencies.
+          li
+            strong Telepat clients
+            p Native clients are available for multiple platforms:
+            ul
+              li
+                a(href='https://github.com/telepat-io/telepat-js') Javascript client
+                | , available on npm and bower as 'telepat-js'
+              li
+                a(href='https://github.com/telepat-io/telepat-android-sdk') Android client
+                | , available as a Maven dependency
+              li
+                a(href='https://github.com/telepat-io/telepat-ios-sdk') iOS client
+                | , available on CocoaPods as 'Telepat'
+
         h3.section#installation-dependencies Launching dependencies
-        p As of 0.2.3, Telepat requires connections to instances of Elasticsearch, Redis and Apache Kafka. You can deploy them individually, or you can use a docker-compose recipe that Telepat provides.
+        p As of 0.2.8, Telepat requires 3 external dependencies:
+        ul
+          li A messaging broker. Adapters are provided out of the box for 
+            a(href='https://www.rabbitmq.com/' target='_blank') RabbitMQ
+            |  and 
+            a(href='http://kafka.apache.org/' target='_blank') Kafka
+            | .
+          li A JSON datastore. An adapter for 
+            a(href='https://www.elastic.co/' target='_blank') Elasticsearch
+            |  is provided.
+          li A 
+            a(href='http://redis.io/' target='_blank') Redis
+            |  instance to hold Telepat state and configuration data.
         p
-          |  The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have 
+          | You can find installation instructions for all components on their respective website.
+        p
+          | Alternatively, we provide Docker Compose files to accelerate deployment. The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have 
           a(href='https://docs.docker.com/installation/') docker
           |  and 
           a(href='https://docs.docker.com/compose/install/') docker-compose
@@ -64,7 +122,7 @@ block content
         p
           | The default ports are 3000 for the API and 80 for the websocket service.
         h3.section#installation-github Get from GitHub
-        p The Telepat backend stack is made up of two components:
+        p The Telepat backend stack is made up of two components, that will each need configuration when installed from source:
         ul
           li
             | The API (
@@ -78,11 +136,11 @@ block content
             ul
               li node telepat-worker/index.js -t aggregation -i 0 
               li node telepat-worker/index.js -t write -i 0 
-              li node telepat-worker/index.js -t track -i 0 
               li node telepat-worker/index.js -t android_transport -i 0 
               li node telepat-worker/index.js -t ios_transport -i 0 
               li node telepat-worker/index.js -t sockets_transport -i 0 
-        p Here are the environment vars that you can set:
+        p To configure the components, create a 'config.json' file in the root of each directory. You can start from the 'config.example.json' template and fill in your specific parameters / remove configurations for services not in use.
+        p Alternatively, you can configure Telepat using environment variables. Here are the environment vars that you can set:
           ul
             li TP_KFK_HOST: Kafka (zoekeeper) server
             li TP_KFK_PORT: Kafka (zoekeeper) server port
@@ -90,8 +148,11 @@ block content
             li TP_REDIS_HOST: Redis database server
             li TP_REDIS_PORT: Redis server port
             li TP_MAIN_DB: Name of the main database which to use. Should be the same as the exported variable in telepat-models
-            li TP_ES_HOST: Elasticsearch server (if you are using the ES database adapter)
-            li TP_ES_PORT: Elasticsearch server port (if you are using the ES database adapter)
+            li TP_ES_HOST: Elasticsearch server 
+            li TP_ES_PORT: Elasticsearch server port
+            li TP_AMQP_HOST: RabbitMQ host
+            li TP_AMQP_USER: RabbitMQ authentication username
+            li TP_AMQP_PASSWORD: RabbitMQ authentication password
 
         h1.section#creating-an-app Creating an app
         p
@@ -128,6 +189,12 @@ block content
         p All you need to do next is run the example:
         pre gulp serve
         p That's it! You've successfully deployed your first Telepat instance.
+        h1.section#status A word on stability
+        p Telepat is beta software. Although specific versions of Telepat are stable and running production applications right now, we are still in the stage of making design and interface decisions based on trials and feedback, so please keep in mind:
+        ul
+          li Some functionalities implemented by the backend components may not be yet implemented in specific clients
+          li API endpoints specifications might change
+        p We appreciate support from the community in identifying and fixing issues, so if you run into any trouble, please open up an issue on the proper repo and we'll be quick to help out.
 block scripts
   script(src="scripts/intro.js")
   script(src="scripts/menu-highlight.js")
