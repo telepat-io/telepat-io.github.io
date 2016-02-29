@@ -10,7 +10,7 @@ block content
               li
                 a.alpha(href="#open-source") Open source
               li
-                a.alpha(href="#backend-stack") Backend stack
+                a.alpha(href="#api-platform") API platform
               li
                 a.alpha(href="#real-time") Real time
               li
@@ -25,15 +25,15 @@ block content
             a.delta(href="#architecture") Architecture
             ul
               li
-                a.delta(href="#the-front-facing-endpoint") The front-facing endpoint
+                a.delta(href="#the-api-endpoint") The API endpoint
               li
                 a.delta(href="#the-datamessaging-queue") The messaging queue
               li
-                a.delta(href="#the-aggregation-layer") The aggregation layer
+                a.delta(href="#data-processing-services") Data processing services
               li
-                a.delta(href="#the-persistence-layer") The persistence layer
+                a.delta(href="#the-persistence-service") The persistence service
               li
-                a.delta(href="#the-synchronization-layer") The synchronization layer
+                a.delta(href="#the-synchronization-service") The synchronization service
           li
             a.epsilon(href="#use-cases") Use cases
           li
@@ -41,17 +41,17 @@ block content
       #main-content.col-md-9
         img.main-logo(width=202 height=123 src="/images/logo_telepat_light@2x.png")
         h1.section#introduction Introduction
-        p Telepat is an open-source backend stack, designed to deliver information and information updates in real-time to clients, while allowing for flexible deployment and simple scaling.
+        p Telepat is an open-source API platform, designed to deliver information and information updates in real-time to clients, while allowing for flexible deployment and simple scaling.
         p Let&rsquo;s break that down:
         h3.section#open-source Open-source
         p
           | We believe that the massive proliferation of free software we&rsquo;ve witnessed in the last decades is changing the face of the world as we know it. Today&rsquo;s open source components - created, tested and maintained by international communities - are the main driver that stands behind the rise of a myriad of new products and services, that could have never iterated or scaled with such agility without relying on the solid foundations that such components provide.
-        h3.section#backend-stack Backend stack
+        h3.section#api-platform API platform
         p
-          | The operations of storing, retrieving and manipulating data constitute the core layer for most of today&rsquo;s software products. While this layer is basically an orchestrator between various database services and transport services, there is significant effort required in setting up all the connecting boilerplate code. This amount of boilerplate needed makes it unfeasible to test several database components, for example, to find the perfect fit for specific use cases. And while there are now many services and stacks that significantly accelerate this part of development, most of them don&rsquo;t provide any choice as to the specific components used behind the scenes.
+          | The operations of storing, retrieving and manipulating data constitute the core layer for most of today&rsquo;s software products. The modern, multi-platform embodiment of this layer is the API. While this is basically an orchestrator between various database, processing and transport services, there is significant effort required in setting up all the connecting boilerplate code. This amount of boilerplate needed makes it unfeasible to test several database components, for example, to find the perfect fit for specific use cases. And while there are now many services and stacks that significantly accelerate this part of development, most of them don&rsquo;t provide any choice as to the specific components used behind the scenes.
         h3.section#real-time Real time
         p
-          | The standard model that has powered web services for years now is pull-based - that is, clients ask the server for the information they need and the server responds with a static snapshot of the data that marks the end of the transaction. Refreshing this stale data means the client needs to request all of the information yet again, in another transaction. While this has been sufficient in most cases until now, the rise of the social web and on-demand economy is marking the transition to a new paradigm, where data needs to be actively pushed from the backend to all subscribing clients in real-time.
+          | The standard model that has powered web services for years now is pull-based - that is, clients ask the server for the information they need and the server responds with a static snapshot of the data that marks the end of the transaction. Refreshing this stale data means the client needs to request all of the information yet again, in another transaction. While this has been sufficient in most cases until now, the rise of the social web and the on-demand economy is marking the transition to a new paradigm, where data needs to be actively pushed from the backend to all subscribing clients in real-time.
         h3.section#flexible-deployment Flexible deployment
         p
           | Software components that handle backend services have a great value offering for developers, as they significantly reduce the effort required for setting up a new project. However, an equal amount of attention needs to be given to taking those projects from early development to later production stages, where apps need to be deployed on various infrastructures, from self-managed machines to cloud providers. Modularization and flexibility in component choice needs to be complemented by flexibility in deployment options, in order to provide safety and simplicity for the whole project lifecycle.
@@ -62,6 +62,9 @@ block content
         p
           | Telepat is designed as a multi-layer system, with the following main objectives in mind:
         ul
+          li Data should be stored and transmitted in JSON format.
+          li
+            | Schema should be defined, in order to provide means of searching and filtering information. Objects should have a `type` property that allows querying.
           li
             | The main focus of the system is orchestrating CRUD operations on data, and persisting as well as replicating changes as soon as possible on all subscribed clients.
           li
@@ -77,12 +80,13 @@ block content
           li
             | The system should be able to handle device and user identification and registration operations.
           li
-            | Users should be connected by a graph of &ldquo;following&rdquo; relationships. Clients should be able to subscribe to changes to the profiles of the users they are following.
+            | Data modeling should also support graph-like relationships between objects, for advanced real-time querying.
         p Other objectives that have shaped the design of Telepat are:
         ul
-          li Data should be stored and transmitted in JSON format.
           li
-            | Schema should be added on top of the JSON structure, in order to provide means of searching and filtering information. At the very least, object types should be defined.
+            | It should work natively on desktop as well as mobile platforms.
+          li
+            | Native push notifications should be supported out of the box.
           li
             | Client libraries should be readily available for all major platforms and languages.
           li
@@ -97,7 +101,7 @@ block content
             strong JSON objects
             | .
           li
-            | All updates of objects are retrieved from and sent to clients using a variant of 
+            | All updates of object properties are retrieved from and sent to clients using a variant of 
             a(href='https://tools.ietf.org/html/rfc6902')
               strong JSON Patch
             |  that also supports value incrementation and decrementation.
@@ -131,10 +135,31 @@ block content
           li
             strong ACLs
             |  are defined for each object type. Read or write permissions can be assigned to anonymous devices, logged-in users or administrators.
+          li
+            | Access control is also defined for objects on a per-property basis.
         h1.section#architecture Architecture
 
-        p The layers that make up the architecture of Telepat are:
-        h3.section#the-front-facing-endpoint The front-facing endpoint
+        p
+          | Telepat implements a microservice architecture, with a messaging broker at the core, orchestrating communications between loosely coupled, highly focused data processing services.
+        p
+          | Telepat runs on top of the following set of 3rd party dependencies:
+        ul
+          li A message broker of choice
+          li A database of choice (supporting JSON storage)
+          li A 
+            a(href='http://redis.io/') Redis
+            |  instance, holding internal Telepat state and configuration data.
+        p The components that make up the architecture of Telepat are:
+        ul
+            li The API endpoint
+            li The messaging queue
+            li The data processing services
+            li The persistence service
+            li The synchronization service
+        p All server-side services are implemented in JavaScript, on top of 
+          a(href='https://nodejs.org/') Node.js
+          | . Clients for the API endpoint are available for multiple platforms and programming languages.
+        h3.section#the-api-endpoint The API endpoint
         img.pull-right(src='/images/schema_01@2x.png' width=250)
         p
           | Powered by 
@@ -153,52 +178,52 @@ block content
           li Creating, editing and removing contexts
           li Creating, editing and removing schemas
         p
-          | The front-facing layer acts like an information dispatcher, and communicates directly with:
+          | The API endpoint acts like an information dispatcher, and communicates directly with:
         ul
           li
-            | The persistence layer, to instantly serve the current information snapshot to clients that make requests
+            | The persistence service, to instantly serve the current information snapshot to clients that make requests
           li
             | The data queue, where all object updates received from clients are stored for aggregation
         .clearfix
         h3.section#the-datamessaging-queue The data/messaging queue
         img.pull-right(src='/images/schema_03@2x.png' width=221)
         p
-          | The data queue layer communicates with the front-end and the aggregation layers, and has multiple purposes within Telepat:
+          | The data queue layer intermediates communication between all Telepat components, and has multiple purposes:
         ul
           li
-            | It acts like a buffer for all the object updates signaled by clients, thus enabling the front-end layer to be write-decoupled from the persistence layer to enhance performance and responsiveness.
+            | It acts like a buffer for all the object updates signaled by clients, thus enabling the API endpoint to be write-decoupled from the persistence service, to enhance performance and responsiveness.
           li
             | It allows the periodic aggregation of updates on same objects, so that, for example, 50 updates of a specific object&rsquo;s property received almost instantly are translated to a single database write and a single update message sent to subscribing clients.
           li
             | It also works as an internal job dispatching queue, for tasks that need to be executed asynchronously, without blocking the system (for example, sending aggregated updates back to clients).
         p This layer is implemented using 3rd party components or services.
         .clearfix
-        h3.section#the-aggregation-layer The aggregation layer
+        h3.section#data-processing-services Data processing services
         img.pull-right(src='/images/schema_02@2x.png' width=221)
         p
-          | The aggregation layer is a core part of Telepat, implemented using 
-          a(href='https://nodejs.org/') Node.js
-          | . It continuously fetches data updates enqueued on the data layer, and merges them into larger chunks that constantly reflect the latest object states and are ready for persisting and sending to subscribing clients. The chunks are also temporarily stored using the persistence layer.
+          | Data processing is achieved by plugging microservices into the data pipeline. Event processing, triggering alerts, tagging objects or extracting trending content in real-time are examples of what such services can provide.
         p
-          | This layer also uses the data queue to send a signal to the synchronization layer whenever new information updates are available and ready for deployment.
+          | The aggregation service comes out of the box with Telepat. Implemented using 
+          a(href='https://nodejs.org/') Node.js
+          | , it continuously fetches data updates enqueued in the data broker, and merges them into larger chunks that constantly reflect the latest object states and are ready for persisting and sending to subscribing clients. The chunks are also temporarily stored using the persistence service.
         .clearfix
-        h3.section#the-persistence-layer The persistence layer
+        h3.section#the-persistence-service The persistence service
         img.pull-right(src='/images/schema_05@2x.png' width=221)
         p
-          | This layer is implemented using 3rd party components or services, and handles storing and retrieving all information that runs though Telepat. The constraint imposed by this layer is using components that support storing JSON objects in a key-value fashion.
+          | This is implemented using 3rd party components or services that plug into Telepat using adapters. It handles storing and retrieving all information that runs though Telepat. The constraint imposed by this service is using components that support storing JSON objects in a key-value fashion.
         p
           | Also, depending on the types of filtering that the application will require, some components may have better performance than others (in doing, for example, full text searches over stored objects).
         .clearfix
-        h3.section#the-synchronization-layer The synchronization layer
+        h3.section#the-synchronization-service The synchronization service
         img.pull-right(src='/images/schema_04@2x.png' width=260)
         p
           | This is also a core part of Telepat, implemented using 
           a(href='https://nodejs.org/') Node.js
-          | . The job of the synchronization layer is to monitor the data queue for signals that new aggregated updates are available and ready for deployment.
-        p When receiving such signals, this layer does two things:
+          | . The job of the synchronization service is to monitor the data queue for signals that new aggregated updates are available and ready for deployment.
+        p When receiving such signals, this service does two things:
         ul
           li
-            | It writes the data to the persistence layer, thus permanently storing the new state of the information
+            | It writes the data to the persistence service, thus permanently storing the new state of the information
           li
             | It sends the data to all current subscribers. This is done using communication adapters, responsible exclusively for the push transport of the information, from the synchronization nodes to the clients.
         p
@@ -222,6 +247,22 @@ block content
           li Require flexibility regarding the choice of software components
           li Require flexibility regarding the infrastructure chosen for production
         p Some examples of applications that can make good use of Telepat are:
+        h3#use-cases-secondscreen Second-screen companion apps
+        p Telepat shines when it comes to traffic spikes like ones you get during a popular live tv show, in a companion app that allows interaction. Here's an example of handling common usage scenarios for second-screen apps:
+        ul
+          li Users log in to Telepat using their Facebook accounts. Shows are represented by contexts inside Telepat, so after login, users start listening for global context changes, as that would signal that a new show is currently available for "check-in".
+          li Once a context becomes available, users can subscribe to "event" objects on that specific context - that's basically the "check-in" process, after the subscribe, users will be notified of any new events, as they happen live.
+          li Admins publish events on Telepat, marking importent moments in the show timeline. Events are generic JSON objects, they can be used to encapsulate not just text but also images, videos, maps or any other content.
+          li Besides being able to push second-screen content in real-time to viewers, admins can also allow them to interact by participating on polls. Polls can be special types of events, and could also have a series of extra properties to store the possible answers and each answer count.
+          li When receiving this special type of event, users are able to vote by sending increment operations on properties holding vote counts.
+          li Increments are scalably queued and aggregated by Telepat, and updated values are sent to all subscribers that are able to see the massive voting results in real-time.
+        h3#use-cases-iot IoT, sensor tracking, geo tracking
+        p Any device that talks HTTP can also talk to Telepat. Basic communication (registering, logging in, administration tasks and data objects CRUD) is classically implemented using client-server HTTP requests. Real-time data object updates are sent via platform-specific adapters, but any device can fallback to HTTP long-polling. 
+        p Sensors can individually or collaboratively work on data objects that are replicated in real-time to all subscribing devices, allowing Telepat to become:
+        ul
+          li An inter-device synchronization and communication layer, allowing the implementation of logic like blinking a LED when values read from a sensor exceed a certain threshold.
+          li A data management layer, allowing the collection and search of generic JSON data objects according to rules described by a schema. Telepat can also be scaled to handle large, enterprise-level data volumes coming from many individual sensors.
+          li A real-time data visualization layer, built for the web using the Telepat JavaScript client.
         h3#use-cases-messaging Messaging and chat
         p Making a public, many to many chat app is simple. But what if you want to build a chat system to allow users to talk 1-on-1 with their Facebook friends? Let's consider an example of two friends, Alice and Bob, doing just that using Telepat. We'll name devices after their users, just to keep thing simple.
         ul
@@ -252,26 +293,34 @@ block content
           li When a buyer decides for an offer, he can delete the original order object or he can close it, using a status variable - in both cases, all sellers get callbacks about the change, so they know the order has expired.
           li The buyer then creates a new "booking" object in Telepat, makes it private and adds the seller user id to the list of the booking's owners. Buyers subscribe to bookings, so the lucky winner instantly knows about his new deal.
           li The booking object is then shared between the two users, facilitating real-time exchange between them until the service has been delivered and the process is done.
-        h3#use-cases-secondscreen Second-screen companion apps
-        p Telepat shines when it comes to traffic spikes like ones you get during a popular live tv show, in a companion app that allows interaction. Here's an example of handling common usage scenarios for second-screen apps:
-        ul
-          li Users log in to Telepat using their Facebook accounts. Shows are represented by contexts inside Telepat, so after login, users start listening for global context changes, as that would signal that a new show is currently available for "check-in".
-          li Once a context becomes available, users can subscribe to "event" objects on that specific context - that's basically the "check-in" process, after the subscribe, users will be notified of any new events, as they happen live.
-          li Admins publish events on Telepat, marking importent moments in the show timeline. Events are generic JSON objects, they can be used to encapsulate not just text but also images, videos, maps or any other content.
-          li Besides being able to push second-screen content in real-time to viewers, admins can also allow them to interact by participating on polls. Polls can be special types of events, and could also have a series of extra properties to store the possible answers and each answer count.
-          li When receiving this special type of event, users are able to vote by sending increment operations on properties holding vote counts.
-          li Increments are scalably queued and aggregated by Telepat, and updated values are sent to all subscribers that are able to see the massive voting results in real-time.
-        h3#use-cases-iot IoT, sensor tracking, geo tracking
-        p Any device that talks HTTP can also talk to Telepat. Basic communication (registering, logging in, administration tasks and data objects CRUD) is classically implemented using client-server HTTP requests. Real-time data object updates are sent via platform-specific adapters, but any device can fallback to HTTP long-polling. 
-        p Sensors can individually or collaboratively work on data objects that are replicated in real-time to all subscribing devices, allowing Telepat to become:
-        ul
-          li An inter-device synchronization and communication layer, allowing the implementation of logic like blinking a LED when values read from a sensor exceed a certain threshold.
-          li A data management layer, allowing the collection and search of generic JSON data objects according to rules described by a schema. Telepat can also be scaled to handle large, enterprise-level data volumes coming from many individual sensors.
-          li A real-time data visualization layer, built for the web using the Telepat JavaScript client.
+
         h1#comparison.section Comparison
 
         p Like other software components out there, open-source or web services, Telepat is also meant to accelerate the development of modern web and mobile applications, while focusing on providing real-time data update functionalities to developers. Many of these components are easy to use, elegant and solid, but there are a lot of aspects that set them apart, so it always makes sense to investigate what the best solution is for your specific requirements.
         p Let's take a look at what sets Telepat apart from the most popular existing solutions.
+        hr
+        a(href='https://www.firebase.com/' target='_blank')
+          img(src='/images/firebase-logo.png' width=170)
+        p
+          br
+          ul
+            li Firebase is a service that is very similar to Telepat's interface design, and a point of inspiration for it. Firebase is focused on the backend functionality, is unopinionated on the frontend and can have native clients for specific platforms.
+            li Like Telepat, Firebase also supports structured data management, but has an approach based on key path subscribing, which makes complex queries difficult to model data for.
+            li Unlike Telepat, Firebase does not support native push notifications for mobile devices or browsers.
+            li User authentication is offered by both Firebase and Telepat. However, managing users and relationships between users is not a focus for Firebase, but can be modeled with extra effort using the basic functionalities provided.
+            li Firebase is closed-source software.
+        hr
+        a(href='https://www.pubnub.com/' target='_blank')
+          img(src='/images/pubnub-logo.png' width=140)
+        p
+          br
+          ul
+            li PubNub is a global data stream network, offered as a service.
+            li PubNub, unlike Telepat, is not concerned with understanding the data it handles, but focuses on delivering it to subscribers across platforms, with extremely low latency. 
+            li PubNub has no object data models, and is not aware of any changes happening with the data. An extra layer of business logic needs to be added on top of PubNub to handle change syncronization or data querying.
+            li Telepat's 
+              a(href='#the-synchronization-service') synchronization service
+              |  handles dispatching all data changes to corresponding subscribers, in the form of JSON Patch objects. Out of the box Telepat uses Socket.io, but services like PubNub (and other dedicated streaming networks) can also be integrated via adapters, to work together with Telepat and speed up delivery of updates.
         hr
         a(href='https://www.meteor.com/' target='_blank')
           img(src='/images/meteor-logo.png' width=150)
@@ -280,30 +329,10 @@ block content
           ul
             li Meteor is a solution for both frontend and backend development, while Telepat focuses on backend functionality.
             li When using Meteor in the backend, you also need to use it in your frontend app. Telepat lets you use any frontend framework.
+            li Decoupling the default Meteor frontend components means using a custom, specific interface (DDP).
             li Meteor is a solution for creating webapps, and running on mobile devices works only via webviews. Telepat enables native clients and native functionality for mobile or embedded.
             li Meteor uses database polling or oplog tailing to provide real-time updates. Telepat monitors and aggregates updates before adding them to the database, thus achieving greater database and overall performance.
-            li Telepat is focused on creating individually scalable service layers.
-            li Telepat allows using adapters for 3rd party databases, messaging queues and push transports.
-        hr
-        a(href='http://deployd.com/' target='_blank')
-          img(src='/images/deployd-logo.png' width=120)
-        p
-          br
-          ul
-            li Deployd is close to Telepat's design. It's focused on the backend functionality, it's unopinionated on the frontend and can have native clients for specific platforms.
-            li Like Telepat, Deployd also helps with data management (by allowing devs to define a schema), and offers an open-source web management dashboard.
-            li However, unlike Telepat, real-time functionality is provided via database polling, and that is very problematic at scale.
-            li Also, Deployd doesn't aim to provide full, real-time object replication but exposes a simple, ready to use pub-sub implementation.
-            li Unlike Telepat, Deployd has no straightforward scaling strategy, and does not allow the use of 3rd party adapters.
-        hr
-        a(href='http://derbyjs.com/' target='_blank')
-          img(src='/images/derby-logo.png' width=150)
-        p
-          br
-          ul
-            li Like Meteor and unlike Telepat, DerbyJS is a full-stack framework for writing webapps. It dictates the way you develop your app, from backend to frontend. Telepat lets you use any frontend framework, and enables native clients and native functionality for mobile or embedded.
-            li Like Telepat, DerbyJS allows using 3rd party database components via livedb.
-            li Unlike Telepat, DerbyJS doesn't directly provide a scaling strategy.
+            li Telepat is focused on creating individually scalable service layers. Meteor has a traditional, monolith design.
             li Telepat allows using adapters for 3rd party databases, messaging queues and push transports.
         
 block scripts
