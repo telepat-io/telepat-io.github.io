@@ -30,7 +30,7 @@
   <meta name="msapplication-wide310x150logo" content="images/favicon/mstile-310x150.png">
   <meta name="msapplication-square310x310logo" content="images/favicon/mstile-310x310.png">
   
-  <link rel="stylesheet" href="styles/main.min-a7e4a9b9.css">
+  <link rel="stylesheet" href="styles/main.min-1605a486.css">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
 </head>
 <body><img id="to-top" src="images/up-arrow-icon.png" onClick="window.scrollTo(0, 0);">
@@ -62,26 +62,13 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <div style="display:none" class="text-center padded"><img src="/images/github.png" width="256" height="256" class="faded">
-              <h1>Coming soon on Github</h1>
-              <form method="post" action="http://appscend.us2.list-manage.com/subscribe/post?u=de3298de9232b91872f2c5529&amp;amp;id=2cf33c9443" class="form-inline">
-                <div style="position: absolute; left: -5000px;">
-                  <input type="text" name="b_de3298de9232b91872f2c5529_2cf33c9443" tabindex="-1" value="">
-                </div>
-                <div class="form-group">
-                  <input type="email" id="header_email" name="EMAIL" placeholder="Your email address" required class="form-control">
-                </div>
-                <div class="form-group">
-                  <button type="submit" name="subscribe" class="btn btn-default">Get notified</button>
-                </div>
-              </form>
-            </div>
             <div class="container-fluid">
               <div class="row">
                 <div class="col-lg-3">
                   <ul class="sidebar-nav second">
                     <li><a href="#installation" class="alpha">Installation</a>
                       <ul>
+                        <li><a href="#installation-repositories" class="alpha">Repositories</a></li>
                         <li><a href="#installation-dependencies" class="alpha">Dependencies</a></li>
                         <li><a href="#installation-configuration" class="alpha">Configuration</a></li>
                         <li><a href="#installation-docker" class="alpha">Booting up with Docker</a></li>
@@ -90,13 +77,56 @@
                     </li>
                     <li><a href="#creating-an-app" class="beta">Creating an app</a></li>
                     <li><a href="#js-example" class="gamma">Connecting the JS client</a></li>
+                    <li><a href="#status" class="delta">Status</a></li>
                   </ul>
                 </div>
                 <div id="main-content" class="col-lg-9">
                   <h1 id="installation" class="section">Getting started with Telepat</h1>
+                  <h3 id="installation-repositories" class="section">Repositories guide</h3>
+                  <ul>
+                    <li><strong><a href="https://github.com/telepat-io/telepat-models" target="_blank">Telepat models</a></strong>
+                      <p>The Telepat models library holds core functionality, and exposes a method API that other components (like the endpoint, and the services) can use to interact with the system. Unless developing the core or working on additional services, you sholdn't need to work with this library directly.</p>
+                      <p><em>Available on npm as 'telepat-models'.</em></p>
+                    </li>
+                    <li><strong><a href="https://github.com/telepat-io/telepat-api" target="_blank">Telepat API</a></strong>
+                      <p>Built on top of <a href="http://expressjs.com/" target="_blank">Express</a>, the API provides web endpoints that allow interacting with Telepat from web and mobile applications. This is a required part of the Telepat stack.</p>
+                      <p><em>Available on npm as 'telepat-api'.</em></p>
+                    </li>
+                    <li><strong><a href="https://github.com/telepat-io/telepat-worker" target="_blank">Telepat services</a></strong>
+                      <p>This repo is a container for all the services that come pre-packaged with Telepat:</p>
+                      <ul>
+                        <li>The aggregation service, that actively monitors data changes and generates patches;</li>
+                        <li>The persistence service, that stores updates in the datastore and sends them off to synchronization;</li>
+                        <li>The synchronization services, handling transport for individual platforms.</li>
+                      </ul>
+                      <p>The aggregation and persistence services are required parts of the Telepat stack. If no synchronization service is started, Telepat will act like a traditional, non-real-time API platform and simply deliver data snapshots on-demand.</p>
+                      <p><em>Available on npm as 'telepat-worker'.</em></p>
+                    </li>
+                    <li><strong><a href="https://github.com/telepat-io/telepat-cli" target="_blank">Telepat CLI</a></strong>
+                      <p>A command-line interface that helps with configuring a Telepat instance and managing applications.</p>
+                      <p><em>Available on npm as 'telepat-cli'.</em></p>
+                    </li>
+                    <li><strong><a href="https://github.com/telepat-io/telepat-docker-compose-files">Telepat Docker files</a></strong>
+                      <p>A set of Docker Compose files for accelerating the deployment of Telepat as well as its dependencies.</p>
+                    </li>
+                    <li><strong>Telepat clients</strong>
+                      <p>Native clients are available for multiple platforms:</p>
+                      <ul>
+                        <li><a href="https://github.com/telepat-io/telepat-js">Javascript client</a>, available on npm and bower as 'telepat-js'</li>
+                        <li><a href="https://github.com/telepat-io/telepat-android-sdk">Android client</a>, available as a Maven dependency</li>
+                        <li><a href="https://github.com/telepat-io/telepat-ios-sdk">iOS client</a>, available on CocoaPods as 'Telepat'</li>
+                      </ul>
+                    </li>
+                  </ul>
                   <h3 id="installation-dependencies" class="section">Launching dependencies</h3>
-                  <p>As of 0.2.3, Telepat requires connections to instances of Elasticsearch, Redis and Apache Kafka. You can deploy them individually, or you can use a docker-compose recipe that Telepat provides.</p>
-                  <p> The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have <a href="https://docs.docker.com/installation/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a> installed on your machine, here are the steps to get dependencies running:</p>
+                  <p>As of 0.2.8, Telepat requires 3 external dependencies:</p>
+                  <ul>
+                    <li>A messaging broker. Adapters are provided out of the box for <a href="https://www.rabbitmq.com/" target="_blank">RabbitMQ</a> and <a href="http://kafka.apache.org/" target="_blank">Kafka</a>.</li>
+                    <li>A JSON datastore. An adapter for <a href="https://www.elastic.co/" target="_blank">Elasticsearch</a> is provided.</li>
+                    <li>A <a href="http://redis.io/" target="_blank">Redis</a> instance to hold Telepat state and configuration data.</li>
+                  </ul>
+                  <p>You can find installation instructions for all components on their respective website.</p>
+                  <p>Alternatively, we provide Docker Compose files to accelerate deployment. The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have <a href="https://docs.docker.com/installation/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a> installed on your machine, here are the steps to get dependencies running:</p>
                   <pre>git clone https://github.com/telepat-io/telepat-docker-compose-files
 cd telepat-docker-compose-files/shared
 sudo docker-compose up</pre>
@@ -115,7 +145,7 @@ sudo docker-compose up</pre>
                   <p>Right now everything should be up and running. The API instance is available on the same IP as your docker machine.</p>
                   <p>The default ports are 3000 for the API and 80 for the websocket service.</p>
                   <h3 id="installation-github" class="section">Get from GitHub</h3>
-                  <p>The Telepat backend stack is made up of two components:</p>
+                  <p>The Telepat backend stack is made up of two components, that will each need configuration when installed from source:</p>
                   <ul>
                     <li>The API (<a href="https://github.com/telepat-io/telepat-api">https://github.com/telepat-io/telepat-api</a>). To start this, simply run <pre>./bin/www</pre> You can also set the PORT environment variable to make the API listen on a port different than the default 3000.</li>
                     <li>The services (<a href="https://github.com/telepat-io/telepat-worker">https://github.com/telepat-io/telepat-worker</a>). To start, run <pre>node index.js -t topic_name -i worker_index</pre>
@@ -123,14 +153,14 @@ sudo docker-compose up</pre>
                       <ul>
                         <li>node telepat-worker/index.js -t aggregation -i 0 </li>
                         <li>node telepat-worker/index.js -t write -i 0 </li>
-                        <li>node telepat-worker/index.js -t track -i 0 </li>
                         <li>node telepat-worker/index.js -t android_transport -i 0 </li>
                         <li>node telepat-worker/index.js -t ios_transport -i 0 </li>
                         <li>node telepat-worker/index.js -t sockets_transport -i 0 </li>
                       </ul>
                     </li>
                   </ul>
-                  <p>Here are the environment vars that you can set:
+                  <p>To configure the components, create a 'config.json' file in the root of each directory. You can start from the 'config.example.json' template and fill in your specific parameters / remove configurations for services not in use.</p>
+                  <p>Alternatively, you can configure Telepat using environment variables. Here are the environment vars that you can set:
                     <ul>
                       <li>TP_KFK_HOST: Kafka (zoekeeper) server</li>
                       <li>TP_KFK_PORT: Kafka (zoekeeper) server port</li>
@@ -138,8 +168,11 @@ sudo docker-compose up</pre>
                       <li>TP_REDIS_HOST: Redis database server</li>
                       <li>TP_REDIS_PORT: Redis server port</li>
                       <li>TP_MAIN_DB: Name of the main database which to use. Should be the same as the exported variable in telepat-models</li>
-                      <li>TP_ES_HOST: Elasticsearch server (if you are using the ES database adapter)</li>
-                      <li>TP_ES_PORT: Elasticsearch server port (if you are using the ES database adapter)</li>
+                      <li>TP_ES_HOST: Elasticsearch server </li>
+                      <li>TP_ES_PORT: Elasticsearch server port</li>
+                      <li>TP_AMQP_HOST: RabbitMQ host</li>
+                      <li>TP_AMQP_USER: RabbitMQ authentication username</li>
+                      <li>TP_AMQP_PASSWORD: RabbitMQ authentication password</li>
                     </ul>
                   </p>
                   <h1 id="creating-an-app" class="section">Creating an app</h1>
@@ -180,6 +213,13 @@ sudo docker-compose up</pre>
                   <p>All you need to do next is run the example:</p>
                   <pre>gulp serve</pre>
                   <p>That's it! You've successfully deployed your first Telepat instance.</p>
+                  <h1 id="status" class="section">A word on stability</h1>
+                  <p>Telepat is beta software. Although specific versions of Telepat are stable and running production applications right now, we are still in the stage of making design and interface decisions based on trials and feedback, so please keep in mind:</p>
+                  <ul>
+                    <li>Some functionalities implemented by the backend components may not be yet implemented in specific clients</li>
+                    <li>API endpoints specifications might change</li>
+                  </ul>
+                  <p>We appreciate support from the community in identifying and fixing issues, so if you run into any trouble, please open up an issue on the proper repo and we'll be quick to help out.</p>
                 </div>
               </div>
             </div>
