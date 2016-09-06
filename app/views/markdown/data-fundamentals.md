@@ -19,7 +19,18 @@ The special keys of an application object are:
 |                       | <br/>**Email settings** |
 | email_confirmation    | A boolean, true if app should validate new registrations via email confirmation. |
 | from_email            | The sender email to use for sending system email, like registration and password update. |
-| email_templates.confirm_account | The HTML template for the content of the email sent out on user registration, if `email_confirmation` is true. Use `{CONFIRM_LINK}` as a placeholder for the URL that users will need to access to complete the registration. |
+|                       | <br/>**User register confirmation settings** |
+| registration_config.confirm_email_html | The HTML template for the content of the email sent out on user registration, if `email_confirmation` is true. Use `{CONFIRM_LINK}` as a placeholder for the URL that users will need to access to complete the registration. |
+| registration_config.confirm_page_html | The HTML template for the page that will be generated when the user clicks through the link in the confirmation email. This will be rendered if no deep links are defined for the platform doing the request. |
+| registration_config.deep_link | If this is defined, the user will be redirected to this URL after clicking through the link in the confirmation email on a desktop device. |
+| registration_config.ios_deep_link | If this is defined, the user will be redirected to this URL after clicking through the link in the confirmation email on an iOS device. |
+| registration_config.deep_link_android | If this is defined, the user will be redirected to this URL after clicking through the link in the confirmation email on an Android device. |
+|                       | <br/>**Forgot password confirmation settings** |
+| forgot_pwd_config.confirm_email_html | The HTML template for the content of the email sent out when a user requests a new password, if `email_confirmation` is true. Use `{CONFIRM_LINK}` as a placeholder for the URL that users will need to access to complete the password update. |
+| forgot_pwd_config.confirm_page_html | The HTML template for the page that will be generated when the user clicks through the link in the confirmation email. This will be rendered if no deep links are defined for the platform doing the request. |
+| forgot_pwd_config.deep_link | If this is defined, the user will be redirected to this URL after clicking through the link in the confirmation email on a desktop device. The code needed to finalize the password update will be sent as a get parameter, named `code`. |
+| forgot_pwd_config.ios_deep_link | If this is defined, the user will be redirected to this URL after clicking through the link in the confirmation email on an iOS device. The code needed to finalize the password update will be sent as a get parameter, named `code`. |
+| forgot_pwd_config.deep_link_android | If this is defined, the user will be redirected to this URL after clicking through the link in the confirmation email on an Android device. The code needed to finalize the password update will be sent as a get parameter, named `code`. |
 |                       | <br/>**Push notification settings**   |
 | apn_pfx               | A base-64 encoded ASCII string, created from the .p12 APN certificate, in which each character in the string is treated as a byte of binary data |
 | apn_passphrase        | The password string required in order to open the .p12 file saved in the `apn_pfx` key. |

@@ -1,4 +1,5 @@
 # Working with Telepat
+*Note that the available SDKs handle all the communication with the Telepat server components, as described below, while exposing a simple, native way of working with objects. To enable push notification transports, you will need to [configure your credentials](#configuring-push-notifications).*
 
 ### API Basics
 You operate with Telepat by sending requests to the API endpoint. You can see a full list of supported methods, along with details about creating requests in the [API reference](/api-docs.html).
@@ -69,22 +70,26 @@ Depending on the transport channels that were set as active during device regist
 
 The structure of a patch object is:
 
-| Property name                | Description |
-| ---------------------------- | ----------- |
-| data                         | Root container of the patches descriptor object |
-| data.new                     | Array containing all individual patches for objects that are newly created |
-| data.new.object              | The newly created object |
-| data.new.subscriptions       | An array of device subscriptions that are affected by the current patch |
-| data.new.timestamp           | Timestamp of when this patch was generated |
-| data.deleted                 | Array containing all individual patches for objects that are newly created |
-| data.deleted.object          | The newly created object |
-| data.deleted.subscriptions   | An array of device subscriptions that are affected by the current patch |
-| data.deleted.timestamp       | Timestamp of when this patch was generated |
-| data.updated                 | Array containing all individual patches for objects that are newly created |
-| data.updated.op              | The type of update operation applied. As of 4.2.1, this can only be 'replaced' |
-| data.updated.object          | The newly created object |
-| data.updated.subscriptions   | An array of device subscriptions that are affected by the current patch |
-| data.updated.timestamp       | Timestamp of when this patch was generated |
+| Property name                  | Description |
+| ------------------------------ | ----------- |
+| data                           | Root container of the patches descriptor object |
+| data.new[]                     | Array containing all individual patches for objects that are newly created |
+| data.new[].object              | The newly created object |
+| data.new[].subscriptions       | An array of device subscriptions that are affected by the current patch |
+| data.new[].timestamp           | Timestamp of when this patch was generated |
+| data.new[].application_id      | The application id of the new object |
+| data.deleted[]                 | Array containing all individual patches for objects that are deleted |
+| data.deleted[].object          | The deleted object |
+| data.deleted[].subscriptions   | An array of device subscriptions that are affected by the current patch |
+| data.deleted[].timestamp       | Timestamp of when this patch was generated |
+| data.deleted[].application_id  | The application id of the deleted object |
+| data.updated[]                 | Array containing all individual patches for objects that are updated |
+| data.updated[].patch.op        | The type of update operation applied. As of 0.4.1, this can only be 'replaced' |
+| data.updated[].patch.path      | The path of the replaced value, in the `{model_name}/{object_id}/{key}` format. |
+| data.updated[].patch.value     | The new value of the property defined in `patch.path` |
+| data.updated[].subscriptions   | An array of device subscriptions that are affected by the current patch |
+| data.updated[].timestamp       | Timestamp of when this patch was generated |
+| data.updated[].application_id  | The application id of the updated object |
 
 Example of an update notification containing a newly created object:
 

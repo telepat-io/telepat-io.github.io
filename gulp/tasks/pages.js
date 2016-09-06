@@ -30,7 +30,12 @@ gulp.task('pages', 'Compile pages',['template', 'pages-with-markdown', 'fullpage
         .pipe(inject(gulp.src([file.path]), {
           starttag: '<!-- inject:scripts -->',
           transform: function (filePath, file) {
-            return '<script src="scripts/' + path.basename(file.path, '.html') + '.js"></script>'
+            try {
+              fs.accessSync('scripts/' + path.basename(file.path, '.html') + '.js');
+              return '<script src="scripts/' + path.basename(file.path, '.html') + '.js"></script>';
+            } catch (e) {
+              return '';
+            }
           }
         }))
         .pipe(rename(path.basename(file.path)))

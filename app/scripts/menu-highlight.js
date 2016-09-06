@@ -13,6 +13,14 @@ require(['jquery', 'stickUp'], function($, stickUp) {
     });
   }
 
+  var currentMenuElement = $('.sidebar-nav.first a[href="'+window.location.pathname+'"]');
+
+  if (currentMenuElement.length) {
+    $('.sidebar-nav.first a[href="'+window.location.pathname+'"]').addClass('selected');
+  } else {
+    $('#beta-menu').addClass('selected');
+  }
+
   var sections = {},
     _height  = $(window).height(),
     i        = 0;

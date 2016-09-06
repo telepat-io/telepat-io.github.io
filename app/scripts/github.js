@@ -12,6 +12,7 @@ require(['jquery', 'cookie', 'ace/lib/ace/ace'], function($, Cookies, ace) {
     editor.setOption("readOnly", true);
     editor.getSession().setMode("ace/lib/ace/mode/javascript");
     editor.getSession().setUseWrapMode(true);
+    editor.setShowPrintMargin(false);
   });
 
   if(!Cookies.get('authenticated')) {
