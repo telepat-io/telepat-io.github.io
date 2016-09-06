@@ -2,7 +2,7 @@
 
 var gulp = require('gulp-help')(require('gulp'));
 
-var sass = require('gulp-sass');
+var stylus = require('gulp-stylus');
 
 var sourcemaps = require('gulp-sourcemaps');
 var postcss = require('gulp-postcss');
@@ -19,12 +19,12 @@ var handleError = require('./../utils/handleError.js');
 gulp.task('styles', 'Compile Sass to CSS', function () {
   return gulp.src(config.styles.src)
     .pipe(sourcemaps.init())
-    .pipe(sass(config.styles.sassCfg))
+    .pipe(stylus())
     .pipe(postcss([
       autoprefixer(config.styles.autoprefixerCfg)
     ]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.styles.dest))
-    .on('error', handleError)
+    .pipe(plumber(handleError))
     .pipe(reload({stream:true}));
 }); 

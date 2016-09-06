@@ -1,38 +1,22 @@
-$icon-font-path: "../dist/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$icon-font-path = "../dist/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/"
 
-$alpha-color: #d8225e;
-$beta-color: #bf3287;
-$gamma-color: #a63d9c;
-$delta-color: #7f4eaf;
-$epsilon-color: #685bba;
-$zeta-color: #546cc4;
-$eta-color: #3988d4;
-$theta-color: #3bbfee;
-$ioda-color: #00a4b3;
-$kappa-color: #00a98f;
+$alpha-color = #d8225e
+$beta-color = #bf3287
+$gamma-color = #a63d9c
+$delta-color = #7f4eaf
+$epsilon-color = #685bba
+$zeta-color = #546cc4
+$eta-color = #3988d4
+$theta-color = #3bbfee
+$ioda-color = #00a4b3
+$kappa-color = #00a98f
 
-// bower:scss
-@import "../../dist/bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-@import "../../dist/bower_components/font-awesome/scss/font-awesome.scss";
-// endbower
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('/bower_components/font-awesome/fonts/fontawesome-webfont.eot');
-  src: url('/bower_components/font-awesome/fonts/fontawesome-webfont.eot') format('embedded-opentype'),
-    url('/bower_components/font-awesome/fonts/fontawesome-webfont.woff2') format('woff2'),
-    url('/bower_components/font-awesome/fonts/fontawesome-webfont.woff') format('woff'),
-    url('/bower_components/font-awesome/fonts/fontawesome-webfont.ttf') format('truetype'),
-    url('/bower_components/font-awesome/fonts/fontawesome-webfont.svg') format('svg');
-}
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot');
-  src: url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2') format('woff2'),
-    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff') format('woff'),
-    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'),
-    url('/bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
+@import "/bower_components/bootstrap/dist/css/bootstrap.min.css";
+@import "/bower_components/font-awesome/css/font-awesome.css";
+
+@font-face
+  font-family 'FontAwesome'
+  src url('/bower_components/font-awesome/fonts/fontawesome-webfont.ttf')
 
 html,body {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -57,18 +41,11 @@ img {
   transition: all 0.5s ease;
 }
 
-#wrapper.toggled {
+#wrapper.toggled
   padding-left: 200px;
-
-  #sidebar-wrapper {
+  #sidebar-wrapper
     width: 200px !important;
     left: 200px !important;
-  }
-
-  #page-content-wrapper {
-
-  }
-}
 
 #github-fork-badge {
   padding-top: 20px;
@@ -93,21 +70,17 @@ img {
   z-index: 10;
 }
 
-#page-content-wrapper {
+#page-content-wrapper
   width: 100%;
   background: #f5f5f5;
-
-  .padded {
+  .padded
     padding-top: 100px;
-  }
-}
 
 .faded {
   opacity: 0.4;
-  filter: alpha(opacity=40);
 }
 
-#main-content {
+#main-content
   background: #fff;
   padding: 0 30px 30px;
   line-height: 170%;
@@ -133,7 +106,6 @@ img {
   table {
     margin-top: 35px;
   }
-}
 
 .main-logo {
   float: right;
@@ -163,7 +135,7 @@ img {
   cursor: pointer;
 }
 
-#top-menu {
+#top-menu
   background: black;
   padding: 10px 30px;
   color: white;
@@ -177,33 +149,25 @@ img {
   span {
     cursor: pointer;
   }
-}
 
-ul.sidebar-nav {
+ul.sidebar-nav
   margin: 30px 0px 5px 0;
   padding: 0;
   list-style: none;
-
-  ul {
+  ul
     list-style: none;
     padding: 0;
-
-    li {
+    li
       margin: 0;
-
-      a {
+      a
         text-transform: none;
         font-weight: normal;
         border-color: #e5e5e5 !important;
-      }
-    }
-  }
 
-  li {
+  li
     line-height: 32px;
     margin-top: 15px;
-
-    a {
+    a
       display: block;
       text-decoration: none;
       text-transform: uppercase;
@@ -213,10 +177,8 @@ ul.sidebar-nav {
       background: #232323;
       border-left: 5px solid;
       font-weight: 600;
-    }
 
     a.padded-left { padding-left: 20px }
-
     a.selected, a.active { color: #fff !important; }
     a.alpha { border-color: $alpha-color; }
     a.alpha.selected, a.alpha.active { background: $alpha-color !important; }
@@ -238,26 +200,18 @@ ul.sidebar-nav {
     a.ioda.selected, a.ioda.active { background: $ioda-color !important; }
     a.kappa { border-color: $kappa-color; }
     a.kappa.selected, a.kappa.active { background: $kappa-color !important; }
-
-    a:hover {
+    a:hover
       text-decoration: none;
       color: #fff;
       background: #404040;
-    }
-
-    a:active, a:focus {
+    a:active, a:focus
       text-decoration: none;
-    }
-  }
-}
 
-ul.sidebar-nav.second {
-  li {
-    a {
+ul.sidebar-nav.second
+  li
+    a
       color: #6f6f6f;
       background: #f5f5f5;
-    }
-
     a.alpha:hover { color: $alpha-color; }
     a.beta:hover { color: $beta-color; }
     a.gamma:hover { color: $gamma-color; }
@@ -268,12 +222,8 @@ ul.sidebar-nav.second {
     a.theta:hover { color: $theta-color; }
     a.ioda:hover { color: $ioda-color; }
     a.kappa:hover { color: $kappa-color; }
-
-    a:hover {
+    a:hover
       background: #fff;
-    }
-  }
-}
 
 #apidoc .apidoc {
   border-top: 1px solid #ebebeb;
@@ -311,7 +261,7 @@ pre {
   overflow: visible;
 }
 
-pre code {
+pre code
   display: block;
   position: relative;
   font-size: 12px;
@@ -321,13 +271,10 @@ pre code {
   white-space: pre;
   padding: 5px;
   visibility: hidden;
-
-  span.pln {
+  span.pln
     color: #fff;
-  }
-}
 
-.code-overlay {
+.code-overlay
   position: absolute;
   left: 0;
   right: 0;
@@ -336,70 +283,54 @@ pre code {
   z-index: 10;
   background-color:rgba(0, 0, 0, 0.7);
   padding: 15px 0 0 15px;
-
-  .login-button {
+  .login-button
     background: black;
-    span {
+    span
       text-decoration: underline;
       cursor: pointer;
-    }
-  }
-}
 
-table {
+table
   border-collapse: collapse;
   width: 100%;
   margin: 0 0 20px 0;
-
-  th {
+  th
     background-color: #f5f5f5;
     text-align: left;
     font-family: "Source Sans Pro", sans-serif;
     font-weight: 700;
     padding: 4px 8px;
     border: #e0e0e0 1px solid;
-  }
-
-  td {
+  td
     vertical-align: top;
     padding: 2px 8px;
     border: #e0e0e0 1px solid;
-  }
-}
 
 img.pull-right {
   margin-left: 20px;
 }
 
-@media(max-width:767px) {
-  #sidebar-wrapper {
+@media(max-width:767px)
+  #sidebar-wrapper
     margin-top: 50px;
-  }
-
-  #page-content-wrapper {
+  #page-content-wrapper
     padding-top: 50px;
     position: absolute;
     margin-right: -200px;
     left: 0;
-  }
-}
 
-@media(min-width:768px) {
+@media(min-width:768px)
     #wrapper {
         padding-left: 200px;
     }
 
-    #wrapper.toggled {
+    #wrapper.toggled
       padding-left: 0;
-
       #sidebar-wrapper {
         width: 0;
       }
-
       #page-content-wrapper {
         margin-right: 0;
       }
-    }
 
     #sidebar-wrapper {
         width: 200px;
@@ -409,4 +340,3 @@ img.pull-right {
     #to-top, #top-menu {
       display: none;
     }
-}

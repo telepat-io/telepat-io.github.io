@@ -122,7 +122,7 @@ module.exports.scripts = {
 
 // Styles task config
 module.exports.styles = {
-  src: path.join(app, styles, 'main.scss'),
+  src: path.join(app, styles, 'main.styl'),
   dest: path.join(dist,styles),
   sassCfg: {},
   autoprefixerCfg: {browsers: ['last 2 version']}
