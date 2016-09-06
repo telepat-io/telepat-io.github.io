@@ -5,11 +5,9 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.4",
     "jquery": "~2.1.3",
-    "google-diff-match-patch-js": "~1.0.0",
-    "handlebars": "~3.0.3",
-    "lodash": "~3.9.3",
-    "google-code-prettify": "~1.0.4",
     "stickUp2": "~2.2.0",
-    "pathtoregexp": "~1.0.3"
+    "js-cookie": "~2.1.3",
+    "ace": "~1.2.5",
+    "font-awesome": "fontawesome#~4.6.3"
   }
 }

@@ -9,7 +9,6 @@ var reload = require('./browserSync.js').reload;
 
 gulp.task('watch', 'Watch source files', function () {
   gulp.watch(config.watch.styles, ['styles']);
-  gulp.watch(config.watch.jade, ['jade', reload]);
-  gulp.watch(config.watch.wiredep, ['wiredep', reload]);
+  gulp.watch(config.watch.pages, ['pages', reload]);
   gulp.watch(config.watch.scripts, ['scripts', reload]);
 });

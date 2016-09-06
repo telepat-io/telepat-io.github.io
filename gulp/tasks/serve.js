@@ -7,18 +7,9 @@ var runSequence = require('run-sequence');
 
 gulp.task('serve', 'Serve project with livereload and file watching',function (cb) {
   runSequence(
-    ['styles','jade', 'scripts'],
-    
+    'build',
     'browser-sync',
     'watch',
-    cb
-  );
-});
-
-gulp.task('serve:dist', 'Bulid preview', function (cb) {
-  runSequence(
-    'build',
-    'browser-sync:dist',
     cb
   );
 });

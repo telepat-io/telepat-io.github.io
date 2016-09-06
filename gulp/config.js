@@ -14,6 +14,9 @@ var images = 'images';
 var scripts = 'scripts';
 var styles = 'styles';
 var views = 'views';
+var markdown = 'markdown';
+var template = 'template';
+var fullpages = 'fullpages';
 
 // Default settings
 module.exports.uglifyJs = true; // to remove .min sufix edit template manually
@@ -22,96 +25,59 @@ module.exports.cacheBust = true;
 module.exports.optimizeImages = true;
 module.exports.lintJs = true;
 
+module.exports.pages = [
+  { name: 'intro' },
+  { name: 'getting-started' },
+  { name: 'data-fundamentals' },
+  { name: 'roadmap' },
+  { name: 'api', type: 'iframe', url: '' },
+  { name: 'js-sdk', type: 'iframe', url: '' },
+  { name: 'android-sdk', type: 'iframe', url: '' },
+  { name: 'ios-sdk', type: 'iframe', url: '' }
+];
+
 // Browser sync task config
 module.exports.browserSync = {
-  dev: {
-    server: {
-      baseDir: [tmp, app],
-      routes: {
-        '/bower_components': bowerDir
-      }
-    },
-    notify: false,
-    debugInfo: false,
-    host: 'localhost'
+  server: {
+    baseDir: dist
   },
-  dist: {
-    server: {
-      baseDir: dist
-    },
-    notify: false,
-    debugInfo: false,
-    host: 'localhost'
-  }
+  notify: false,
+  debugInfo: false,
+  host: '0.0.0.0'
 };
 
 // Build size task config
 module.exports.buildSize = {
   srcAll: dist + '/**/*',
   cfgAll: {
-    title: 'build', 
+    title: 'build',
     gzip: true
   },
   srcCss: path.join(dist, styles, '/**/*'),
   cfgCss: {
-    title: 'CSS', 
+    title: 'CSS',
     gzip: true
   },
   srcJs: path.join(dist, scripts, '/**/*'),
   cfgJs: {
-    title: 'JS', 
+    title: 'JS',
     gzip: true
   },
   srcImages: path.join(dist, images, '/**/*'),
   cfgImages: {
-    title: 'Images', 
+    title: 'Images',
     gzip: false
   }
 };
 
 // Clean task config
 // Be carefull what you cleaning!
-module.exports.clean = [tmp, dist + '/' + styles];
-
-// Copy fonts task config
-module.exports.copyFonts = {
-  src: path.join(app, fonts, '**/*'),
-  dest: dist + '/fonts'
-};
-
-// Copy extras task config
-module.exports.copyExtras = {
-  src: [
-    app + '/locales/**',
-  ],
-  dest: dist + '/locales',
-  cfg: {
-    dot: true
-  }
-};
-
-// Deploy task config
-// FTP settings are in .env file
-module.exports.deploy = {
-  src: dist + '/**',
-  dev: {
-    root: dist,
-    hostname: process.env.FTP_DEV_HOSTNAME,
-    username: process.env.FTP_DEV_USER,
-    destination: process.env.FTP_DEV_DEST
-  },
-  dist: {
-    root: dist,
-    hostname: process.env.FTP_DIST_HOSTNAME,
-    username: process.env.FTP_DIST_USER,
-    destination: process.env.FTP_DIST_DEST
-  }
-};
+module.exports.clean = [tmp];
 
 // Images task config
 module.exports.images = {
   src: path.join(app, images, '**/*'),
-  dest: dist + '/images',
+  dest: path.join(dist, images),
   cfg: {
     progressive: true,
     interlaced: true,
@@ -119,28 +85,27 @@ module.exports.images = {
   }
 };
 
-// Jade task config
-module.exports.jade = {
-  src: path.join(app, views, '*.jade'),
-  dest: tmp,
-  cfg: {
+// Markdown task config
+module.exports.pages = {
+  markdownSrc: path.join(app, views, markdown, '*.md'),
+  templateMarkdownDest: path.join(tmp, template, markdown),
+  templateSrc: path.join(app, views, template, 'template.jade'),
+  templateDest: path.join(tmp, template),
+  pagesSrc: path.join(app, views, '*.jade'),
+  fullpagesSrc: path.join(app, views, fullpages, '*.jade'),
+  templatePageDest: path.join(tmp, template, views),
+  dest: dist,
+  jadeCfg: {
     pretty: true,
     compileDebug: false
-  }
-};
-
-// JadeData task config
-module.exports.jadeData = {
-  src: path.join(app, views, data, '/**/*.json'),
-  dest: app + '/views',
-  dataName: 'data.json',
-  dataPath: path.join(app, views, 'data.json')
+  },
+  markdownCfg: {}
 };
 
 // JSHint task config
 module.exports.jshint = {
   src: [
-    path.join(app, scripts,'**/*.js'), 
+    path.join(app, scripts,'**/*.js'),
     path.join('!' + app, scripts,'plugins/**/*.js') // do not lint external plugins
   ],
   reporter: require('jshint-stylish')
@@ -158,48 +123,19 @@ module.exports.scripts = {
 // Styles task config
 module.exports.styles = {
   src: path.join(app, styles, 'main.scss'),
-  dest: path.join(tmp,styles),
-  sassCfg: {}, 
+  dest: path.join(dist,styles),
+  sassCfg: {},
   autoprefixerCfg: {browsers: ['last 2 version']}
-};
-
-module.exports.useref = {
-  src: tmp + '/*.html',
-  dest: dist,
-  assetsCfg: {
-    searchPath : app
-  },
-  revManifestCfg: {merge: true}
 };
 
 // Watch task config
 module.exports.watch = {
   styles: path.join(app, styles, '/**/*.scss'),
-  jade: [
-    path.join(app, views, '/**/*.jade'), 
-    path.join(app, views, data, '/**/*.json')
+  pages: [
+    path.join(app, views, '/**/*.jade'),
+    path.join(app, views, markdown, '/**/*.md'),
+    path.join(app, views, template, '/**/*.jade')
   ],
   scripts: path.join(app, scripts, '/**/*.js'),
-  wiredep: 'bower.json' 
+  wiredep: 'bower.json'
 };
-
-// Wiredep task config
-module.exports.wiredep = {
-  sass: {
-    src: path.join(app, styles, '/*.scss'),
-    dest: path.join(app, styles),
-    cfg: {
-      ignorePath: '',
-      overides: {}
-    }
-  },
-  jade: {
-    src: path.join(app, views, '/layouts/*.jade'),
-    dest: path.join(app, views, '/layouts'),
-    cfg: {
-      exclude: ['modernizr'],
-      ignorePath: '../../',
-      overides: {}
-    }
-  } 
-}

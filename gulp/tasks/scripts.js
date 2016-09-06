@@ -25,6 +25,5 @@ gulp.task('jshint', 'Lint js files', function () {
 
 gulp.task('scripts', false,['jshint'],function () {
   return gulp.src(config.scripts.src)
-  
     .pipe(gulp.dest(config.scripts.dest));
 });

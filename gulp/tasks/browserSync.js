@@ -8,13 +8,7 @@ var config = require('./../config.js');
 // Serve project with livereload
 
 gulp.task('browser-sync', false, function() {
-  browserSync(config.browserSync.dev);
-});
-
-// Serve dist of project
-
-gulp.task('browser-sync:dist', false, function() {
-  browserSync(config.browserSync.dist);
+  browserSync(config.browserSync);
 });
 
 module.exports.reload = browserSync.reload;

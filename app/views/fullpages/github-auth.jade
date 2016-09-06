@@ -1,0 +1,18 @@
+script(src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js')
+script(src='/scripts/require.config.js')
+script.
+  function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+  }
+
+  require(['jquery', 'cookie'], function($, Cookies) {
+    $.getJSON('http://localhost:9999/authenticate/'+getURLParameter('code'), function(data) {
+      if (data.error) {
+        alert('Authentication error: ' + data.error);
+      } else {
+        Cookies.set('authenticated', true);
+        window.opener.location.reload();
+        window.close();
+      }
+    });
+  });

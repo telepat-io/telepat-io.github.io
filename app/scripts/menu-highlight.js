@@ -1,7 +1,7 @@
 require(['jquery', 'stickUp'], function($, stickUp) {
   var isIpad = window.matchMedia('only screen and (min-device-width : 768px) and (max-device-width : 1024px)').matches;
-  var isIphone = 
-    window.matchMedia('only screen and (min-device-width : 320px) and (max-device-width : 480px)').matches || 
+  var isIphone =
+    window.matchMedia('only screen and (min-device-width : 320px) and (max-device-width : 480px)').matches ||
     window.matchMedia('only screen and (min-device-width : 320px) and (max-device-width : 568px)').matches ||
     window.matchMedia('only screen and (min-device-width : 375px) and (max-device-width : 667px)').matches ||
     window.matchMedia('only screen and (min-device-width : 414px) and (max-device-width : 736px)').matches;
@@ -17,8 +17,8 @@ require(['jquery', 'stickUp'], function($, stickUp) {
     _height  = $(window).height(),
     i        = 0;
 
-  // Grab positions of our sections 
-  $('.section').each(function(){
+  // Grab positions of our sections
+  $('h1, h2, h3, h4, h5, h6').each(function(){
     sections[this.id] = $(this).offset().top + 100;
   });
 
@@ -26,11 +26,14 @@ require(['jquery', 'stickUp'], function($, stickUp) {
     var pos = self.scrollTop();
     for(i in sections){
       if(sections[i] > pos && sections[i] < pos + _height) {
-        //console.log(i);
-        $('.sidebar-nav.second .selected').removeClass('selected');
-        $('a[href$="#'+i+'"]').addClass('selected');
+        var anchor = $('a[href$="#'+i+'"]');
+
+        if (anchor.length) {
+          $('.sidebar-nav.second .selected').removeClass('selected');
+          anchor.addClass('selected');
+        }
         return;
-      }  
+      }
     }
   }
 

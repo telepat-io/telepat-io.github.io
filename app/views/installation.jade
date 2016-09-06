@@ -1,0 +1,37 @@
+.container-fluid
+  .row
+    .col-lg-3
+      ul.sidebar-nav.second
+        li
+          a.alpha(href="/getting-started.html") Getting started with Telepat
+        li
+          a.beta(href="/data-fundamentals.html") Data fundamentals
+        li
+          a.gamma.active(href="#installing-and-running-telepat") Telepat install guide
+          ul
+            li
+              a.gamma(href="#repositories-guide") Repositories
+            li
+              a.gamma(href="#launching-dependencies") Dependencies
+            li
+              a.gamma(href="#configuration") Configuration
+            li
+              a.gamma(href="#boot-up-with-docker") Booting up with Docker
+            li
+              a.gamma(href="#get-from-github") Get from GitHub
+            li
+              a.gamma(href="#creating-an-app") Creating an app
+            li
+              a.gamma(href="#example-app") Connecting the JS client
+            li
+              a.gamma(href="#a-word-on-stability") Status
+
+        li
+          a.delta(href="/api.html") The Telepat API
+        li
+          a.epsilon(href="/user-management.html") User management
+        li
+          a.zeta(href="/js-tutorial.html") App tutorial
+    #main-content.col-lg-9
+      <!-- inject:content:md -->
+      <!-- endinject -->
