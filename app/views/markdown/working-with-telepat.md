@@ -2,7 +2,7 @@
 *Note that the available SDKs handle all the communication with the Telepat server components, as described below, while exposing a simple, native way of working with objects. To enable push notification transports, you will need to [configure your credentials](#configuring-push-notifications).*
 
 ### API Basics
-You operate with Telepat by sending requests to the API endpoint. You can see a full list of supported methods, along with details about creating requests in the [API reference](/api-docs.html).
+You operate with Telepat by sending requests to the API endpoint. You can see a full list of supported methods, along with details about creating requests in the [API reference](http://docs.telepat.io/api-docs.html).
 
 A success response from the API has the following structure:
 
