@@ -67,12 +67,20 @@ Here's a full example of a schema object:
 ### Models
 Every object within Telepat belongs to one of a series of admin defined object categories - the models. The main structure of a model descriptor is:
 
+| Key                | Description |
+| ------------------ | ----------- |
+| belongsTo          | Array of 'belongs to' relationships |
+| meta_read_acl      | Numeric bitmask representing permissions for access to metadata like object count |
+| properties         | Descriptor object for model key properties |
+| read_acl           | Numeric bitmask representing permissions for reading objects of this type |
+| write_acl          | Numeric bitmask representing permissions fore updating/deleting objects of this type |
+
     {
-        properties: { // Descriptor for model key properties },
-        belongsTo: [ // Array of 'belongs to' relationships ],
-        meta_read_acl: 7, // Permissions for access to metadata like object count
-        read_acl: 7, // Permissions for reading objects of this type
-        write_acl: 7 // Permissions fore updating/deleting objects of this type
+        properties: { /* Descriptor for model key properties */ },
+        belongsTo: [ /* Array of 'belongs to' relationships */ ],
+        meta_read_acl: 7, /* Permissions for access to metadata like object count */
+        read_acl: 7, /* Permissions for reading objects of this type */
+        write_acl: 7 /* Permissions fore updating/deleting objects of this type */
     }
         
 There are some model names that are special and reserved:

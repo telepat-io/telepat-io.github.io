@@ -8,9 +8,10 @@ require(['jquery', 'cookie', 'ace/lib/ace/ace'], function($, Cookies, ace) {
     $this.css('visibility', 'visible');
     var editor = ace.edit(this);
     editor.setTheme("ace/lib/ace/theme/monokai");
-    editor.setOption("maxLines", 30);
+    editor.setOption("maxLines", 50);
     editor.setOption("readOnly", true);
     editor.getSession().setMode("ace/lib/ace/mode/javascript");
+    editor.getSession().setUseWrapMode(true);
   });
 
   if(!Cookies.get('authenticated')) {

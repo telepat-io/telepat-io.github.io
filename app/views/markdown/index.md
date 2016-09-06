@@ -84,7 +84,7 @@ All server-side services are implemented in JavaScript, on top of [Node.js](http
 
 ### The API endpoint
 
-![](/images/schema_01@2x.png)
+![](http://docs.telepat.io/images/schema_01@2x.png)
 
 Powered by [Express](http://expressjs.com), this is a core component of Telepat and the main entry point to the system. All operations that allow clients to interact with the information are made via HTTP requests to these endpoints. The main operations available are:
 
@@ -108,7 +108,7 @@ The API endpoint acts like an information dispatcher, and communicates directly 
 
 ### The data/messaging queue
 
-![](/images/schema_03@2x.png)
+![](http://docs.telepat.io/images/schema_03@2x.png)
 
 The data queue layer intermediates communication between all Telepat components, and has multiple purposes:
 
@@ -120,7 +120,7 @@ This layer is implemented using 3rd party components or services.
 
 ### Data processing services
 
-![](/images/schema_02@2x.png)
+![](http://docs.telepat.io/images/schema_02@2x.png)
 
 Data processing is achieved by plugging microservices into the data pipeline. Event processing, triggering alerts, tagging objects or extracting trending content in real-time are examples of what such services can provide.
 
@@ -128,7 +128,7 @@ The aggregation service comes out of the box with Telepat. Implemented using [No
 
 ### The persistence service
 
-![](/images/schema_05@2x.png)
+![](http://docs.telepat.io/images/schema_05@2x.png)
 
 This is implemented using 3rd party components or services that plug into Telepat using adapters. It handles storing and retrieving all information that runs though Telepat. The constraint imposed by this service is using components that support storing JSON objects in a key-value fashion.
 
@@ -136,7 +136,7 @@ Also, depending on the types of filtering that the application will require, som
 
 ### The synchronization service
 
-![](/images/schema_04@2x.png)
+![](http://docs.telepat.io/images/schema_04@2x.png)
 
 This is also a core part of Telepat, implemented using [Node.js](https://nodejs.org/). The job of the synchronization service is to monitor the data queue for signals that new aggregated updates are available and ready for deployment.
 
@@ -230,7 +230,7 @@ Let's take a look at what sets Telepat apart from the most popular existing solu
 
 * * *
 
-[![](/images/firebase-logo.png)](https://www.firebase.com/)
+[![](http://docs.telepat.io/images/firebase-logo.png)](https://www.firebase.com/)
 
 *   Firebase is a service that is very similar to Telepat's interface design, and a point of inspiration for it. Firebase is focused on the backend functionality, is unopinionated on the frontend and can have native clients for specific platforms.
 *   Like Telepat, Firebase also supports structured data management, but has an approach based on key path subscribing, which makes complex queries difficult to model data for.
@@ -240,7 +240,7 @@ Let's take a look at what sets Telepat apart from the most popular existing solu
 
 * * *
 
-[![](/images/pubnub-logo.png)](https://www.pubnub.com/)
+[![](http://docs.telepat.io/images/pubnub-logo.png)](https://www.pubnub.com/)
 
 *   PubNub is a global data stream network, offered as a service.
 *   PubNub, unlike Telepat, is not concerned with understanding the data it handles, but focuses on delivering it to subscribers across platforms, with extremely low latency.
@@ -249,7 +249,7 @@ Let's take a look at what sets Telepat apart from the most popular existing solu
 
 * * *
 
-[![](/images/meteor-logo.png)](https://www.meteor.com/)
+[![](http://docs.telepat.io/images/meteor-logo.png)](https://www.meteor.com/)
 
 *   Meteor is a solution for both frontend and backend development, while Telepat focuses on backend functionality.
 *   When using Meteor in the backend, you also need to use it in your frontend app. Telepat lets you use any frontend framework.

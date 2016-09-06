@@ -1,4 +1,4 @@
-# Working with the Telepat API
+# Working with Telepat
 
 ### API Basics
 You operate with Telepat by sending requests to the API endpoint. You can see a full list of supported methods, along with details about creating requests in the [API reference](/api-docs.html).
@@ -25,7 +25,7 @@ Some routes require sending additional authentication header parameters in order
 | ------------------ | ----------- |
 | X-BLGREQ-SIGN      | SHA256 of a valid application API key |
 | X-BLGREQ-APPID     | The unique identifier of the application the request references |
-| X-BLGREQ-UDID      | The unique identifier of the device making the request. See [device registration](#device-registration) |
+| X-BLGREQ-UDID      | The unique identifier of the device making the request. See [device registration](#device-registration). |
 | Authentication     | The JWT token identifying the currently logged in user or admin. |
 
 ### Device registration
@@ -41,16 +41,17 @@ To register a device with the Telepat backend, you need to follow a two step pro
 | info.manufacturer  | String representing the device manufacturer (optional). |
 | info.model         | String representing the device model (optional). |
 | info.udid          | Unique device identifier. If applicable, you can set this value instead of the X-BLGREQ-UDID header to make sure that devices that have previously registered get the same identifier back from Telepat. | 
-| volatile           | Contains details about volatile connectivity channels (channels that are active only while the user is using the app - like websockets). |
-| volatile.type      | The type of volatile transport to use - the only supported option as of 4.2.1 is 'sockets'. |
-| volatile.active    | Set this to 1 to enable the volatile transport. |
 | persistent         | Contains details about persistent connectivity channels (channels that are always active - like push notifications). |
 | persistent.type    | The type of persistent transport to use - one of 'ios' or 'android'. |
 | persistent.token   | The unique device token for the chosen transport - either the iOS PN token, or the GCM registration token. |
 | persistent.active  | Set this to 1 to enable the persistent transport. |
 
+* If the current device is registering for the first time, and has no saved Telepat device identifier, set the `X-BLGREQ-UDID` header to the `TP_EMPTY_UDID` value
+
+* If the device can generate a unique identifier by itself, set that on the `info.udid` key. If not, leave that field empty. Note that this is different than the UDID received from Telepat that is used for the `X-BLGREQ-UDID` request header key.
+
 * The `/device/register` route can give two types of answers:
-  * If you've sent a X-BLGREQ-UDID header along with the request, or you've specified the device udid in the `info.udid` key of the body, Telepat will simply update the data on the existing device;
+  * If you've sent a X-BLGREQ-UDID header along with the request, or if you've specified another unique device identifier in the `info.udid` key of the body, Telepat will simply update the data on the existing device;
   * Else, if it's a new device, connecting to Telepat for the first time, a new device identifier will be generated and returned to the client. This should be used from now on to identify all requests made by this device.
 
 * After registration, if the socket transport is required, you need to connect to the socket endpoint and then send a `bind_device` message to the server, with the following content:
@@ -85,6 +86,103 @@ The structure of a patch object is:
 | data.updated.subscriptions   | An array of device subscriptions that are affected by the current patch |
 | data.updated.timestamp       | Timestamp of when this patch was generated |
 
+Example of an update notification containing a newly created object:
+
+    {
+       "data":{
+          "new":[
+             {
+                "op":"create",
+                "object":{
+                   "image":null,
+                   "title":"text",
+                   "user":null,
+                   "user_id":"d34d6fc1-bfb7-438d-bba6-8685fec199b2",
+                   "type":"model",
+                   "context_id":"e50089d5-a4fc-4997-9eae-af7b7147c8f8",
+                   "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+                   "id":"5fedc735-c0ac-4f48-85c2-7338048820c3",
+                   "created":1473175101,
+                   "modified":1473175101
+                },
+                "subscriptions":[
+                   "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
+                ],
+                "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+                "timestamp":1473175082952686
+             }
+          ],
+          "updated":[
+
+          ],
+          "deleted":[
+
+          ]
+       }
+    }
+
+Example of an update notification containing data updates:
+
+    {
+       "data":{
+          "new":[
+
+          ],
+          "updated":[
+             {
+                "op":"update",
+                "subscriptions":[
+                   "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
+                ],
+                "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+                "timestamp":1473175260988508,
+                "patch":{
+                   "op":"replace",
+                   "path":"model/5fedc735-c0ac-4f48-85c2-7338048820c3/title",
+                   "value":"changed text"
+                }
+             }
+          ],
+          "deleted":[
+
+          ]
+       }
+    }
+
+Example of an update notification containing deleted objects:
+
+    {
+       "data":{
+          "new":[
+
+          ],
+          "updated":[
+
+          ],
+          "deleted":[
+             {
+                "op":"delete",
+                "object":{
+                   "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+                   "context_id":"e50089d5-a4fc-4997-9eae-af7b7147c8f8",
+                   "created":1473175101,
+                   "id":"5fedc735-c0ac-4f48-85c2-7338048820c3",
+                   "image":null,
+                   "modified":1473175279,
+                   "title":"changed text",
+                   "type":"model",
+                   "user":null,
+                   "user_id":"d34d6fc1-bfb7-438d-bba6-8685fec199b2"
+                },
+                "subscriptions":[
+                   "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
+                ],
+                "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+                "timestamp":1473175313919102
+             }
+          ]
+       }
+    }
 
 ### Configuring push notifications
 To activate persistent transports for mobile devices, Telepat needs to be configured to talk with push notification service providers, like Apple's APN servers and GCM servers. 

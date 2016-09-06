@@ -72,7 +72,7 @@ module.exports.buildSize = {
 
 // Clean task config
 // Be carefull what you cleaning!
-module.exports.clean = [tmp];
+module.exports.clean = [tmp, dist + '/**', '!' + dist, '!' + bowerDir + '/**'];
 
 // Images task config
 module.exports.images = {
@@ -115,7 +115,7 @@ module.exports.jshint = {
 module.exports.scripts = {
   src: [
     path.join(app, scripts, '*.js'),
-    path.join(app, scripts, 'modules/**/*.js')
+    path.join(app, scripts, 'views/*.js')
   ],
   dest: dist + '/scripts'
 };
