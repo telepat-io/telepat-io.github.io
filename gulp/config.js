@@ -22,7 +22,7 @@ var fullpages = 'fullpages';
 module.exports.uglifyJs = true; // to remove .min sufix edit template manually
 module.exports.minifyCss = true; // to remove .min sufix edit template manually
 module.exports.cacheBust = true;
-module.exports.optimizeImages = true;
+module.exports.optimizeImages = false;
 module.exports.lintJs = true;
 
 module.exports.pages = [
