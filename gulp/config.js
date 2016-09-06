@@ -130,7 +130,7 @@ module.exports.styles = {
 
 // Watch task config
 module.exports.watch = {
-  styles: path.join(app, styles, '/**/*.scss'),
+  styles: path.join(app, styles, '/**/*.styl'),
   pages: [
     path.join(app, views, '/**/*.jade'),
     path.join(app, views, markdown, '/**/*.md'),

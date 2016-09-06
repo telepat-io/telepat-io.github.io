@@ -11,332 +11,291 @@ $theta-color = #3bbfee
 $ioda-color = #00a4b3
 $kappa-color = #00a98f
 
-@import "/bower_components/bootstrap/dist/css/bootstrap.min.css";
-@import "/bower_components/font-awesome/css/font-awesome.css";
+@import "/bower_components/bootstrap/dist/css/bootstrap.min.css"
+@import "/bower_components/font-awesome/css/font-awesome.css"
 
 @font-face
   font-family 'FontAwesome'
   src url('/bower_components/font-awesome/fonts/fontawesome-webfont.ttf')
 
-html,body {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  background: #f5f5f5;
+html,body
+  font-family 'Open Sans', Helvetica, sans-serif
+  background #f5f5f5
+
+img
+  height auto
+  width auto
+  max-height 200px
+  max-width 350px
+  border 1px solid #ccc
+  padding 15px
+  margin 5px
+  transition all .4s ease-in-out
+  background white
+  z-index 1000
+
+img.transition
+  transform scale(1.8)
+
+img.pull-right
+  margin-left 20px
+
+pre {
+  background-color #292b36
+  color #ffffff
+  padding 10px
+  border-radius 6px
+  position relative
+  margin 10px 0 20px 0
+  overflow visible
 }
 
-img {
-  height: auto;
-  width: auto;
-  max-height: 200px;
-  max-width:  350px;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin: 5px;
-}
+pre code
+  display block
+  position relative
+  font-size 12px
+  font-style normal
+  font-weight 400
+  word-wrap normal
+  white-space pre
+  padding 5px
+  visibility hidden
+  span.pln
+    color #fff
 
-#wrapper {
-  padding-left: 0;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
+table
+  border-collapse collapse
+  width 100%
+  margin 0 0 20px 0
+  th
+    background-color #f5f5f5
+    text-align left
+    font-family "Source Sans Pro", sans-serif
+    font-weight 700
+    padding 4px 8px
+    border #e0e0e0 1px solid
+  td
+    vertical-align top
+    padding 2px 8px
+    border #e0e0e0 1px solid
 
-#wrapper.toggled
-  padding-left: 200px;
+
+#wrapper
+  padding-left 0
+  -webkit-transition all 0.5s ease
+  -moz-transition all 0.5s ease
+  -o-transition all 0.5s ease
+  transition all 0.5s ease
+  .toggled
+    padding-left 200px
   #sidebar-wrapper
-    width: 200px !important;
-    left: 200px !important;
+    width 200px !important
+    left 200px !important
 
-#github-fork-badge {
-  padding-top: 20px;
-  color: #aaa;
-  line-height: 20px;
-  font-size: 10px;
-}
+#github-fork-badge
+  padding-top 20px
+  color #aaa
+  line-height 20px
+  font-size 10px
 
-#sidebar-wrapper {
-  position: fixed;
-  left: 0px;
-  width: 0;
-  height: 100%;
-  margin-left: -200px;
-  overflow-y: auto;
-  padding: 10px;
-  background: #000;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  z-index: 10;
-}
+#sidebar-wrapper
+  position fixed
+  left 0px
+  width 0
+  height 100%
+  margin-left -200px
+  overflow-y auto
+  padding 10px
+  background #000
+  -webkit-transition all 0.5s ease
+  -moz-transition all 0.5s ease
+  -o-transition all 0.5s ease
+  transition all 0.5s ease
+  z-index 10
 
 #page-content-wrapper
-  width: 100%;
-  background: #f5f5f5;
+  width 100%
+  background #f5f5f5
   .padded
-    padding-top: 100px;
+    padding-top 100px
 
-.faded {
-  opacity: 0.4;
-}
+.faded
+  opacity 0.4
 
 #main-content
-  background: #fff;
-  padding: 0 30px 30px;
-  line-height: 170%;
+  background #fff
+  padding 0 30px 30px
+  line-height 170%
+  z-index 99
+  h1, h2, h3, h4, h5
+    margin-top 65px
+  h1
+    padding 10px 0
+    margin-top 20px
+  h2
+    padding 5px 0
+  h5
+    font-weight bold
+    font-size 110%
+  table
+    margin-top 35px
 
-  h1, h2, h3, h4, h5 {
-    margin-top: 65px;
-  }
+.main-logo
+  float right
+  margin 40px 0 10px 20px
 
-  h1 {
-    padding: 10px 0;
-    margin-top: 20px;
-  }
+.full-height
+  position fixed
+  height 100%
 
-  h2 {
-    padding: 5px 0;
-  }
+.margin-auto
+  margin auto
 
-  h5 {
-    font-weight: bold;
-    font-size: 110%;
-  }
+.clear
+  clear both
 
-  table {
-    margin-top: 35px;
-  }
-
-.main-logo {
-  float: right;
-  margin: 40px 0 10px 20px;
-}
-
-.full-height {
-  position: fixed;
-  height: 100%;
-}
-
-.margin-auto {
-  margin: auto;
-}
-
-.clear {
-  clear: both;
-}
-
-#to-top {
-  position: fixed;
-  right: 20px;
-  bottom: 30px;
-  width: 50px;
-  height: 50px;
-  z-index: 10;
-  cursor: pointer;
-}
+#to-top
+  position fixed
+  right 20px
+  bottom 30px
+  width 50px
+  height 50px
+  z-index 10
+  cursor pointer
 
 #top-menu
-  background: black;
-  padding: 10px 30px;
-  color: white;
-  font-size: 24px;
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: 50px;
-  z-index: 10;
-  span {
-    cursor: pointer;
-  }
+  background black
+  padding 10px 30px
+  color white
+  font-size 24px
+  position fixed
+  left 0px
+  right 0px
+  width 100%
+  height 50px
+  z-index 10
+  span
+    cursor pointer
 
 ul.sidebar-nav
-  margin: 30px 0px 5px 0;
-  padding: 0;
-  list-style: none;
+  margin 30px 0px 5px 0
+  padding 0
+  list-style none
   ul
-    list-style: none;
-    padding: 0;
+    list-style none
+    padding 0
     li
-      margin: 0;
+      margin 0
       a
-        text-transform: none;
-        font-weight: normal;
-        border-color: #e5e5e5 !important;
+        text-transform none
+        font-weight normal
+        border-color #e5e5e5 !important
 
   li
-    line-height: 32px;
-    margin-top: 15px;
+    line-height 32px
+    margin-top 15px
     a
-      display: block;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 80%;
-      color: #aeaeae;
-      padding-left: 10px;
-      background: #232323;
-      border-left: 5px solid;
-      font-weight: 600;
+      display block
+      text-decoration none
+      text-transform uppercase
+      font-size 80%
+      color #aeaeae
+      padding-left 10px
+      background #232323
+      border-left 5px solid
+      font-weight 600
 
     a.padded-left { padding-left: 20px }
-    a.selected, a.active { color: #fff !important; }
-    a.alpha { border-color: $alpha-color; }
-    a.alpha.selected, a.alpha.active { background: $alpha-color !important; }
-    a.beta { border-color: $beta-color; }
-    a.beta.selected, a.beta.active { background: $beta-color !important; }
-    a.gamma { border-color: $gamma-color; }
-    a.gamma.selected, a.gamma.active { background: $gamma-color !important; }
-    a.delta { border-color: $delta-color; }
-    a.delta.selected, a.delta.active { background: $delta-color !important; }
-    a.epsilon { border-color: $epsilon-color; }
-    a.epsilon.selected,  a.epsilon.active { background: $epsilon-color !important; }
-    a.zeta { border-color: $zeta-color; }
-    a.zeta.selected, a.zeta.active { background: $zeta-color !important; }
-    a.eta { border-color: $eta-color; }
-    a.eta.selected, a.eta.active { background: $eta-color !important; }
-    a.theta { border-color: $theta-color; }
-    a.theta.selected,  a.theta.active { background: $theta-color !important; }
-    a.ioda { border-color: $ioda-color; }
-    a.ioda.selected, a.ioda.active { background: $ioda-color !important; }
-    a.kappa { border-color: $kappa-color; }
-    a.kappa.selected, a.kappa.active { background: $kappa-color !important; }
+    a.selected, a.active { color: #fff !important }
+    a.alpha { border-color: $alpha-color }
+    a.alpha.selected, a.alpha.active { background: $alpha-color !important }
+    a.beta { border-color: $beta-color }
+    a.beta.selected, a.beta.active { background: $beta-color !important }
+    a.gamma { border-color: $gamma-color }
+    a.gamma.selected, a.gamma.active { background: $gamma-color !important }
+    a.delta { border-color: $delta-color }
+    a.delta.selected, a.delta.active { background: $delta-color !important }
+    a.epsilon { border-color: $epsilon-color }
+    a.epsilon.selected,  a.epsilon.active { background: $epsilon-color !important }
+    a.zeta { border-color: $zeta-color }
+    a.zeta.selected, a.zeta.active { background: $zeta-color !important }
+    a.eta { border-color: $eta-color }
+    a.eta.selected, a.eta.active { background: $eta-color !important }
+    a.theta { border-color: $theta-color }
+    a.theta.selected,  a.theta.active { background: $theta-color !important }
+    a.ioda { border-color: $ioda-color }
+    a.ioda.selected, a.ioda.active { background: $ioda-color !important }
+    a.kappa { border-color: $kappa-color }
+    a.kappa.selected, a.kappa.active { background: $kappa-color !important }
     a:hover
-      text-decoration: none;
-      color: #fff;
-      background: #404040;
+      text-decoration none
+      color #fff
+      background #404040
     a:active, a:focus
-      text-decoration: none;
+      text-decoration none
 
 ul.sidebar-nav.second
   li
     a
-      color: #6f6f6f;
-      background: #f5f5f5;
-    a.alpha:hover { color: $alpha-color; }
-    a.beta:hover { color: $beta-color; }
-    a.gamma:hover { color: $gamma-color; }
-    a.delta:hover { color: $delta-color; }
-    a.epsilon:hover { color: $epsilon-color; }
-    a.zeta:hover { color: $zeta-color; }
-    a.eta:hover { color: $eta-color; }
-    a.theta:hover { color: $theta-color; }
-    a.ioda:hover { color: $ioda-color; }
-    a.kappa:hover { color: $kappa-color; }
+      color #6f6f6f
+      background #f5f5f5
+    a.alpha:hover { color: $alpha-color }
+    a.beta:hover { color: $beta-color }
+    a.gamma:hover { color: $gamma-color }
+    a.delta:hover { color: $delta-color }
+    a.epsilon:hover { color: $epsilon-color }
+    a.zeta:hover { color: $zeta-color }
+    a.eta:hover { color: $eta-color }
+    a.theta:hover { color: $theta-color }
+    a.ioda:hover { color: $ioda-color }
+    a.kappa:hover { color: $kappa-color }
     a:hover
-      background: #fff;
-
-#apidoc .apidoc {
-  border-top: 1px solid #ebebeb;
-  padding: 30px 0;
-}
-
-#apidoc h1 {
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 40px;
-  padding-bottom: 14px;
-  margin: 0 0 20px 0;
-  padding: 0;
-}
-
-#apidoc h2 {
-  font-family: "Source Sans Pro Bold", sans-serif;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 26px;
-  padding-top: 14px;
-}
-
-/* ------------------------------------------------------------------------------------------
- * pre / code
- * ------------------------------------------------------------------------------------------ */
-pre {
-  background-color: #292b36;
-  color: #ffffff;
-  padding: 10px;
-  border-radius: 6px;
-  position: relative;
-  margin: 10px 0 20px 0;
-  overflow: visible;
-}
-
-pre code
-  display: block;
-  position: relative;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  word-wrap: normal;
-  white-space: pre;
-  padding: 5px;
-  visibility: hidden;
-  span.pln
-    color: #fff;
+      background #fff
 
 .code-overlay
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 10;
-  background-color:rgba(0, 0, 0, 0.7);
-  padding: 15px 0 0 15px;
+  position absolute
+  left 0
+  right 0
+  top 0
+  bottom 0
+  z-index 10
+  background-colorrgba(0, 0, 0, 0.7)
+  padding 15px 0 0 15px
   .login-button
-    background: black;
+    background black
     span
-      text-decoration: underline;
-      cursor: pointer;
+      text-decoration underline
+      cursor pointer
 
-table
-  border-collapse: collapse;
-  width: 100%;
-  margin: 0 0 20px 0;
-  th
-    background-color: #f5f5f5;
-    text-align: left;
-    font-family: "Source Sans Pro", sans-serif;
-    font-weight: 700;
-    padding: 4px 8px;
-    border: #e0e0e0 1px solid;
-  td
-    vertical-align: top;
-    padding: 2px 8px;
-    border: #e0e0e0 1px solid;
-
-img.pull-right {
-  margin-left: 20px;
-}
 
 @media(max-width:767px)
   #sidebar-wrapper
-    margin-top: 50px;
+    margin-top 50px
   #page-content-wrapper
-    padding-top: 50px;
-    position: absolute;
-    margin-right: -200px;
-    left: 0;
+    padding-top 50px
+    position absolute
+    margin-right -200px
+    left 0
 
 @media(min-width:768px)
     #wrapper {
-        padding-left: 200px;
+        padding-left 200px
     }
 
     #wrapper.toggled
-      padding-left: 0;
+      padding-left 0
       #sidebar-wrapper {
-        width: 0;
+        width 0
       }
       #page-content-wrapper {
-        margin-right: 0;
+        margin-right 0
       }
 
     #sidebar-wrapper {
-        width: 200px;
-        left: 200px;
+        width 200px
+        left 200px
     }
 
     #to-top, #top-menu {
-      display: none;
+      display none
     }
