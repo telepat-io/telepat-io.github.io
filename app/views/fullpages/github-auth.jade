@@ -6,13 +6,45 @@ script.
   }
 
   require(['jquery', 'cookie'], function($, Cookies) {
-    $.getJSON('http://localhost:9999/authenticate/'+getURLParameter('code'), function(data) {
+    function saveAndClose() {
+      Cookies.set('authenticated', true);
+      window.opener.location.reload();
+      window.close();
+    }
+
+    $.getJSON('http://demo-instance.telepat.io:1492/authenticate/'+getURLParameter('code'), function(data) {
       if (data.error) {
         alert('Authentication error: ' + data.error);
       } else {
-        Cookies.set('authenticated', true);
-        window.opener.location.reload();
-        window.close();
+        $.ajax({
+          url: 'https://api.github.com/user',
+          type: 'GET',
+          beforeSend: function(xhr) { xhr.setRequestHeader('authorization', 'token ' + data.token); },
+          success: function(res) {
+            if (res.email) {
+              $.ajax({
+                url: 'http://demo-instance.telepat.io:1492/add',
+                type: 'POST',
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                data: JSON.stringify({
+                  email_address: res.email,
+                  status: 'subscribed',
+                  merge_fields: { NAME: res.name, LOGIN: res.login }
+                }),
+                success: function(res) {
+                  saveAndClose();
+                }, error: function() {
+                  saveAndClose();
+                }
+              });
+            } else {
+              saveAndClose();
+            }
+          }, error: function() {
+            saveAndClose();
+          }
+        });
       }
     });
   });
