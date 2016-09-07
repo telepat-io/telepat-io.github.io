@@ -20,7 +20,8 @@
 
     *   The aggregation service, that actively monitors data changes and generates patches;
     *   The persistence service, that stores updates in the datastore and sends them off to synchronization;
-    *   The synchronization services, handling transport for individual platforms.
+    *   The transport manager service, that prepares synchronization messages and relays them to each transport type
+    *   The synchronization services (currently APN, GCM and Socket.io), handling transport for individual platforms.
 
     The aggregation and persistence services are required parts of the Telepat stack. If no synchronization service is started, Telepat will act like a traditional, non-real-time API platform and simply deliver data snapshots on-demand.
 
@@ -58,11 +59,11 @@ Alternatively, we provide Docker Compose files to accelerate deployment. The rec
 
     git clone https://github.com/telepat-io/telepat-docker-compose-files
     cd telepat-docker-compose-files/shared
-    sudo docker-compose up<
+    sudo docker-compose up
 
 This will start up all the infrastructure components.
 
-### Configuration
+### Configuring dependencies
 
 Telepat needs to create an Elasticsearch index and a series of mappings next. To help you to this, as well as other management tasks, there's a npm package that you can install:
 
@@ -73,7 +74,7 @@ Telepat needs to create an Elasticsearch index and a series of mappings next. To
 
 The default hostname is locahost, and the default port is 9200\. If running via docker-machine, you can get the host ip by running `docker-machine ip default`.
 
-### Boot up with Docker
+### Install with Docker
 
 Next, you need to launch the Telepat API and all the other services:
 
@@ -84,7 +85,7 @@ Right now everything should be up and running. The API instance is available on 
 
 The default ports are 3000 for the API and 80 for the websocket service.
 
-### Get from GitHub
+### Install from GitHub
 
 The Telepat backend stack is made up of two components, that will each need configuration when installed from source:
 
@@ -101,19 +102,100 @@ The Telepat backend stack is made up of two components, that will each need conf
 
     *   node telepat-worker/index.js -t aggregation -i 0
     *   node telepat-worker/index.js -t write -i 0
+    *   node telepat-worker/index.js -t transport_manager -i 0
     *   node telepat-worker/index.js -t android_transport -i 0
     *   node telepat-worker/index.js -t ios_transport -i 0
     *   node telepat-worker/index.js -t sockets_transport -i 0
 
 To configure the components, create a 'config.json' file in the root of each directory. You can start from the 'config.example.json' template and fill in your specific parameters / remove configurations for services not in use.
 
-Alternatively, you can configure Telepat using environment variables. Here are the environment vars that you can set:
+### Configuration
+
+**Scaling considerations**
+
+Depending on your specific workload and concurrency situations, you will find that some components, such as the API endpoint or the sockets transport service need to be scaled out. You can start any number of instances of the same service type, on the same or different machines. For the service side, increment the value of the -i (index) parameter for each worker. Components that communicate directly with the clients (the API and sockets service) can be placed behind a load balancer (typically HAProxy has been used successfully with production deployments, using a source load balancing algorithm for socket.io load balancing).
+
+**config.json fields**
+
+*   main_database: The adapter type that will be used for the persistent object storage (use "ElasticSearch" to use an ElasticSearch cluster for storage)
+*   message_queue: The adapter type that will be used for the message queue system (use "amqp" or "kafka")
+*   logger: Telepat uses [Winston](https://github.com/winstonjs/winston) for logging activity and error data. Place a Winston configuration object on this key in order to configure logging. Example:
+
+        "logger": {
+            "type": "Console",
+            "settings": {
+              "level": "info"
+            }
+        }
+
+*   ElasticSearch: Configuration information for the Elasticsearch adapter. You can specify all the nodes in the cluster using the "hosts" array. If your cluster has auto-discovery configured you can specify a "host" and "port" set of keys and the rest of the cluster nodes will be dynamically found and used. Example:
+
+        "ElasticSearch": {
+            "hosts": ["172.31.49.149:9200"],
+            "index": "default"
+        }
+
+*   redis: Configuration information for the redis instance, used by Telepat to hold subscription and device information. Example:
+
+        "redis": {
+            "host": "172.31.49.149",
+            "port": 6379
+        }
+
+*   redisCache: Configuration information for the redis instance used for data caching (such as count calls results). You can use the same instance as for state information, or a separate one, for distributing load.
+
+        "redisCache": {
+            "host": "172.31.49.149",
+            "port": 6379
+        }
+
+*   login_providers: Configuration information for facebook and twitter login providers.
+
+        "login_providers": {
+            "facebook": {
+              "client_id": "",
+              "client_secret": ""
+            },
+            "twitter": {
+              "consumer_key": "",
+              "consumer_secret": ""
+            }
+        }
+Note: for configuring this setting on your Telepat Cloud instance, send us a request to [support@telepat.io](mailto:support@telepat.io)
+
+*   amqp: Configuration information for the AMQP queue adapter (RabbitMQ or ActiveMQ). Example:
+
+        "amqp": {
+            "host": "172.31.49.149",
+            "user": "guest",
+            "password": "guest"
+        }
+
+*   password_salt: A password salt used by bcrypt to secure user passwords against dictionary attacks. The hash has the following format: `$<id>$<cost>$<salt><digest>` and can be generated in bash using the commands below:
+
+        node
+        bcrypt = require('bcrypt')    
+        bcrypt.genSaltSync()
+
+*   mandrill: Telepat uses Mandrill for sending transactional emails, such as account confirmation emails or password reset messages. The API key can be configured similarly to the following example:
+
+        "mandrill": {
+            "api_key": ""
+        }
+Note: for configuring this setting on your Telepat Cloud instance, send us a request to [support@telepat.io](mailto:support@telepat.io)
+
+**Environment variables**
+
+Alternatively, you can configure Telepat using environment variables. Here are the environment variables that you can set:
 
 *   TP_KFK_HOST: Kafka (zoekeeper) server
 *   TP_KFK_PORT: Kafka (zoekeeper) server port
 *   TP_KFK_CLIENT: Name for the kafka client
 *   TP_REDIS_HOST: Redis database server
 *   TP_REDIS_PORT: Redis server port
+*   TP_REDISCACHE:_HOST Redis caching instance hostname / IP address
+*   TP_REDISCACHE:_PORT Redis caching instance port
+*   TP_PW_SALT: Bcrypt formatted password salt for securing user passwords
 *   TP_MAIN_DB: Name of the main database which to use. Should be the same as the exported variable in telepat-models
 *   TP_ES_HOST: Elasticsearch server
 *   TP_ES_PORT: Elasticsearch server port

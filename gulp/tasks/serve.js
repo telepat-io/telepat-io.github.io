@@ -5,7 +5,7 @@ var runSequence = require('run-sequence');
 
 // Serve project with watching and livereload
 
-gulp.task('serve', 'Serve project with livereload and file watching',function (cb) {
+gulp.task('serve', {'port': 1208 },function (cb) {
   runSequence(
     'build',
     'browser-sync',
