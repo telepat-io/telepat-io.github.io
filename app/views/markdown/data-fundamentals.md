@@ -143,10 +143,13 @@ Permission keys allow defining read, write and 'meta' access levels for each Tel
 - **write**, meaning the object can be updated and deleted
 - **meta**, meaning access to model meta information. As of Telepat 0.4.1, the only meta information exposed is object count.
 
-Permission levels are:
-- **unauthenticated**, for universal access
-- **authenticated**, for access based on registration with a Telepat user account
-- **admin**, for administrator access
+Permission levels are (in increasing order of bit significance for the bitmask value set for the permission):
+- **unauthenticated**, for universal access. This corresponds to the least significant bit of the bitmask value created.
+- **authenticated**, for access based on registration with a Telepat user account.
+- **admin**, for administrator access.
+- **author**, for access given just to object authors. The authors are:
+  - the user that created the object;
+  - any other user whose id is stored within the object, on a key that's defined in the schema as having the `author` type.
 
 The schema keys defining permissions are:
 
@@ -156,9 +159,10 @@ The schema keys defining permissions are:
 | write_acl          | Bitmask corresponding to the write permission levels |
 | meta_read_acl      | Bitmask corresponding to the meta read permission levels |
 
-        application.schema.comment.read_acl = 7 // any client can read this
-        application.schema.comment.meta_read_acl = 6 // only logged in users and admins
-        application.schema.comment.write_acl = 4 // admins only
+    application.schema.comment.read_acl = 15 // any client can read this
+    application.schema.comment.meta_read_acl = 6 // only logged in users and admins
+    application.schema.comment.write_acl = 4 // admins only
+    application.schema.article.write_acl = 8 // authors only
 
 ## Objects
 All Telepat data is stored within objects, with JSON as the data format of choice. Every object belongs to a model (as defined in the application schema) and to a collection.
@@ -335,12 +339,31 @@ Use this in combination with the filters above to create negative statements. Si
     }
 
 ### Sorting
-The sorting object has key names equal to the object key that should be used for sorting. The value of these objects is either `asc` or `desc`, depending on the required direction that should be applied to the sort.
+The sorting object has key names equal to the object key that should be used for sorting. The value of these keys is an object describing the sort operation.
+
+| Key                         | Description |
+| --------------------------- | ----------- |
+| *sorted_key_name*           | The name of the key to sort by. |
+| *sorted_key_name*.order     | The order of the sort - can be `asc` or `desc` |
+| *sorted_key_name*.type      | Optional field, describes special sorting types. As of 0.4.1, the only supported value is `geo`. |
+| *sorted_key_name*.poi       | If sorting type is `geo`, contains the geocoordinates of the reference location to compute distance to. |
+| *sorted_key_name*.poi.lat   | If sorting type is `geo`, contains the latitude of the reference location to compute distance to. |
+| *sorted_key_name*.poi.long  | If sorting type is `geo`, contains the longitude of the reference location to compute distance to. |
 
 Example:
 
     sub.sort = {
-        created: 'asc'
+      key_name: {
+        order: "asc"
+      },
+      geolocation: {
+        order: "asc",
+        type: "geo",
+        poi: {
+          lat: 0,
+          long: 0
+        }
+      }
     }
 
 ### Pagination
