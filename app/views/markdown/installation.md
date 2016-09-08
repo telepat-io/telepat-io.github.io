@@ -223,42 +223,6 @@ After bootup, you need to create a new administration user account - Telepat CLI
 
         telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
 
-# Example app
-
-There's a Telepat example app that you can quickly run to test out your deployment. To configure the server side part, you can run
-
-    telepat add demoApp
-
-This will create an admin, create an app and a context and attach the demo schema required for the app. The API key used is "testApiKey". Telepat is ready to go! You can also `telepat list apps` to get a list of all apps for the currently logged-in admin.
-
-Next, let's launch a browser-based client to connect to Telepat. To do that, you need to clone the JavaScript client repository:
-
-    git clone https://github.com/telepat-io/telepat-js.git
-
-Then you need to install all dependencies, so run:
-
-    npm install
-
-Now let's configure the connection to the local instance of Telepat. Go to example/script.js and edit your connect options:
-
-    var connectOptions = {
-     apiKey: 'APIKEY',
-     appId: 'APPID',
-     apiEndpoint: 'http://localhost:3000',
-     socketEndpoint: 'http://localhost',
-     timerInterval: 150
-    };
-
-The apiEndpoint and socketEndpoint are probably fine if you're running Telepat locally (unless you're running in docker-machine, then you need to use the Docker IP), so you need to enter the API key and app ID you set up earlier.
-
-You'll also want to enter your own Facebook application id in example/index.html - set it for web, on http://localhost:3002.
-
-All you need to do next is run the example:
-
-    gulp serve
-
-That's it! You've successfully deployed your first Telepat instance.
-
 # A word on stability
 
 Telepat is beta software. Although specific versions of Telepat are stable and running production applications right now, we are still in the stage of making design and interface decisions based on trials and feedback, so please keep in mind:
