@@ -1,18 +1,13 @@
 /*jshint loopfunc: true */
 
-require(['jquery', 'cookie', 'ace/lib/ace/ace'], function($, Cookies, ace) {
+require(['jquery', 'cookie', 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js'], function($, Cookies, hljs) {
+  hljs.initHighlightingOnLoad();
+
   $('pre code').each(function() {
     var $this = $(this),
         $code = $this.html();
 
     $this.css('visibility', 'visible');
-    var editor = ace.edit(this);
-    editor.setTheme("ace/lib/ace/theme/monokai");
-    editor.setOption("maxLines", 50);
-    editor.setOption("readOnly", true);
-    editor.getSession().setMode("ace/lib/ace/mode/javascript");
-    editor.getSession().setUseWrapMode(true);
-    editor.setShowPrintMargin(false);
   });
 
   if(!Cookies.get('authenticated')) {

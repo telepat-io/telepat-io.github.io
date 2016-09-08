@@ -72,7 +72,7 @@ module.exports.buildSize = {
 
 // Clean task config
 // Be carefull what you cleaning!
-module.exports.clean = [tmp, dist + '/**', '!' + dist, '!' + bowerDir + '/**'];
+module.exports.clean = [tmp, dist + '/**', '!' + dist, '!' + bowerDir + '/**', '!' + dist + '/CNAME'];
 
 // Images task config
 module.exports.images = {
