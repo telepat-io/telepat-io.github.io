@@ -74,16 +74,15 @@
             <li><a href="#launching-dependencies" class="gamma">Dependencies</a></li>
             <li><a href="#install-with-docker" class="gamma">Booting up with Docker</a></li>
             <li><a href="#install-from-github" class="gamma">Get from GitHub</a></li>
-            <li><a href="#configuration" class="gamma">Configuration              </a></li>
+            <li><a href="#configuration" class="gamma">Configuration</a></li>
             <li><a href="#creating-an-app" class="gamma">Creating an app</a></li>
-            <li><a href="#example-app" class="gamma">Connecting the JS client</a></li>
             <li><a href="#a-word-on-stability" class="gamma">Status</a></li>
           </ul>
         </li>
         <li><a href="/working-with-telepat.html" class="delta">Working with Telepat</a></li>
-        <li><a href="/cli.html" class="yotta">The Telepat CLI</a></li>
-        <li><a href="/user-management.html" class="epsilon">User management</a></li>
-        <li><a href="/js-tutorial.html" class="zeta">App tutorial</a></li>
+        <li><a href="/cli.html" class="epsilon">The Telepat CLI</a></li>
+        <li><a href="/user-management.html" class="zeta">User management</a></li>
+        <li><a href="/js-tutorial.html" class="eta">App tutorial</a></li>
       </ul>
     </div>
     <div id="main-content" class="col-lg-9">
@@ -272,27 +271,6 @@ bcrypt.genSaltSync()
 <pre><code>telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
 </code></pre></li>
 </ul>
-<h1 id="example-app">Example app</h1>
-<p>There&#39;s a Telepat example app that you can quickly run to test out your deployment. To configure the server side part, you can run</p>
-<pre><code>telepat add demoApp
-</code></pre><p>This will create an admin, create an app and a context and attach the demo schema required for the app. The API key used is &quot;testApiKey&quot;. Telepat is ready to go! You can also <code>telepat list apps</code> to get a list of all apps for the currently logged-in admin.</p>
-<p>Next, let&#39;s launch a browser-based client to connect to Telepat. To do that, you need to clone the JavaScript client repository:</p>
-<pre><code>git clone https://github.com/telepat-io/telepat-js.git
-</code></pre><p>Then you need to install all dependencies, so run:</p>
-<pre><code>npm install
-</code></pre><p>Now let&#39;s configure the connection to the local instance of Telepat. Go to example/script.js and edit your connect options:</p>
-<pre><code>var connectOptions = {
- apiKey: &#39;APIKEY&#39;,
- appId: &#39;APPID&#39;,
- apiEndpoint: &#39;http://localhost:3000&#39;,
- socketEndpoint: &#39;http://localhost&#39;,
- timerInterval: 150
-};
-</code></pre><p>The apiEndpoint and socketEndpoint are probably fine if you&#39;re running Telepat locally (unless you&#39;re running in docker-machine, then you need to use the Docker IP), so you need to enter the API key and app ID you set up earlier.</p>
-<p>You&#39;ll also want to enter your own Facebook application id in example/index.html - set it for web, on <a href="http://localhost:3002">http://localhost:3002</a>.</p>
-<p>All you need to do next is run the example:</p>
-<pre><code>gulp serve
-</code></pre><p>That&#39;s it! You&#39;ve successfully deployed your first Telepat instance.</p>
 <h1 id="a-word-on-stability">A word on stability</h1>
 <p>Telepat is beta software. Although specific versions of Telepat are stable and running production applications right now, we are still in the stage of making design and interface decisions based on trials and feedback, so please keep in mind:</p>
 <ul>

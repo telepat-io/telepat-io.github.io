@@ -7,8 +7,6 @@ require(['jquery', 'cookie', 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js
     hljs.highlightBlock(module);
   });
 
-  //hljs.initHighlightingOnLoad();
-
   if(!Cookies.get('authenticated')) {
     $('pre code').each(function() {
       $(this).parent().append('<div class="code-overlay"><div class="login-button"><i class="fa fa-github" aria-hidden="true"></i> <span>Login with GitHub to view source</span></div></div>');
