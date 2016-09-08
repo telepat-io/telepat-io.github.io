@@ -1,13 +1,10 @@
 /*jshint loopfunc: true */
 
 require(['jquery', 'cookie', 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js'], function($, Cookies, hljs) {
-  hljs.initHighlightingOnLoad();
-
-  $('pre code').each(function() {
-    var $this = $(this),
-        $code = $this.html();
-
-    $this.css('visibility', 'visible');
+  $('pre code').each(function(i, module) {
+    $(this).css('visibility', 'visible');
+    $(this).addClass('javascript');
+    hljs.highlightBlock(module);
   });
 
   if(!Cookies.get('authenticated')) {
