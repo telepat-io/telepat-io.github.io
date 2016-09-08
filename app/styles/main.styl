@@ -4,7 +4,7 @@ $alpha-color = #d8225e
 $beta-color = #bf3287
 $gamma-color = #a63d9c
 $delta-color = #7f4eaf
-$yotta-color = #7f4eaf
+$yotta-color = #00a98f
 $epsilon-color = #685bba
 $zeta-color = #546cc4
 $eta-color = #3988d4
@@ -90,8 +90,8 @@ table
   .toggled
     padding-left 200px
   #sidebar-wrapper
-    width 200px !important
-    left 200px !important
+    width 200px
+    left 200px
 
 #github-fork-badge
   padding-top 20px
@@ -112,7 +112,7 @@ table
   -moz-transition all 0.5s ease
   -o-transition all 0.5s ease
   transition all 0.5s ease
-  z-index 10
+  z-index 100
 
 #page-content-wrapper
   width 100%
@@ -161,7 +161,7 @@ table
   bottom 30px
   width 50px
   height 50px
-  z-index 10
+  z-index 100
   cursor pointer
 
 #top-menu
@@ -174,7 +174,7 @@ table
   right 0px
   width 100%
   height 50px
-  z-index 10
+  z-index 100
   span
     cursor pointer
 
@@ -217,7 +217,7 @@ ul.sidebar-nav
     a.delta { border-color: $delta-color; }
     a.delta.selected, a.delta.active { background: $delta-color !important; }
     a.yotta { border-color: $yotta-color; }
-    a.yotta.selected, a.yotta.active { background: $yotta-color !important; }    
+    a.yotta.selected, a.yotta.active { background: $yotta-color !important; }
     a.epsilon { border-color: $epsilon-color; }
     a.epsilon.selected,  a.epsilon.active { background: $epsilon-color !important; }
     a.zeta { border-color: $zeta-color; }
@@ -246,7 +246,7 @@ ul.sidebar-nav.second
     a.beta:hover { color: $beta-color; }
     a.gamma:hover { color: $gamma-color; }
     a.delta:hover { color: $delta-color; }
-    a.yotta:hover { color: $yotta-color; }    
+    a.yotta:hover { color: $yotta-color; }
     a.epsilon:hover { color: $epsilon-color; }
     a.zeta:hover { color: $zeta-color; }
     a.eta:hover { color: $eta-color; }
@@ -273,33 +273,29 @@ ul.sidebar-nav.second
 
 
 @media(max-width:767px)
-  #sidebar-wrapper
-    margin-top 50px
-  #page-content-wrapper
-    padding-top 50px
-    position absolute
-    margin-right -200px
-    left 0
+  #wrapper.toggled
+    #sidebar-wrapper
+      width 200px
+      left 200px
+    #page-content-wrapper
+      margin-right -200px
+  #wrapper
+    padding-left 0
+    #sidebar-wrapper
+      width 0
+      left 0
+      margin-top 50px
+    #page-content-wrapper
+      padding-top 50px
+      position absolute
+      left 0
+      margin-right 0
 
 @media(min-width:768px)
-    #wrapper {
-        padding-left 200px
-    }
-
-    #wrapper.toggled
-      padding-left 0
-      #sidebar-wrapper {
-        width 0
-      }
-      #page-content-wrapper {
-        margin-right 0
-      }
-
-    #sidebar-wrapper {
+    #wrapper
+      padding-left 200px
+    #sidebar-wrapper
         width 200px
         left 200px
-    }
-
-    #to-top, #top-menu {
+    #to-top, #top-menu
       display none
-    }
