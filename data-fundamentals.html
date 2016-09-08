@@ -338,11 +338,16 @@
 <li><strong>write</strong>, meaning the object can be updated and deleted</li>
 <li><strong>meta</strong>, meaning access to model meta information. As of Telepat 0.4.1, the only meta information exposed is object count.</li>
 </ul>
-<p>Permission levels are:</p>
+<p>Permission levels are (in increasing order of bit significance for the bitmask value set for the permission):</p>
 <ul>
-<li><strong>unauthenticated</strong>, for universal access</li>
-<li><strong>authenticated</strong>, for access based on registration with a Telepat user account</li>
-<li><strong>admin</strong>, for administrator access</li>
+<li><strong>unauthenticated</strong>, for universal access. This corresponds to the least significant bit of the bitmask value created.</li>
+<li><strong>authenticated</strong>, for access based on registration with a Telepat user account.</li>
+<li><strong>admin</strong>, for administrator access.</li>
+<li><strong>author</strong>, for access given just to object authors. The authors are:<ul>
+<li>the user that created the object;</li>
+<li>any other user whose id is stored within the object, on a key that&#39;s defined in the schema as having the <code>author</code> type.</li>
+</ul>
+</li>
 </ul>
 <p>The schema keys defining permissions are:</p>
 <table>
@@ -367,9 +372,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code>    application.schema.comment.read_acl = 7 // any client can read this
-    application.schema.comment.meta_read_acl = 6 // only logged in users and admins
-    application.schema.comment.write_acl = 4 // admins only
+<pre><code>application.schema.comment.read_acl = 15 // any client can read this
+application.schema.comment.meta_read_acl = 6 // only logged in users and admins
+application.schema.comment.write_acl = 4 // admins only
+application.schema.article.write_acl = 8 // authors only
 </code></pre><h2 id="objects">Objects</h2>
 <p>All Telepat data is stored within objects, with JSON as the data format of choice. Every object belongs to a model (as defined in the application schema) and to a collection.</p>
 <p>You can store data on any key of the object, but some keys are reserved and managed by the system.</p>
@@ -646,10 +652,54 @@
   }
 }
 </code></pre><h3 id="sorting">Sorting</h3>
-<p>The sorting object has key names equal to the object key that should be used for sorting. The value of these objects is either <code>asc</code> or <code>desc</code>, depending on the required direction that should be applied to the sort.</p>
+<p>The sorting object has key names equal to the object key that should be used for sorting. The value of these keys is an object describing the sort operation.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>sorted_key_name</em></td>
+<td>The name of the key to sort by.</td>
+</tr>
+<tr>
+<td><em>sorted_key_name</em>.order</td>
+<td>The order of the sort - can be <code>asc</code> or <code>desc</code></td>
+</tr>
+<tr>
+<td><em>sorted_key_name</em>.type</td>
+<td>Optional field, describes special sorting types. As of 0.4.1, the only supported value is <code>geo</code>.</td>
+</tr>
+<tr>
+<td><em>sorted_key_name</em>.poi</td>
+<td>If sorting type is <code>geo</code>, contains the geocoordinates of the reference location to compute distance to.</td>
+</tr>
+<tr>
+<td><em>sorted_key_name</em>.poi.lat</td>
+<td>If sorting type is <code>geo</code>, contains the latitude of the reference location to compute distance to.</td>
+</tr>
+<tr>
+<td><em>sorted_key_name</em>.poi.long</td>
+<td>If sorting type is <code>geo</code>, contains the longitude of the reference location to compute distance to.</td>
+</tr>
+</tbody>
+</table>
 <p>Example:</p>
 <pre><code>sub.sort = {
-    created: &#39;asc&#39;
+  key_name: {
+    order: &quot;asc&quot;
+  },
+  geolocation: {
+    order: &quot;asc&quot;,
+    type: &quot;geo&quot;,
+    poi: {
+      lat: 0,
+      long: 0
+    }
+  }
 }
 </code></pre><h3 id="pagination">Pagination</h3>
 <p>Set the <code>offset</code> and <code>limit</code> keys to adjust the padding of the results that the subscription returns. The default value for the <code>limit</code> key is 64.</p>
