@@ -59,6 +59,7 @@
         },
                 
         unStick = function(){
+            void 0;
             $placeholder.remove();
             $element.removeClass('isStuck')
             .css({ 
@@ -81,6 +82,7 @@
         },
                 
         holdIt = function(forceBottom){
+            void 0;
             $element.before($placeholder.css('height', outerHeight));
             var offsetParent = $placeholder.offsetParent();
             
@@ -104,6 +106,7 @@
             });
         },
         stickIt = function(){
+            void 0;
             active = true;
             $element.before($placeholder.css('height', outerHeight));
             $element.addClass('isStuck');
@@ -121,6 +124,7 @@
             });
         },
         stickAtBottom = function(){
+            void 0;
             $element.before($placeholder.css('height', outerHeight));
             $element.addClass('isStuck');
             var bottomDistance = -offset;//-offset;
@@ -195,7 +199,9 @@
             if(stickyHeight>viewportHeight){
                 portrait = true;
                 if(landscape){
-                    holdIt();
+                    offset = 0;
+                    if(hold)
+                        holdIt();
                     landscape = false;
                 }
                 if( hold && scrollDir === 'up' && scroll <= elementOffset - topMargin){
@@ -237,14 +243,15 @@
             }else{
                 landscape = true;
                 if(portrait){
-                    holdIt();
+                    if(hold)
+                        holdIt();
                     portrait = false;
                 }
                 // Google like reappearance on upward scroll
                 if (options.scrollHide)
                     offset = stickyHeight + options.lazyHeight; //negative offset for initial hiding
                 else
-                    offset = + options.lazyHeight;
+                    offset = options.lazyHeight;
                 
                 if(!active && !bottom && scroll >= stickpoints.top - topMargin + offset 
                 || bottom && hold && scroll <= elementOffset - topMargin + offset){
@@ -291,8 +298,10 @@
             //console.log("active ",active,"hold ",hold,"bottom ",bottom);
         },
         stickUpResponsiveHandlerFn = function(event){
-            if(hold)
+            if(hold){
                 holdIt();
+                bottom = false;
+            }
             void 0;
                 stickUpScrollHandlerFn(event);
 

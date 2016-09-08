@@ -1,0 +1,52 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+<script src="/scripts/require.config.js"></script>
+<script>
+  function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+  }
+  
+  require(['jquery', 'cookie'], function($, Cookies) {
+    function saveAndClose() {
+      Cookies.set('authenticated', true);
+      window.opener.location.reload();
+      window.close();
+    }
+  
+    $.getJSON('http://demo-instance.telepat.io:1492/authenticate/'+getURLParameter('code'), function(data) {
+      if (data.error) {
+        alert('Authentication error: ' + data.error);
+      } else {
+        $.ajax({
+          url: 'https://api.github.com/user',
+          type: 'GET',
+          beforeSend: function(xhr) { xhr.setRequestHeader('authorization', 'token ' + data.token); },
+          success: function(res) {
+            if (res.email) {
+              $.ajax({
+                url: 'http://demo-instance.telepat.io:1492/add',
+                type: 'POST',
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                data: JSON.stringify({
+                  email_address: res.email,
+                  status: 'subscribed',
+                  merge_fields: { NAME: res.name, LOGIN: res.login }
+                }),
+                success: function(res) {
+                  saveAndClose();
+                }, error: function() {
+                  saveAndClose();
+                }
+              });
+            } else {
+              saveAndClose();
+            }
+          }, error: function() {
+            saveAndClose();
+          }
+        });
+      }
+    });
+  });
+</script>

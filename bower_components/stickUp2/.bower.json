@@ -42,15 +42,14 @@
   "dependencies": {
     "jquery": ">= 1.9.1"
   },
-  "version": "2.2.0",
-  "_release": "2.2.0",
+  "version": "2.2.2",
+  "_release": "2.2.2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.2.0",
-    "commit": "a7ce4fb0747093ae40a8f39380c440507ac7a9a5"
+    "tag": "v2.2.2",
+    "commit": "2a68703d13f4e66edcb5084fa42c09b809f368f4"
   },
-  "_source": "git://github.com/ppowalowski/stickUp2.git",
+  "_source": "https://github.com/ppowalowski/stickUp2.git",
   "_target": "~2.2.0",
-  "_originalSource": "stickUp2",
-  "_direct": true
+  "_originalSource": "stickUp2"
 }

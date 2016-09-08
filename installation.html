@@ -1,0 +1,336 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]>      <html class="no-js gt-ie9"> <![endif]-->
+<!--[if !IE]> <![IGNORE[--><!--[IGNORE[]]--> <html class="no-js noie">
+<head>
+  <meta charset="utf-8">
+  <title>Telepat Docs</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/favicon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/favicon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/favicon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/favicon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/favicon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/favicon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/favicon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/favicon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-128.png" sizes="128x128">
+  <meta name="application-name" content="Telepat">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+  <meta name="msapplication-square70x70logo" content="images/favicon/mstile-70x70.png">
+  <meta name="msapplication-square150x150logo" content="images/favicon/mstile-150x150.png">
+  <meta name="msapplication-wide310x150logo" content="images/favicon/mstile-310x150.png">
+  <meta name="msapplication-square310x310logo" content="images/favicon/mstile-310x310.png">
+  <link rel="stylesheet" href="styles/main.css">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+</head>
+<body><img id="to-top" src="images/up-arrow-icon.png" onClick="window.scrollTo(0, 0);">
+  <div id="top-menu">
+    <div class="pull-left"><span onClick="$('#wrapper').toggleClass('toggled')" class="glyphicon glyphicon-list"></span></div>
+    <div class="pull-right">Telepat.io Docs</div>
+    <div class="clear"></div>
+  </div>
+  <div id="wrapper">
+    <div id="sidebar-wrapper"><a href="http://telepat.io" title="Telepat Real-Time Backend">
+        <div data-height="70" data-stroke-color="#000000" class="telepat-logo"></div></a>
+      <script type="text/javascript" src="http://telepat.io/js/telepat-logo.js"></script>
+      <ul class="sidebar-nav first">
+        <li><a id="alpha-menu" href="/" class="alpha">Introduction</a></li>
+        <li><a id="beta-menu" href="/getting-started.html" class="beta">Getting Started</a></li>
+        <li><a id="gamma-menu" href="/roadmap.html" class="gamma">Roadmap</a></li>
+        <li><a id="delta-menu" href="/api-docs.html" class="delta">API Reference</a></li>
+        <li><a id="epsilon-menu" href="/js-sdk.html" class="epsilon">JS Client Reference</a></li>
+        <li><a id="zeta-menu" href="/android-sdk.html" class="zeta">Android Client Reference</a></li>
+        <li><a id="eta-menu" href="/ios-sdk.html" class="eta">iOS Client Reference</a></li>
+        <div id="github-fork-badge">Improve the docs
+          <iframe src="https://ghbtns.com/github-btn.html?user=telepat-io&amp;repo=telepat-io.github.io&amp;type=fork&amp;count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+        </div>
+      </ul>
+    </div>
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div style="margin:0px;padding:0px;" class="container-fluid">
+              <!-- inject:content -->
+              
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <ul class="sidebar-nav second">
+        <li><a href="/getting-started.html" class="alpha">Getting started with Telepat</a></li>
+        <li><a href="/data-fundamentals.html" class="beta">Data fundamentals</a></li>
+        <li><a href="#installing-and-running-telepat" class="gamma active">Telepat install guide</a>
+          <ul>
+            <li><a href="#repositories-guide" class="gamma">Repositories</a></li>
+            <li><a href="#launching-dependencies" class="gamma">Dependencies</a></li>
+            <li><a href="#install-with-docker" class="gamma">Booting up with Docker</a></li>
+            <li><a href="#install-from-github" class="gamma">Get from GitHub</a></li>
+            <li><a href="#configuration" class="gamma">Configuration              </a></li>
+            <li><a href="#creating-an-app" class="gamma">Creating an app</a></li>
+            <li><a href="#example-app" class="gamma">Connecting the JS client</a></li>
+            <li><a href="#a-word-on-stability" class="gamma">Status</a></li>
+          </ul>
+        </li>
+        <li><a href="/working-with-telepat.html" class="delta">Working with Telepat</a></li>
+        <li><a href="/cli.html" class="yotta">The Telepat CLI</a></li>
+        <li><a href="/user-management.html" class="epsilon">User management</a></li>
+        <li><a href="/js-tutorial.html" class="zeta">App tutorial</a></li>
+      </ul>
+    </div>
+    <div id="main-content" class="col-lg-9">
+      <!-- inject:content:md -->
+      <h1 id="installing-and-running-telepat">Installing and running Telepat</h1>
+<h3 id="repositories-guide">Repositories guide</h3>
+<ul>
+<li><p><strong><a href="https://github.com/telepat-io/telepat-models">Telepat models</a></strong></p>
+<p>The Telepat models library holds core functionality, and exposes a method API that other components (like the endpoint, and the services) can use to interact with the system. Unless developing the core or working on additional services, you sholdn&#39;t need to work with this library directly.</p>
+<p><em>Available on npm as &#39;telepat-models&#39;.</em></p>
+</li>
+<li><p><strong><a href="https://github.com/telepat-io/telepat-api">Telepat API</a></strong></p>
+<p>Built on top of <a href="http://expressjs.com/">Express</a>, the API provides web endpoints that allow interacting with Telepat from web and mobile applications. This is a required part of the Telepat stack.</p>
+<p><em>Available on npm as &#39;telepat-api&#39;.</em></p>
+</li>
+<li><p><strong><a href="https://github.com/telepat-io/telepat-worker">Telepat services</a></strong></p>
+<p>This repo is a container for all the services that come pre-packaged with Telepat:</p>
+<ul>
+<li>The aggregation service, that actively monitors data changes and generates patches;</li>
+<li>The persistence service, that stores updates in the datastore and sends them off to synchronization;</li>
+<li>The transport manager service, that prepares synchronization messages and relays them to each transport type</li>
+<li>The synchronization services (currently APN, GCM and Socket.io), handling transport for individual platforms.</li>
+</ul>
+<p>The aggregation and persistence services are required parts of the Telepat stack. If no synchronization service is started, Telepat will act like a traditional, non-real-time API platform and simply deliver data snapshots on-demand.</p>
+<p><em>Available on npm as &#39;telepat-worker&#39;.</em></p>
+</li>
+<li><p><strong><a href="https://github.com/telepat-io/telepat-cli">Telepat CLI</a></strong></p>
+<p>A command-line interface that helps with configuring a Telepat instance and managing applications.</p>
+<p><em>Available on npm as &#39;telepat-cli&#39;.</em></p>
+</li>
+<li><p><strong><a href="https://github.com/telepat-io/telepat-docker-compose-files">Telepat Docker files</a></strong></p>
+<p>A set of Docker Compose files for accelerating the deployment of Telepat as well as its dependencies.</p>
+</li>
+<li><p><strong>Telepat clients</strong></p>
+<p>Native clients are available for multiple platforms:</p>
+<ul>
+<li><a href="https://github.com/telepat-io/telepat-js">Javascript client</a>, available on npm and bower as &#39;telepat-js&#39;</li>
+<li><a href="https://github.com/telepat-io/telepat-android-sdk">Android client</a>, available as a Maven dependency</li>
+<li><a href="https://github.com/telepat-io/telepat-ios-sdk">iOS client</a>, available on CocoaPods as &#39;Telepat&#39;</li>
+</ul>
+</li>
+</ul>
+<h3 id="launching-dependencies">Launching dependencies</h3>
+<p>As of 0.2.8, Telepat requires 3 external dependencies:</p>
+<ul>
+<li>A messaging broker. Adapters are provided out of the box for <a href="https://www.rabbitmq.com/">RabbitMQ</a> and <a href="http://kafka.apache.org/">Kafka</a>.</li>
+<li>A JSON datastore. An adapter for <a href="https://www.elastic.co/">Elasticsearch</a> is provided.</li>
+<li>A <a href="http://redis.io/">Redis</a> instance to hold Telepat state and configuration data.</li>
+</ul>
+<p>You can find installation instructions for all components on their respective website.</p>
+<p>Alternatively, we provide Docker Compose files to accelerate deployment. The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have <a href="https://docs.docker.com/installation/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a> installed on your machine, here are the steps to get dependencies running:</p>
+<pre><code>git clone https://github.com/telepat-io/telepat-docker-compose-files
+cd telepat-docker-compose-files/shared
+sudo docker-compose up
+</code></pre><p>This will start up all the infrastructure components.</p>
+<h3 id="configuring-dependencies">Configuring dependencies</h3>
+<p>Telepat needs to create an Elasticsearch index and a series of mappings next. To help you to this, as well as other management tasks, there&#39;s a npm package that you can install:</p>
+<pre><code>npm install telepat-cli
+telepat set elasticsearch_host ES_HOST // Run these 2 if Docker is not running on localhost
+telepat set elasticsearch_port ES_PORT // Mac or Windows, for example
+telepat configure elasticsearch
+</code></pre><p>The default hostname is locahost, and the default port is 9200. If running via docker-machine, you can get the host ip by running <code>docker-machine ip default</code>.</p>
+<h3 id="install-with-docker">Install with Docker</h3>
+<p>Next, you need to launch the Telepat API and all the other services:</p>
+<pre><code>cd telepat-docker-compose-files/telepat
+sudo docker-compose up
+</code></pre><p>Right now everything should be up and running. The API instance is available on the same IP as your docker machine.</p>
+<p>The default ports are 3000 for the API and 80 for the websocket service.</p>
+<h3 id="install-from-github">Install from GitHub</h3>
+<p>The Telepat backend stack is made up of two components, that will each need configuration when installed from source:</p>
+<ul>
+<li><p>The API (<a href="https://github.com/telepat-io/telepat-api">https://github.com/telepat-io/telepat-api</a>). To start this, simply run</p>
+<pre><code>./bin/www
+</code></pre><p>You can also set the PORT environment variable to make the API listen on a port different than the default 3000.</p>
+</li>
+<li><p>The services (<a href="https://github.com/telepat-io/telepat-worker">https://github.com/telepat-io/telepat-worker</a>). To start, run</p>
+<pre><code>node index.js -t topic_name -i worker_index
+</code></pre><p>For built-in services, these are the commands to start up:</p>
+<ul>
+<li>node telepat-worker/index.js -t aggregation -i 0</li>
+<li>node telepat-worker/index.js -t write -i 0</li>
+<li>node telepat-worker/index.js -t transport_manager -i 0</li>
+<li>node telepat-worker/index.js -t android_transport -i 0</li>
+<li>node telepat-worker/index.js -t ios_transport -i 0</li>
+<li>node telepat-worker/index.js -t sockets_transport -i 0</li>
+</ul>
+</li>
+</ul>
+<p>To configure the components, create a &#39;config.json&#39; file in the root of each directory. You can start from the &#39;config.example.json&#39; template and fill in your specific parameters / remove configurations for services not in use.</p>
+<h3 id="configuration">Configuration</h3>
+<p><strong>Scaling considerations</strong></p>
+<p>Depending on your specific workload and concurrency situations, you will find that some components, such as the API endpoint or the sockets transport service need to be scaled out. You can start any number of instances of the same service type, on the same or different machines. For the service side, increment the value of the -i (index) parameter for each worker. Components that communicate directly with the clients (the API and sockets service) can be placed behind a load balancer (typically HAProxy has been used successfully with production deployments, using a source load balancing algorithm for socket.io load balancing).</p>
+<p><strong>config.json fields</strong></p>
+<ul>
+<li>main_database: The adapter type that will be used for the persistent object storage (use &quot;ElasticSearch&quot; to use an ElasticSearch cluster for storage)</li>
+<li>message_queue: The adapter type that will be used for the message queue system (use &quot;amqp&quot; or &quot;kafka&quot;)</li>
+<li><p>logger: Telepat uses <a href="https://github.com/winstonjs/winston">Winston</a> for logging activity and error data. Place a Winston configuration object on this key in order to configure logging. Example:</p>
+<pre><code>&quot;logger&quot;: {
+    &quot;type&quot;: &quot;Console&quot;,
+    &quot;settings&quot;: {
+      &quot;level&quot;: &quot;info&quot;
+    }
+}
+</code></pre></li>
+<li><p>ElasticSearch: Configuration information for the Elasticsearch adapter. You can specify all the nodes in the cluster using the &quot;hosts&quot; array. If your cluster has auto-discovery configured you can specify a &quot;host&quot; and &quot;port&quot; set of keys and the rest of the cluster nodes will be dynamically found and used. Example:</p>
+<pre><code>&quot;ElasticSearch&quot;: {
+    &quot;hosts&quot;: [&quot;172.31.49.149:9200&quot;],
+    &quot;index&quot;: &quot;default&quot;
+}
+</code></pre></li>
+<li><p>redis: Configuration information for the redis instance, used by Telepat to hold subscription and device information. Example:</p>
+<pre><code>&quot;redis&quot;: {
+    &quot;host&quot;: &quot;172.31.49.149&quot;,
+    &quot;port&quot;: 6379
+}
+</code></pre></li>
+<li><p>redisCache: Configuration information for the redis instance used for data caching (such as count calls results). You can use the same instance as for state information, or a separate one, for distributing load.</p>
+<pre><code>&quot;redisCache&quot;: {
+    &quot;host&quot;: &quot;172.31.49.149&quot;,
+    &quot;port&quot;: 6379
+}
+</code></pre></li>
+<li><p>login_providers: Configuration information for facebook and twitter login providers.</p>
+<pre><code>&quot;login_providers&quot;: {
+    &quot;facebook&quot;: {
+      &quot;client_id&quot;: &quot;&quot;,
+      &quot;client_secret&quot;: &quot;&quot;
+    },
+    &quot;twitter&quot;: {
+      &quot;consumer_key&quot;: &quot;&quot;,
+      &quot;consumer_secret&quot;: &quot;&quot;
+    }
+}
+</code></pre><p>Note: for configuring this setting on your Telepat Cloud instance, send us a request to <a href="mailto:support@telepat.io">support@telepat.io</a></p>
+</li>
+<li><p>amqp: Configuration information for the AMQP queue adapter (RabbitMQ or ActiveMQ). Example:</p>
+<pre><code>&quot;amqp&quot;: {
+    &quot;host&quot;: &quot;172.31.49.149&quot;,
+    &quot;user&quot;: &quot;guest&quot;,
+    &quot;password&quot;: &quot;guest&quot;
+}
+</code></pre></li>
+<li><p>password_salt: A password salt used by bcrypt to secure user passwords against dictionary attacks. The hash has the following format: <code>$&lt;id&gt;$&lt;cost&gt;$&lt;salt&gt;&lt;digest&gt;</code> and can be generated in bash using the commands below:</p>
+<pre><code>node
+bcrypt = require(&#39;bcrypt&#39;)    
+bcrypt.genSaltSync()
+</code></pre></li>
+<li><p>mandrill: Telepat uses Mandrill for sending transactional emails, such as account confirmation emails or password reset messages. The API key can be configured similarly to the following example:</p>
+<pre><code>&quot;mandrill&quot;: {
+    &quot;api_key&quot;: &quot;&quot;
+}
+</code></pre><p>Note: for configuring this setting on your Telepat Cloud instance, send us a request to <a href="mailto:support@telepat.io">support@telepat.io</a></p>
+</li>
+</ul>
+<p><strong>Environment variables</strong></p>
+<p>Alternatively, you can configure Telepat using environment variables. Here are the environment variables that you can set:</p>
+<ul>
+<li>TP_KFK_HOST: Kafka (zoekeeper) server</li>
+<li>TP_KFK_PORT: Kafka (zoekeeper) server port</li>
+<li>TP_KFK_CLIENT: Name for the kafka client</li>
+<li>TP_REDIS_HOST: Redis database server</li>
+<li>TP_REDIS_PORT: Redis server port</li>
+<li>TP_REDISCACHE:_HOST Redis caching instance hostname / IP address</li>
+<li>TP_REDISCACHE:_PORT Redis caching instance port</li>
+<li>TP_PW_SALT: Bcrypt formatted password salt for securing user passwords</li>
+<li>TP_MAIN_DB: Name of the main database which to use. Should be the same as the exported variable in telepat-models</li>
+<li>TP_ES_HOST: Elasticsearch server</li>
+<li>TP_ES_PORT: Elasticsearch server port</li>
+<li>TP_AMQP_HOST: RabbitMQ host</li>
+<li>TP_AMQP_USER: RabbitMQ authentication username</li>
+<li>TP_AMQP_PASSWORD: RabbitMQ authentication password</li>
+</ul>
+<h1 id="creating-an-app">Creating an app</h1>
+<p>After bootup, you need to create a new administration user account - Telepat CLI can help you setup your new app in no time. Here are the steps you need to take to create a new app:</p>
+<ul>
+<li><p>Register a new admin:</p>
+<pre><code>telepat add admin --email EMAIL --password PASSWORD
+</code></pre></li>
+<li><p>Create the app:</p>
+<pre><code>telepat add app --name APP_NAME --apiKey API_KEY
+</code></pre></li>
+<li><p>Create at least one context (as a container for your objects):</p>
+<pre><code>telepat add context --contextName CONTEXT_NAME
+</code></pre></li>
+<li><p>Create a schema file, and feed it into your app, so Telepat knows the types of objects you&#39;ll be working with. You need to have a schema that defines at the very least the types of objects; you can optionally also add information about object parameter names or relationships.</p>
+<pre><code>telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
+</code></pre></li>
+</ul>
+<h1 id="example-app">Example app</h1>
+<p>There&#39;s a Telepat example app that you can quickly run to test out your deployment. To configure the server side part, you can run</p>
+<pre><code>telepat add demoApp
+</code></pre><p>This will create an admin, create an app and a context and attach the demo schema required for the app. The API key used is &quot;testApiKey&quot;. Telepat is ready to go! You can also <code>telepat list apps</code> to get a list of all apps for the currently logged-in admin.</p>
+<p>Next, let&#39;s launch a browser-based client to connect to Telepat. To do that, you need to clone the JavaScript client repository:</p>
+<pre><code>git clone https://github.com/telepat-io/telepat-js.git
+</code></pre><p>Then you need to install all dependencies, so run:</p>
+<pre><code>npm install
+</code></pre><p>Now let&#39;s configure the connection to the local instance of Telepat. Go to example/script.js and edit your connect options:</p>
+<pre><code>var connectOptions = {
+ apiKey: &#39;APIKEY&#39;,
+ appId: &#39;APPID&#39;,
+ apiEndpoint: &#39;http://localhost:3000&#39;,
+ socketEndpoint: &#39;http://localhost&#39;,
+ timerInterval: 150
+};
+</code></pre><p>The apiEndpoint and socketEndpoint are probably fine if you&#39;re running Telepat locally (unless you&#39;re running in docker-machine, then you need to use the Docker IP), so you need to enter the API key and app ID you set up earlier.</p>
+<p>You&#39;ll also want to enter your own Facebook application id in example/index.html - set it for web, on <a href="http://localhost:3002">http://localhost:3002</a>.</p>
+<p>All you need to do next is run the example:</p>
+<pre><code>gulp serve
+</code></pre><p>That&#39;s it! You&#39;ve successfully deployed your first Telepat instance.</p>
+<h1 id="a-word-on-stability">A word on stability</h1>
+<p>Telepat is beta software. Although specific versions of Telepat are stable and running production applications right now, we are still in the stage of making design and interface decisions based on trials and feedback, so please keep in mind:</p>
+<ul>
+<li>Some functionalities implemented by the backend components may not be yet implemented in specific clients</li>
+<li>API endpoints specifications might change</li>
+</ul>
+<p>We appreciate support from the community in identifying and fixing issues, so if you run into any trouble, please open up an issue on the proper repo and we&#39;ll be quick to help out.</p>
+
+      <!-- endinject -->
+    </div>
+  </div>
+</div>
+              <!-- endinject -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- build:js(./app/) scripts/vendor.min.js-->
+  <!-- endbuild-->
+  <!-- build:js scripts/plugins.min.js-->
+  <!-- endbuild-->
+  <!-- build:js(.tmp) scripts/main.min.js-->
+  <!-- endbuild-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+  <script src="/scripts/require.config.js"></script>
+  <script src="scripts/menu-highlight.js"></script>
+  <script src="scripts/github.js"></script>
+  <script src="scripts/image-zoom.js"></script><!-- inject:scripts -->
+  
+  <!-- endinject -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-21406959-6', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>

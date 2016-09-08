@@ -1,0 +1,644 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]>      <html class="no-js gt-ie9"> <![endif]-->
+<!--[if !IE]> <![IGNORE[--><!--[IGNORE[]]--> <html class="no-js noie">
+<head>
+  <meta charset="utf-8">
+  <title>Telepat Docs</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/favicon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/favicon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/favicon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/favicon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/favicon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/favicon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/favicon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/favicon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-128.png" sizes="128x128">
+  <meta name="application-name" content="Telepat">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+  <meta name="msapplication-square70x70logo" content="images/favicon/mstile-70x70.png">
+  <meta name="msapplication-square150x150logo" content="images/favicon/mstile-150x150.png">
+  <meta name="msapplication-wide310x150logo" content="images/favicon/mstile-310x150.png">
+  <meta name="msapplication-square310x310logo" content="images/favicon/mstile-310x310.png">
+  <link rel="stylesheet" href="styles/main.css">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+</head>
+<body><img id="to-top" src="images/up-arrow-icon.png" onClick="window.scrollTo(0, 0);">
+  <div id="top-menu">
+    <div class="pull-left"><span onClick="$('#wrapper').toggleClass('toggled')" class="glyphicon glyphicon-list"></span></div>
+    <div class="pull-right">Telepat.io Docs</div>
+    <div class="clear"></div>
+  </div>
+  <div id="wrapper">
+    <div id="sidebar-wrapper"><a href="http://telepat.io" title="Telepat Real-Time Backend">
+        <div data-height="70" data-stroke-color="#000000" class="telepat-logo"></div></a>
+      <script type="text/javascript" src="http://telepat.io/js/telepat-logo.js"></script>
+      <ul class="sidebar-nav first">
+        <li><a id="alpha-menu" href="/" class="alpha">Introduction</a></li>
+        <li><a id="beta-menu" href="/getting-started.html" class="beta">Getting Started</a></li>
+        <li><a id="gamma-menu" href="/roadmap.html" class="gamma">Roadmap</a></li>
+        <li><a id="delta-menu" href="/api-docs.html" class="delta">API Reference</a></li>
+        <li><a id="epsilon-menu" href="/js-sdk.html" class="epsilon">JS Client Reference</a></li>
+        <li><a id="zeta-menu" href="/android-sdk.html" class="zeta">Android Client Reference</a></li>
+        <li><a id="eta-menu" href="/ios-sdk.html" class="eta">iOS Client Reference</a></li>
+        <div id="github-fork-badge">Improve the docs
+          <iframe src="https://ghbtns.com/github-btn.html?user=telepat-io&amp;repo=telepat-io.github.io&amp;type=fork&amp;count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+        </div>
+      </ul>
+    </div>
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div style="margin:0px;padding:0px;" class="container-fluid">
+              <!-- inject:content -->
+              
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <ul class="sidebar-nav second">
+        <li><a href="/getting-started.html" class="alpha">Getting started with Telepat</a></li>
+        <li><a href="/data-fundamentals.html" class="beta">Data fundamentals</a></li>
+        <li><a href="/installation.html" class="gamma">Telepat install guide</a></li>
+        <li><a href="/working-with-telepat.html" class="delta">Working with Telepat</a></li>
+        <li><a href="/cli.html" class="yotta">The Telepat CLI          </a></li>
+        <li><a href="/user-management.html" class="epsilon">User management</a></li>
+        <li><a href="/js-tutorial.html" class="zeta active">App tutorial</a>
+          <ul>
+            <li><a href="#the-server-components" class="zeta">Server components</a></li>
+            <li><a href="#structuring-the-data" class="zeta">Structuring the data</a></li>
+            <li><a href="#configuring-your-app" class="zeta">Configuring the Telepat app</a></li>
+            <li><a href="#installing-and-running-the-demo" class="zeta">Installing the demo</a></li>
+            <li><a href="#connecting-to-telepat" class="zeta">Connecting to Telepat</a></li>
+            <li><a href="#authentication" class="zeta">Authentication</a></li>
+            <li><a href="#subscribing-to-messages" class="zeta">Subscribing to messages</a></li>
+            <li><a href="#users-list" class="zeta padded-left">Updating the user list</a></li>
+            <li><a href="#typing-indicators" class="zeta padded-left">Typing indicators</a></li>
+            <li><a href="#unread-count" class="zeta padded-left">The unread count</a></li>
+            <li><a href="#chat-messages" class="zeta padded-left">Chat messages</a></li>
+            <li><a href="#implementing-tasks" class="zeta padded-left">Tasks</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div id="main-content" class="col-lg-9">
+      <!-- inject:content:md -->
+      <h1 id="building-a-chat-app-using-telepat">Building a chat app using Telepat</h1>
+<p>This tutorial will walk you through the most important parts of using Telepat to build a simple, realtime chat, with a bonus task management feature. You&#39;ll learn how to use Telepat to implement:</p>
+<ul>
+<li>a multi-user, 1-to-1, realtime chat</li>
+<li>allowing Facebook login</li>
+<li>with typing indicators</li>
+<li>with delivered/seen receipts</li>
+<li>with badges for unread messages from other threads</li>
+<li>with realtime tasks, that users can assign, complete and delete</li>
+</ul>
+<p>The app source code is available on <a href="https://github.com/telepat-io/telepat-demo">GitHub</a>, and you can also <a href="http://telepat-chat-demo.s3-website-us-west-1.amazonaws.com/">see it in action</a> in this demo instance we&#39;ve set up. It&#39;s plain JavaScript, depends on jQuery for DOM manipulation, and you should be familiar with <a href="http://gulpjs.com/">Gulp</a>, <a href="https://bower.io/">Bower</a> and <a href="http://stylus-lang.com/">Stylus</a> to build or modify the project.</p>
+<p>While this is a webapp, implemented using the <a href="http://docs.telepat.io/js-sdk.html">Telepat JavaScript SDK</a>, implementations look similar for native apps, using the <a href="http://docs.telepat.io/ios-sdk.html">iOS SDK</a> and the <a href="http://docs.telepat.io/android-sdk.html">Android SDK</a>.</p>
+<p>The main topics this tutorial will be covering are:</p>
+<ul>
+<li>Getting started with the server components</li>
+<li>Setting up your app</li>
+<li>Connecting Telepat</li>
+<li>Authenticating users</li>
+<li>Creating subscriptions and responding to updates</li>
+</ul>
+<h3 id="the-server-components">The server components</h3>
+<p>You have two options for this part:</p>
+<ul>
+<li>Roll your own. See the <a href="http://docs.telepat.io/install.html">install guide</a> to deploy locally or on your servers;</li>
+<li>Signup for a free cloud instance on the <a href="http://telepat.io">Telepat homepage</a>.</li>
+</ul>
+<h3 id="structuring-the-data">Structuring the data</h3>
+<h5 id="messages">Messages</h5>
+<p>The first kind of object we want to have in our app is the message. A message object should represent a single text message, sent from one user to another. We should also store some information about the message being delivered and seen.</p>
+<p><strong> The structure of a <code>message</code> object </strong></p>
+<table>
+<thead>
+<tr>
+<th>Key name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>received</td>
+<td>boolean</td>
+<td>True if recipient has received the message</td>
+</tr>
+<tr>
+<td>recipient_id</td>
+<td>user</td>
+<td>The user id of the recepient of the message</td>
+</tr>
+<tr>
+<td>seen</td>
+<td>boolean</td>
+<td>True if recipient has seen the message</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>The text of the message</td>
+</tr>
+</tbody>
+</table>
+<h5 id="chatrooms">Chatrooms</h5>
+<p>We also need to implement the typing indicator functionality. Let&#39;s create some other objects, that the two participants to a chat can both read and write, so they can communicate with each other. We&#39;ll call these chatrooms. </p>
+<p><strong> The structure of a <code>chatroom</code> object </strong></p>
+<table>
+<thead>
+<tr>
+<th>Key name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>participant_1</td>
+<td>user</td>
+<td>The user id of one of the participants</td>
+</tr>
+<tr>
+<td>participant_1</td>
+<td>user</td>
+<td>The user id of the other participant</td>
+</tr>
+<tr>
+<td>recipient_is_typing</td>
+<td>boolean</td>
+<td>True if recipient is currently typing</td>
+</tr>
+<tr>
+<td>sender_is_typing</td>
+<td>boolean</td>
+<td>True if sender is currently typing</td>
+</tr>
+</tbody>
+</table>
+<p>We&#39;ll also add a <code>belongsTo</code> relationship from messages to channels, so that we can subscribe to messages using a <code>parent</code> subscription rather than filters.</p>
+<h5 id="tasks">Tasks</h5>
+<p>Finally, we need object representing the tasks being assigned by users to other users. Much like messages, we use them to store data about who the recipient is, the text of the task and its completion status.</p>
+<p><strong> The structure of a <code>task</code> object </strong></p>
+<table>
+<thead>
+<tr>
+<th>Key name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>completed</td>
+<td>boolean</td>
+<td>True if recipient has completed the task</td>
+</tr>
+<tr>
+<td>recipient_id</td>
+<td>user</td>
+<td>The user id of the recepient of the task</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>The text associated with the task</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuring-your-app">Configuring your app</h3>
+<p>You need to do three things to have a functional app on the server side:</p>
+<ul>
+<li>Create the app;</li>
+<li>Set the schema;</li>
+<li>Create a collection.</li>
+</ul>
+<h5 id="if-using-the-telepat-dashboard-">If using the Telepat dashboard:</h5>
+<ul>
+<li>Navigate to your homescreen (the &#39;/apps&#39; route), and click on the add button, in the upper right corner.</li>
+<li>Enter an app name (like &#39;Telepat Chat&#39;), and press the save button (the checkmark in the upper right). But sure, why not also add an app icon, for good looks?</li>
+<li>You will be redirected to the schema page of your new app. Create the following schema:</li>
+</ul>
+<p><img src="http://docs.telepat.io/images/demo-schema.png" alt=""></p>
+<ul>
+<li>Go to the browse page of your app, and click the add button in the &#39;Collections&#39; column.</li>
+<li>Type in a name for this collection, and press the save button (the checkmark in the upper right).</li>
+<li>Get your <strong>collection identifier</strong>:</li>
+</ul>
+<p><img src="http://docs.telepat.io/images/demo-collection-id.png" alt=""></p>
+<ul>
+<li>Go to the settings page of your app, and get the <strong>app id</strong>:</li>
+</ul>
+<p><img src="http://docs.telepat.io/images/demo-app-id.png" alt=""></p>
+<ul>
+<li>Go to the &#39;Manage API keys&#39; panel of the app settings page, and get your app <strong>API key</strong>.</li>
+</ul>
+<h5 id="if-running-own-instance">If running own instance</h5>
+<p>Alternatively, you can setup your app using the Telepat CLI:</p>
+<pre><code>telepat add app --name APP_NAME --apiKey API_KEY
+telepat add context --contextName CONTEXT_NAME
+telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
+</code></pre><p>Here is the full schema object that needs to be set on the application:</p>
+<pre><code>{
+ &quot;chatroom&quot;:{
+    &quot;meta_read_acl&quot;:6,
+    &quot;properties&quot;:{
+       &quot;participant_1&quot;:{ &quot;type&quot;:&quot;user&quot; },
+       &quot;participant_2&quot;:{ &quot;type&quot;:&quot;user&quot; },
+       &quot;recipient_is_typing&quot;:{ &quot;type&quot;:&quot;bool&quot; },
+       &quot;sender_is_typing&quot;:{ &quot;type&quot;:&quot;bool&quot; }
+    },
+    &quot;read_acl&quot;:6,
+    &quot;write_acl&quot;:6
+ },
+ &quot;message&quot;:{
+    &quot;belongsTo&quot;:[{ &quot;parentModel&quot;:&quot;chatroom&quot; }],
+    &quot;meta_read_acl&quot;:6,
+    &quot;properties&quot;:{
+       &quot;received&quot;:{ &quot;type&quot;:&quot;bool&quot; },
+       &quot;recipient_id&quot;:{ &quot;type&quot;:&quot;user&quot; },
+       &quot;seen&quot;:{ &quot;type&quot;:&quot;bool&quot; },
+       &quot;text&quot;:{ &quot;type&quot;:&quot;string&quot;}
+    },
+    &quot;read_acl&quot;:6,
+    &quot;write_acl&quot;:6
+ },
+ &quot;task&quot;:{
+    &quot;meta_read_acl&quot;:6,
+    &quot;properties&quot;:{
+       &quot;completed&quot;:{ &quot;type&quot;:&quot;bool&quot; },
+       &quot;recipient_id&quot;:{ &quot;type&quot;:&quot;user&quot; },
+       &quot;text&quot;:{ &quot;type&quot;:&quot;string&quot; }
+    },
+    &quot;read_acl&quot;:6,
+    &quot;write_acl&quot;:6
+ }
+}
+</code></pre><h3 id="installing-and-running-the-demo">Installing and running the demo</h3>
+<ul>
+<li><p>Clone the GitHub repository:</p>
+<pre><code>git clone https://github.com/telepat-io/telepat-demo.git
+cd telepat-demo
+</code></pre></li>
+<li><p>Install npm and bower dependencies:</p>
+<pre><code>npm install &amp;&amp; bower install
+</code></pre></li>
+<li><p>Configure the app. 
+Rename <code>src/js/config.example.js</code> to <code>src/js/config.js</code>, and fill in data from the Telepat server instance:</p>
+<pre><code>var TelepatConfig = {
+  apiKey: &#39;APP-API-KEY&#39;,
+  appId: &#39;APP-ID&#39;,
+  apiEndpoint: &#39;API-URL&#39;,
+  socketEndpoint: &#39;SOCKET-URL&#39;,
+  timerInterval: 150,
+  collectionId: &#39;APP-MAIN-COLLECTION-ID&#39;,
+  facebookAppId: &#39;1743490645916155&#39;
+};
+</code></pre></li>
+<li><p>Run it using</p>
+<pre><code>gulp
+</code></pre></li>
+</ul>
+<h3 id="connecting-to-telepat">Connecting to Telepat</h3>
+<p>One of the first things the app does is connect to the Telepat instance:</p>
+<pre><code>window.TelepatInstance = new Telepat();
+window.TelepatInstance.setLogLevel(&#39;debug&#39;);
+window.TelepatInstance.connect(TelepatConfig);
+var callbackId = window.TelepatInstance.on(&#39;connect&#39;, function() {
+  window.TelepatInstance.removeCallback(&#39;connect&#39;, callbackId);
+  LoginController.render();
+});
+</code></pre><p>We&#39;re listening to the <code>connect</code> event, and registering a callback that we unregister on the first trigger - that is, when the client is connected. After connection succedes, we can go ahead and render the login controller.</p>
+<h3 id="authentication">Authentication</h3>
+<p>The Telepat SDK saves authentication tokens to local storage, so that client reloads can be done without requiring the user to log in each time. If a saved token is available, we should reauthenticate using that. If not, we should check our Facebook authentication status - if we get an authentication token back from Facebook, we can use that to log into Telepat.</p>
+<pre><code>if (window.TelepatInstance.user.canReauth) {
+  window.TelepatInstance.user.reauth();
+} else {
+  FB.getLoginStatus(function(response) {
+    if (response.status === &#39;connected&#39;) {
+      //Logs the user into Telepat using FB credentials (access_token)
+      window.TelepatInstance.user.loginWithFacebook(response.authResponse.accessToken);
+    } else {
+      $(&#39;#everything&#39;).load(&#39;login.html&#39;, null, LoginController.ready);
+    }
+  });
+}
+</code></pre><p>We also want to show the chat interface when the login is completed, so we listen for that event:</p>
+<pre><code>window.TelepatInstance.on(&#39;login&#39;, function() {
+  ChatController.render();
+});
+</code></pre><h3 id="subscribing-to-messages">Subscribing to messages</h3>
+<p>One of the first things the chat controller does is create three subscriptions:</p>
+<h5 id="users-list">Users list</h5>
+<ul>
+<li><p>First, to the application users. After getting the list of users, we can render the list of profiles in the left column. Anytime a new user is added, we update the interface by adding a new DOM element for that user.</p>
+<pre><code>ChatController.usersChannel = TelepatInstance.subscribe({
+  channel: {
+    model: &#39;user&#39;
+  },
+  sort: {
+    name: &#39;asc&#39;
+  }
+}, function() {
+  ChatController.updateUserList();
+  ChatController.usersChannel.on(&#39;update&#39;, function(opType, userId, object) {
+    if(opType == &#39;add&#39;)
+      ChatController.insertUser(object);
+  });
+});
+</code></pre></li>
+</ul>
+<h5 id="typing-indicators">Typing indicators</h5>
+<ul>
+<li><p>Next, a subscription to all messaging channels where the currently logged user is one of the participants.</p>
+<pre><code>ChatController.ChatroomChannel = TelepatInstance.subscribe({
+  channel: {
+    model: &#39;chatroom&#39;,
+    context: TelepatConfig.collectionId
+  },
+  filters: {
+    or: [
+      {
+        is: {
+          participant_1: TelepatInstance.user.data.id,
+        }
+      },
+      {
+        is: {
+          participant_2: TelepatInstance.user.data.id,
+        }
+      }
+    ]
+  }
+});
+</code></pre></li>
+<li><p>We use channel objects to store and transmit information about which user is currently typing.</p>
+<pre><code>ChatController.ChatroomChannel.on(&#39;update&#39;, function(opType, id, object, patch) {
+  //we&#39;re only interested in the chatrooms where I am a participant
+  if (ChatController.recipient &amp;&amp; (object.participant_1 == ChatController.recipient.id || object.participant_2 == ChatController.recipient.id)) {
+    if (opType == &#39;replace&#39;) {
+      //changes on this field name indicate when the other user is typing
+      var isTypingField = ChatController.currentChatroom.user_id == TelepatInstance.user.data.id ? &#39;recipient_is_typing&#39; : &#39;sender_is_typing&#39;;
+
+      if (isTypingField == patch.path) {
+        if (ChatController.ChatroomChannel.objects[id][patch.path] == true) {
+          // Create the dots typing indicator
+        }
+        else if (ChatController.ChatroomChannel.objects[id][patch.path] == false) {
+          // Remove the dots typing indicator
+        }
+      }
+    }
+  }
+});
+</code></pre></li>
+<li><p>We build methods to set typing information for the current user as well. Notice that we only need to set the proper value on the channel object - the change is picked up and signaled to Telepat by the SDK.</p>
+<pre><code>/**
+ * sends the is typing property on the chatroom that tells when the other participant has started typing
+ */
+sendIsTyping: function() {
+  var isTypingField = ChatController.currentChatroom.user_id == TelepatInstance.user.data.id ? &#39;sender_is_typing&#39; : &#39;recipient_is_typing&#39;;
+  ChatController.ChatroomChannel.objects[ChatController.currentChatroom.id][isTypingField] = true;
+  ChatController.isTypingTimeout = setTimeout(ChatController.clearIsTyping, 3000);
+},
+/**
+ * clears this flag when at least 3 seconds have passed since the last key pressed
+ */
+clearIsTyping: function() {
+  var isTypingField = ChatController.currentChatroom.user_id == TelepatInstance.user.data.id ? &#39;sender_is_typing&#39; : &#39;recipient_is_typing&#39;;
+  ChatController.ChatroomChannel.objects[ChatController.currentChatroom.id][isTypingField] = false;
+  clearTimeout(ChatController.isTypingTimeout);
+  ChatController.isTypingTimeout = null;
+},
+</code></pre></li>
+</ul>
+<h5 id="unread-count">Unread count</h5>
+<ul>
+<li><p>Finally, we subscribe to all incoming messages, then check for the <code>unseen</code> object property to see how many unread messages we have from each user:</p>
+<pre><code>ChatController.AllMessagesChannel = TelepatInstance.subscribe({
+  channel: {
+    model: &#39;message&#39;,
+    context: TelepatConfig.collectionId
+  },
+  filters: {
+    and: [
+      {
+        is: {
+          recipient_id: TelepatInstance.user.data.id,
+        }
+      }
+    ]
+  }
+}, function() {
+  //iterate through all messages, check for unseen
+  for (var messageId in ChatController.AllMessagesChannel.objects) {
+    // ...
+  }
+  //update all chat badges based on the unread counts
+});
+</code></pre></li>
+<li><p>Anytime a new message is received, we want to:</p>
+<ul>
+<li>Mark it as received (do this as soon as possible, even if the sender is not our current chat partner);</li>
+<li><p>Update the unread badge count, if necessary.</p>
+<pre><code>ChatController.AllMessagesChannel.on(&#39;update&#39;, function(opType, id, object, patch) {
+  //set the message to received while we&#39;re online, even if we&#39;re not on the right channel
+  object.received = true;
+  if (!ChatController.recipient || object.user_id !== ChatController.recipient.id) {
+    if (opType === &#39;add&#39;) {
+      //there&#39;s a new message from a user different than the one we&#39;re chatting with, update the badge count
+      if (!ChatController.badgeCount[object.user_id]) {
+        ChatController.badgeCount[object.user_id] = 1;
+      } else {
+        ChatController.badgeCount[object.user_id]++;
+      }
+      ChatController.updateBadgeCountForUser(object.user_id);
+      ChatController.newMessageSound.play();
+    }
+  }
+});
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h5 id="chat-messages">Chat messages</h5>
+<ul>
+<li><p>Anytime the user clicks on of the profiles in the left column, we subscribe to messages that correspond to the chatroom object shared by the two participants to the chat. After getting the ordered messages objects, we need to add them to the interface, and mark them as both delivered and seen.</p>
+<pre><code>ChatController.MessagesChannel = TelepatInstance.subscribe({
+  channel: {
+    model: &#39;message&#39;,
+    parent: {
+      model: &#39;chatroom&#39;,
+      id: chatroomId
+    }
+  },
+  sort: {
+    created: &#39;asc&#39;
+  }
+}, function() {
+  //inserting messages into the DOM from the initial subscribe
+  for(var msgId = 0; msgId &lt; ChatController.MessagesChannel.objectsArray.length; msgId++) {
+    var object = ChatController.MessagesChannel.objectsArray[msgId];
+
+    if (object.user_id == TelepatInstance.user.data.id)
+      ChatController.insertFromMessage(object);
+    else
+      ChatController.insertToMessage(object);
+
+    object.received = true;
+    object.seen = true;
+  }
+});
+</code></pre></li>
+<li><p>There are two types of relevant updates to MessagesChannel objects that we need to listen to:</p>
+<ul>
+<li>New messages coming in;</li>
+<li><p>Updates about existing messages becoming delivered/seen.</p>
+<pre><code>ChatController.MessagesChannel.on(&#39;update&#39;, function(opType, id, message, patch) {
+  if (opType == &#39;add&#39;) {
+    //messages sent by me are also signaled here, after the create request has been processed
+    if (message.user_id == TelepatInstance.user.data.id)  {
+      ChatController.insertFromMessage(message);
+    } //otherwise it&#39;s the from my partner
+    else {
+      //set this message as delivered
+      ChatController.MessagesChannel.objects[id].received = true;
+      ChatController.insertToMessage(message);
+
+      //also, if the input message element is in focus, we set the message as seen
+      if (document.activeElement.parentElement.id == &#39;message_input_container&#39;) {
+        ChatController.MessagesChannel.objects[ChatController.lastHisMessageId].seen = true;
+      }
+    }
+  } else if (opType == &#39;replace&#39;) {
+    //this is how we capture the &#39;received&#39; and &#39;seen&#39; changes on each message
+    if (patch.path == &#39;received&#39; &amp;&amp; ChatController.MessagesChannel.objects[id].user_id == TelepatInstance.user.data.id)
+      ChatController.setMessageDelivered(id);
+    else if (patch.path == &#39;seen&#39; &amp;&amp; ChatController.MessagesChannel.objects[id].user_id == TelepatInstance.user.data.id) {
+      ChatController.setSeen();
+    }
+  }
+});
+</code></pre></li>
+</ul>
+</li>
+<li><p>Creating a new message is really simple, just add it to the <code>objects</code> property of a channel, under a random, new key. </p>
+<p>The change will be picked up by the monitoring system, so the object will vanish from <code>objects</code> for the moment, to be re-added under the proper id when Telepat finishes processing the update and signals back to the client. We&#39;re already capturing and adding all new messages from subscribing to <code>update</code> before, so it boils down to:</p>
+<pre><code>ChatController.MessagesChannel.objects[&#39;new&#39;] = {
+  text: textMessage,
+  recipient_id: ChatController.recipient.id,
+  context_id: TelepatConfig.collectionId,
+  chatroom_id: ChatController.currentChatroom.id
+}
+</code></pre></li>
+</ul>
+<h5 id="implementing-tasks">Implementing tasks</h5>
+<ul>
+<li><p>Just like with messages, we first subscribe to the tasks we need, and then we update the interface. We&#39;ll use filters for this subscription:</p>
+<pre><code>TasksController[which] = TelepatInstance.subscribe({
+  channel: {
+    model: &#39;task&#39;,
+    context: TelepatConfig.collectionId
+  },
+  filters: {
+    and: [
+      {
+        is: {
+          user_id: where == &#39;from&#39; ? ChatController.recipient.id : TelepatInstance.user.data.id,
+        }
+      },
+      {
+        is: {
+          recipient_id: where == &#39;from&#39; ? TelepatInstance.user.data.id : ChatController.recipient.id
+        }
+      }
+    ]
+  }
+}, function() {
+  for(var id in TasksController[which].objects) {
+    var task = TasksController[which].objects[id];
+
+    TasksController.insertTask(task, where);
+  }
+});
+</code></pre></li>
+<li><p>We listen for update events on the channel, and we filter out 3 possible operations:</p>
+<ul>
+<li>A task property has been replaced, and that can be the <code>completed</code> key signaling a task has been completed</li>
+<li>A task has been added, and the UI needs updating</li>
+<li><p>A task has been deleted, and the UI needs updating</p>
+<pre><code>TasksController[which].on(&#39;update&#39;, function(opType, id, object, patch) {
+  if (opType == &#39;replace&#39;) {
+    //this happens when we click on the completed checkbox
+    if (patch.path == &#39;completed&#39;) {
+      // Update UI to indicate complete task
+    }
+  } else if (opType == &#39;add&#39;) {
+    // Insert the new task in the UI
+  //when tasks are deleted
+  } else if (opType == &#39;delete&#39;) {
+    // Remove task from UI
+  }
+});
+</code></pre></li>
+</ul>
+</li>
+<li><p>Adding a new task is as easy as adding a new message:</p>
+<pre><code>TasksController.TheirTasksChannel.objects[&#39;new&#39;] = {
+  text: taskText,
+  completed: false,
+  recipient_id: ChatController.recipient.id
+};
+</code></pre></li>
+<li><p>Completing a task means setting its <code>completed</code> property to true. The change will be propagated by the SDK and Telepat.</p>
+<pre><code>TasksController.MyTasksChannel.objects[id].completed = true;
+</code></pre></li>
+<li><p>And removing a task means deleting its object from the collection.</p>
+<pre><code>delete TasksController.MyTasksChannel.objects[id];
+</code></pre></li>
+</ul>
+
+      <!-- endinject -->
+    </div>
+  </div>
+</div>
+              <!-- endinject -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- build:js(./app/) scripts/vendor.min.js-->
+  <!-- endbuild-->
+  <!-- build:js scripts/plugins.min.js-->
+  <!-- endbuild-->
+  <!-- build:js(.tmp) scripts/main.min.js-->
+  <!-- endbuild-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+  <script src="/scripts/require.config.js"></script>
+  <script src="scripts/menu-highlight.js"></script>
+  <script src="scripts/github.js"></script>
+  <script src="scripts/image-zoom.js"></script><!-- inject:scripts -->
+  
+  <!-- endinject -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-21406959-6', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
