@@ -3,7 +3,7 @@
 require(['jquery', 'cookie', 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js'], function($, Cookies, hljs) {
   $('pre code').each(function(i, module) {
     $(this).css('visibility', 'visible');
-    $(this).addClass('javascript');
+    //$(this).addClass('javascript');
     hljs.highlightBlock(module);
   });
 

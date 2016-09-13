@@ -209,38 +209,40 @@
 <h2 id="schema">Schema</h2>
 <p>The application schema helps you structure and define the data your application will be working with. You&#39;ll use this structuring to filter through objects and subscribe to updates for specific data your app needs.</p>
 <p>The schema object is stored on the <code>schema</code> key of the application object. Each key in the schema represents a model and holds an object describing the model&#39;s properties. </p>
-<pre><code>app.schema = {
-    article: { // Model descriptor for the article model },
-    comment: { // Model descriptor for the comment model }
-}
-</code></pre><p>Here&#39;s a full example of a schema object:</p>
-<pre><code>schema: {  
-    chatroom: {  
-       meta_read_acl:7,
-       properties: {  
-            participant_1: {  type: &quot;user&quot; },
-            participant_2: {  type: &quot;user&quot; },
-            recipient_is_typing: {  type: &quot;bool&quot; },
-            sender_is_typing: {  type: &quot;bool&quot; }
-       },
-       read_acl:7,
-       write_acl:7
+<pre><code class="lang-js">app.schema = {
+  article: { /* Model descriptor for the article model */ },
+  comment: { /* Model descriptor for the comment model */ }
+};
+</code></pre>
+<p>Here&#39;s a full example of a schema object:</p>
+<pre><code class="lang-json">schema: {  
+  chatroom: {  
+    meta_read_acl:7,
+    properties: {  
+      participant_1: {  type: &quot;user&quot; },
+      participant_2: {  type: &quot;user&quot; },
+      recipient_is_typing: {  type: &quot;bool&quot; },
+      sender_is_typing: {  type: &quot;bool&quot; }
     },
-    message: {  
-       belongsTo: [ { parentModel: &quot;chatroom&quot; } ],
-       meta_read_acl:7,
-       properties: {  
-            received: { type:&quot;bool&quot; },
-            recipient_id: { type:&quot;user&quot; },
-            seen: { type:&quot;bool&quot; },
-            text: {  type:&quot;string&quot; }
-       },
-       read_acl:7,
-       write_acl:7,
-       ios_push_field:&quot;text&quot;
-    }
- }
-</code></pre><h3 id="models">Models</h3>
+    read_acl:7,
+    write_acl:7
+  },
+  message: {  
+    belongsTo: [ { parentModel: &quot;chatroom&quot; } ],
+    meta_read_acl:7,
+    properties: {  
+      received: { type:&quot;bool&quot; },
+      recipient_id: { type:&quot;user&quot; },
+      seen: { type:&quot;bool&quot; },
+      text: {  type:&quot;string&quot; }
+    },
+    read_acl:7,
+    write_acl:7,
+    ios_push_field:&quot;text&quot;
+  }
+}
+</code></pre>
+<h3 id="models">Models</h3>
 <p>Every object within Telepat belongs to one of a series of admin defined object categories - the models. The main structure of a model descriptor is:</p>
 <table>
 <thead>
@@ -272,14 +274,15 @@
 </tr>
 </tbody>
 </table>
-<pre><code>{
-    properties: { /* Descriptor for model key properties */ },
-    belongsTo: [ /* Array of &#39;belongs to&#39; relationships */ ],
-    meta_read_acl: 7, /* Permissions for access to metadata like object count */
-    read_acl: 7, /* Permissions for reading objects of this type */
-    write_acl: 7 /* Permissions fore updating/deleting objects of this type */
+<pre><code class="lang-json">{
+  properties: { /* Descriptor for model key properties */ },
+  belongsTo: [ /* Array of &#39;belongs to&#39; relationships */ ],
+  meta_read_acl: 7, /* Permissions for access to metadata like object count */
+  read_acl: 7, /* Permissions for reading objects of this type */
+  write_acl: 7 /* Permissions fore updating/deleting objects of this type */
 }
-</code></pre><p>There are some model names that are special and reserved:</p>
+</code></pre>
+<p>There are some model names that are special and reserved:</p>
 <table>
 <thead>
 <tr>
@@ -309,29 +312,31 @@
 <h3 id="properties">Properties</h3>
 <p>This is metadata, defining properties that keys set on the current object may have. Keys defined here are not limitative to object structure - any non-system key can be used to store data, and there&#39;s no validation being performed as of 0.4.1.</p>
 <p>Each key name is stored as a key of <code>app.schema.model.properties</code> and the value is an object storing the metadata about the respective key.</p>
-<pre><code>application.schema.article.properties = {
-    title: {
-        type: &#39;string&#39;
-    },
-    content: {
-        type: &#39;html&#39;
-    },
-    published: {
-        type: &#39;boolean&#39;
-    }
+<pre><code class="lang-json">application.schema.article.properties = {
+  title: {
+    type: &#39;string&#39;
+  },
+  content: {
+    type: &#39;html&#39;
+  },
+  published: {
+    type: &#39;boolean&#39;
+  }
 }
-</code></pre><h3 id="relationships">Relationships</h3>
+</code></pre>
+<h3 id="relationships">Relationships</h3>
 <p>In order for Telepat to properly dispatch data updates to subscribers with specific filters, you need to define relationships between objects (using the application schema). As of 0.4.1, only the <code>belongs to</code> relationship is implemented.</p>
 <h5 id="the-belongs-to-relationship">The <code>belongs to</code> relationship</h5>
 <p>The object has a unique parent object within the same collection, but belonging to another model. This affects subscriptions with <code>parent</code> options.</p>
 <p>Objects that define this kind of relationship with another model have a system-managed key named <code>#model#_id</code>, pointing to the parent object.</p>
 <p>You can add multiple <code>belongs to</code> relationships on a single model. Populate the <code>application.schema.model.key.belongsTo</code> array to define relationships:</p>
-<pre><code>application.schema.comment.belongsTo = [
-    {
-        parentModel: &quot;article&quot;
-    }
+<pre><code class="lang-js">application.schema.comment.belongsTo = [
+  {
+    parentModel: &quot;article&quot;
+  }
 ];
-</code></pre><h3 id="permissions">Permissions</h3>
+</code></pre>
+<h3 id="permissions">Permissions</h3>
 <p>Permission keys allow defining read, write and &#39;meta&#39; access levels for each Telepat object belonging to a certain model. Defined permission types are:</p>
 <ul>
 <li><strong>read</strong>, meaning the object can be retrieved and subscribed to</li>
@@ -372,11 +377,12 @@
 </tr>
 </tbody>
 </table>
-<pre><code>application.schema.comment.read_acl = 15 // any client can read this
+<pre><code class="lang-js">application.schema.comment.read_acl = 15 // any client can read this
 application.schema.comment.meta_read_acl = 6 // only logged in users and admins
 application.schema.comment.write_acl = 4 // admins only
 application.schema.article.write_acl = 8 // authors only
-</code></pre><h2 id="objects">Objects</h2>
+</code></pre>
+<h2 id="objects">Objects</h2>
 <p>All Telepat data is stored within objects, with JSON as the data format of choice. Every object belongs to a model (as defined in the application schema) and to a collection.</p>
 <p>You can store data on any key of the object, but some keys are reserved and managed by the system.</p>
 <p><strong>System object keys</strong></p>
@@ -578,38 +584,41 @@ application.schema.article.write_acl = 8 // authors only
 </tbody>
 </table>
 <p>Here is a simple subscription to all of the articles within a collection:</p>
-<pre><code>{
-    channel: {
-        context: &#39;collection-unique-identifier&#39;,
-        model: &#39;article&#39;
-    }
+<pre><code class="lang-js">{
+  channel: {
+    context: &#39;collection-unique-identifier&#39;,
+    model: &#39;article&#39;
+  }
 }
-</code></pre><p>Here is a subscription to all of the comments on a specific article:</p>
-<pre><code>{
-    channel: {
-        context: &#39;collection-unique-identifier&#39;,
-        model: &#39;comment&#39;,
-        parent: {
-            id: &#39;article-id&#39;,
-            model: &#39;article&#39;
-        }
+</code></pre>
+<p>Here is a subscription to all of the comments on a specific article:</p>
+<pre><code class="lang-js">{
+  channel: {
+    context: &#39;collection-unique-identifier&#39;,
+    model: &#39;comment&#39;,
+    parent: {
+      id: &#39;article-id&#39;,
+      model: &#39;article&#39;
     }
+  }
 }
-</code></pre><p>And a subscription to all comments from a specific user:</p>
-<pre><code>{
-    channel: {
-        context: &#39;collection-unique-identifier&#39;,
-        model: &#39;comment&#39;,
-        user: &#39;author-user-id&#39;
-    }
+</code></pre>
+<p>And a subscription to all comments from a specific user:</p>
+<pre><code class="lang-js">{
+  channel: {
+    context: &#39;collection-unique-identifier&#39;,
+    model: &#39;comment&#39;,
+    user: &#39;author-user-id&#39;
+  }
 }
-</code></pre><h3 id="filters">Filters</h3>
+</code></pre>
+<h3 id="filters">Filters</h3>
 <p>You can expand on the basic queries that a channel allows you to perform using filters. You can define property-level logical conditions that objects must match to become part of the subscription.</p>
 <p>There are 3 elementary types of filters implemented: <strong>is</strong>, <strong>range</strong> and <strong>like</strong>. You can place any of them under a <strong>not</strong> negation, and connect them using <strong>and</strong> and <strong>or</strong> operators.</p>
 <h5 id="-and-and-or-operators"><code>and</code> and <code>or</code> operators</h5>
 <p>Start your filter with one of these two connectors. Both are arrays that can contain filters, <code>not</code> filters or other connectors like themselves, to allow defining complex queries.</p>
 <p>Here is the simplest filter, that checks for objects with the <code>recipient_id</code> key equal to a specific user id:</p>
-<pre><code>sub.filters = {
+<pre><code class="lang-js">sub.filters = {
   and: [
     {
       is: {
@@ -618,40 +627,45 @@ application.schema.article.write_acl = 8 // authors only
     }
   ]
 }
-</code></pre><h5 id="-is-filter"><code>is</code> filter</h5>
+</code></pre>
+<h5 id="-is-filter"><code>is</code> filter</h5>
 <p>Use this to look for an object property equal to a specific value. For example:</p>
-<pre><code>{
+<pre><code class="lang-js">{
   is: {
     queried_key: &#39;queried value&#39;
   }
 }
-</code></pre><h5 id="-range-filter"><code>range</code> filter</h5>
+</code></pre>
+<h5 id="-range-filter"><code>range</code> filter</h5>
 <p>Use this to look for an object property that&#39;s within a range of acceptable values. For example:</p>
-<pre><code>{
+<pre><code class="lang-js">{
   range: {
     queried_key: {
-        gte: &#39;queried_key must be bigger than this value&#39;,
-        lte: &#39;queried_key must be lower than this value&#39;
+      gte: &#39;queried_key must be bigger than this value&#39;,
+      lte: &#39;queried_key must be lower than this value&#39;
     }
   }
 }
-</code></pre><h5 id="-like-filter"><code>like</code> filter</h5>
+</code></pre>
+<h5 id="-like-filter"><code>like</code> filter</h5>
 <p>Use this to look for an object property that contains a specific value. For example:</p>
-<pre><code>{
+<pre><code class="lang-js">{
   like: {
     queried_key: &#39;queried contained value&#39;
   }
 }
-</code></pre><h5 id="-not-filter"><code>not</code> filter</h5>
+</code></pre>
+<h5 id="-not-filter"><code>not</code> filter</h5>
 <p>Use this in combination with the filters above to create negative statements. Simply wrap the filter within a <code>not</code> container, like this:</p>
-<pre><code>{
+<pre><code class="lang-js">{
   not: {
     is: {
       queried_key: &#39;queried value&#39;
     }
   }
 }
-</code></pre><h3 id="sorting">Sorting</h3>
+</code></pre>
+<h3 id="sorting">Sorting</h3>
 <p>The sorting object has key names equal to the object key that should be used for sorting. The value of these keys is an object describing the sort operation.</p>
 <table>
 <thead>
@@ -688,7 +702,7 @@ application.schema.article.write_acl = 8 // authors only
 </tbody>
 </table>
 <p>Example:</p>
-<pre><code>sub.sort = {
+<pre><code class="lang-js">sub.sort = {
   key_name: {
     order: &quot;asc&quot;
   },
@@ -701,7 +715,8 @@ application.schema.article.write_acl = 8 // authors only
     }
   }
 }
-</code></pre><h3 id="pagination">Pagination</h3>
+</code></pre>
+<h3 id="pagination">Pagination</h3>
 <p>Set the <code>offset</code> and <code>limit</code> keys to adjust the padding of the results that the subscription returns. The default value for the <code>limit</code> key is 64.</p>
 
       <!-- endinject -->

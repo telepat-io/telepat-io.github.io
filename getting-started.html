@@ -83,7 +83,7 @@
 <p>As opposed to traditional APIs that serve still snapshots of application data to clients, you use the Telepat API to create and manage subscriptions. Subscribtions work similarly to classic <code>get</code> requests, in that they respond by sending the client the initial state of the queried data. But subscribing to a set of objects also means that the client will get notified (via additional channels like websockets and push notifications) when any value within those objects is changed, and changes will be immediately merged into client state.</p>
 <p>Before starting to design your Telepat app, get up to date with the <a href="http://docs.telepat.io/data-fundamentals.html">data fundamentals »</a>.</p>
 <h3 id="deploying-telepat">Deploying Telepat</h3>
-<p>Telepat is open source software, so you can install it on your own hardware. You can boot up dependencies and Telepat services individually, or use the available Docker Compose files. Read all about it in the <a href="/installation.html">installation guide »</a>.</p>
+<p>Telepat is open source software, so you can install it on your own hardware. You can boot up dependencies and Telepat services individually, or use the available Docker Compose files. Read all about it in the <a href="http://docs.telepat.io/installation.html">installation guide »</a>.</p>
 <h3 id="developing-with-telepat">Developing with Telepat</h3>
 <ul>
 <li>Use the Telepat API to register with the backend, authenticate users and create subscriptions. The Telepat API is complemented by push transports, like websockets or mobile push notifications. Read more in the <a href="http://docs.telepat.io/working-with-telepat.html">API guide »</a>.</li>

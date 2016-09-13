@@ -90,17 +90,19 @@
 <h3 id="api-basics">API Basics</h3>
 <p>You operate with Telepat by sending requests to the API endpoint. You can see a full list of supported methods, along with details about creating requests in the <a href="http://docs.telepat.io/api-docs.html">API reference</a>.</p>
 <p>A success response from the API has the following structure:</p>
-<pre><code>{
+<pre><code class="lang-json">{
   &quot;status&quot;: ..., // Operation result status code - usually, 200 or 202 for success
   &quot;content&quot;: ... // Content can be a string, Object or Array, depending on the operation
 }
-</code></pre><p>An error response from the API has the following structure:</p>
-<pre><code>{
+</code></pre>
+<p>An error response from the API has the following structure:</p>
+<pre><code class="lang-json">{
   &quot;status&quot;: ..., // Operation error status code
   &quot;code&quot;: ..., // The code of the error encountered while processing operation
   &quot;message&quot;: ... // String describing encountered error
 }
-</code></pre><h3 id="authentication">Authentication</h3>
+</code></pre>
+<h3 id="authentication">Authentication</h3>
 <p>Some routes require sending additional authentication header parameters in order to work. These parameters are:</p>
 <table>
 <thead>
@@ -195,13 +197,14 @@
 </ul>
 </li>
 <li><p>After registration, if the socket transport is required, you need to connect to the socket endpoint and then send a <code>bind_device</code> message to the server, with the following content:</p>
+<pre><code class="lang-json">  {
+    device_id: &#39;DEVICE-ID&#39;, // Set this to the UDID received from Telepat on first registration
+    application_id: &#39;APPLICATION-ID&#39; // Set this to the id of the connected app
+  }
+</code></pre>
 </li>
 </ul>
-<pre><code>{
-  device_id: &#39;DEVICE-ID&#39;, // Set this to the UDID received from Telepat on first registration
-  application_id: &#39;APPLICATION-ID&#39; // Set this to the id of the connected app
-}
-</code></pre><h3 id="update-notifications">Update notifications</h3>
+<h3 id="update-notifications">Update notifications</h3>
 <p>When objects that fall within one of a device&#39;s subscriptions are updated, the Telepat backend sends patches back to subscribers, containing deltas that describe the updates made. This allows clients to synchronize their local state with the global one at all times.</p>
 <p>Depending on the transport channels that were set as active during device registration, you can receive the patches via push notifications (for mobile devices), or via websockets. If using websockets, patches will be sent together with the <code>message</code> event, so you need to create a listener for that specific event.</p>
 <p>The structure of a patch object is:</p>
@@ -288,7 +291,7 @@
 </tbody>
 </table>
 <p>Example of an update notification containing a newly created object:</p>
-<pre><code>{
+<pre><code class="lang-json">{
    &quot;data&quot;:{
       &quot;new&quot;:[
          {
@@ -312,20 +315,15 @@
             &quot;timestamp&quot;:1473175082952686
          }
       ],
-      &quot;updated&quot;:[
-
-      ],
-      &quot;deleted&quot;:[
-
-      ]
+      &quot;updated&quot;:[],
+      &quot;deleted&quot;:[]
    }
 }
-</code></pre><p>Example of an update notification containing data updates:</p>
-<pre><code>{
+</code></pre>
+<p>Example of an update notification containing data updates:</p>
+<pre><code class="lang-json">{
    &quot;data&quot;:{
-      &quot;new&quot;:[
-
-      ],
+      &quot;new&quot;:[],
       &quot;updated&quot;:[
          {
             &quot;op&quot;:&quot;update&quot;,
@@ -341,20 +339,15 @@
             }
          }
       ],
-      &quot;deleted&quot;:[
-
-      ]
+      &quot;deleted&quot;:[]
    }
 }
-</code></pre><p>Example of an update notification containing deleted objects:</p>
-<pre><code>{
+</code></pre>
+<p>Example of an update notification containing deleted objects:</p>
+<pre><code class="lang-json">{
    &quot;data&quot;:{
-      &quot;new&quot;:[
-
-      ],
-      &quot;updated&quot;:[
-
-      ],
+      &quot;new&quot;:[],
+      &quot;updated&quot;:[],
       &quot;deleted&quot;:[
          {
             &quot;op&quot;:&quot;delete&quot;,
@@ -379,7 +372,8 @@
       ]
    }
 }
-</code></pre><h3 id="configuring-push-notifications">Configuring push notifications</h3>
+</code></pre>
+<h3 id="configuring-push-notifications">Configuring push notifications</h3>
 <p>To activate persistent transports for mobile devices, Telepat needs to be configured to talk with push notification service providers, like Apple&#39;s APN servers and GCM servers. </p>
 <p>Credentials are stored on each individual Telepat app, using the app object that can be accessed and modified by administrators. To do this:</p>
 <ul>

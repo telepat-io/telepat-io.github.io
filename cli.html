@@ -86,21 +86,24 @@
 <h3 id="cli-basics">CLI Basics</h3>
 <p>The Telepat CLI is available as an npm package that can be installed globally and used as a system command. The CLI aims to provide a tools for the initial configuration of a Telepat instance, before any client apps or dashboards are connected to it.</p>
 <p>The usage syntax is documented below. Please note that any parameter value that is used often can be globally set and can then be omitted from the command, like below:</p>
-<pre><code>    telepat add context --appId 1234 --contextName &quot;New context&quot;
-    telepat set appId 1234
-    telepat add context --contextName &quot;New context&quot;
-</code></pre><p>Also, values are automatically remembered when creating new resources. For example, if you use the CLI to create a new admin user, that user will be automatically be used in subsequent calls without the need to specify the credentials each time. In order to see all of the currently globally set values, use the &quot;list configs&quot; command:</p>
-<pre><code>    telepat list configs
-</code></pre><h3 id="available-commands">Available commands</h3>
+<pre><code class="lang-bash">telepat add context --appId 1234 --contextName &quot;New context&quot;
+telepat set appId 1234
+telepat add context --contextName &quot;New context&quot;
+</code></pre>
+<p>Also, values are automatically remembered when creating new resources. For example, if you use the CLI to create a new admin user, that user will be automatically be used in subsequent calls without the need to specify the credentials each time. In order to see all of the currently globally set values, use the &quot;list configs&quot; command:</p>
+<pre><code class="lang-bash">telepat list configs
+</code></pre>
+<h3 id="available-commands">Available commands</h3>
 <ul>
 <li><p><strong>configure</strong></p>
 <ul>
 <li><p><strong>elasticsearch</strong></p>
 <p>This command will create and configure an Elasticsearch index to be used with Telepat. Prior to calling this, you should run </p>
-<pre><code>  telepat set elasticsearch_host &lt;es host&gt;
+<pre><code class="lang-bash">  telepat set elasticsearch_host &lt;es host&gt;
   telepat set elasticsearch_port &lt;es port&gt;
   telepat configure elasticsearch
-</code></pre></li>
+</code></pre>
+</li>
 </ul>
 </li>
 <li><p><strong>set</strong></p>

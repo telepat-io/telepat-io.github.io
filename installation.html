@@ -134,33 +134,44 @@
 </ul>
 <p>You can find installation instructions for all components on their respective website.</p>
 <p>Alternatively, we provide Docker Compose files to accelerate deployment. The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have <a href="https://docs.docker.com/installation/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a> installed on your machine, here are the steps to get dependencies running:</p>
-<pre><code>git clone https://github.com/telepat-io/telepat-docker-compose-files
+<pre><code class="lang-bash">git clone https://github.com/telepat-io/telepat-docker-compose-files
 cd telepat-docker-compose-files/shared
 sudo docker-compose up
-</code></pre><p>This will start up all the infrastructure components.</p>
+</code></pre>
+<p>This will start up all the infrastructure components.</p>
 <h3 id="configuring-dependencies">Configuring dependencies</h3>
 <p>Telepat needs to create an Elasticsearch index and a series of mappings next. To help you to this, as well as other management tasks, there&#39;s a npm package that you can install:</p>
-<pre><code>npm install telepat-cli
-telepat set elasticsearch_host ES_HOST // Run these 2 if Docker is not running on localhost
-telepat set elasticsearch_port ES_PORT // Mac or Windows, for example
+<pre><code class="lang-bash">npm install telepat-cli
+
+# Run these 2 if Docker is not running on localhost
+# Mac or Windows, for example
+telepat set elasticsearch_host ES_HOST 
+telepat set elasticsearch_port ES_PORT
+
 telepat configure elasticsearch
-</code></pre><p>The default hostname is locahost, and the default port is 9200. If running via docker-machine, you can get the host ip by running <code>docker-machine ip default</code>.</p>
+</code></pre>
+<p>The default hostname is locahost, and the default port is 9200. If running via docker-machine, you can get the host ip by running <code>docker-machine ip default</code>.</p>
 <h3 id="install-with-docker">Install with Docker</h3>
 <p>Next, you need to launch the Telepat API and all the other services:</p>
-<pre><code>cd telepat-docker-compose-files/telepat
+<pre><code class="lang-bash">cd telepat-docker-compose-files/telepat
 sudo docker-compose up
-</code></pre><p>Right now everything should be up and running. The API instance is available on the same IP as your docker machine.</p>
+</code></pre>
+<p>Right now everything should be up and running. The API instance is available on the same IP as your docker machine.</p>
 <p>The default ports are 3000 for the API and 80 for the websocket service.</p>
 <h3 id="install-from-github">Install from GitHub</h3>
 <p>The Telepat backend stack is made up of two components, that will each need configuration when installed from source:</p>
 <ul>
 <li><p>The API (<a href="https://github.com/telepat-io/telepat-api">https://github.com/telepat-io/telepat-api</a>). To start this, simply run</p>
-<pre><code>./bin/www
-</code></pre><p>You can also set the PORT environment variable to make the API listen on a port different than the default 3000.</p>
+<pre><code class="lang-bash">./bin/www
+</code></pre>
 </li>
+</ul>
+<p>You can also set the PORT environment variable to make the API listen on a port different than the default 3000.</p>
+<ul>
 <li><p>The services (<a href="https://github.com/telepat-io/telepat-worker">https://github.com/telepat-io/telepat-worker</a>). To start, run</p>
-<pre><code>node index.js -t topic_name -i worker_index
-</code></pre><p>For built-in services, these are the commands to start up:</p>
+<pre><code class="lang-bash">node index.js -t topic_name -i worker_index
+</code></pre>
+<p>For built-in services, these are the commands to start up:</p>
 <ul>
 <li>node telepat-worker/index.js -t aggregation -i 0</li>
 <li>node telepat-worker/index.js -t write -i 0</li>
@@ -180,33 +191,37 @@ sudo docker-compose up
 <li>main_database: The adapter type that will be used for the persistent object storage (use &quot;ElasticSearch&quot; to use an ElasticSearch cluster for storage)</li>
 <li>message_queue: The adapter type that will be used for the message queue system (use &quot;amqp&quot; or &quot;kafka&quot;)</li>
 <li><p>logger: Telepat uses <a href="https://github.com/winstonjs/winston">Winston</a> for logging activity and error data. Place a Winston configuration object on this key in order to configure logging. Example:</p>
-<pre><code>&quot;logger&quot;: {
+<pre><code class="lang-json">&quot;logger&quot;: {
     &quot;type&quot;: &quot;Console&quot;,
     &quot;settings&quot;: {
       &quot;level&quot;: &quot;info&quot;
     }
-}
-</code></pre></li>
+};
+</code></pre>
+</li>
 <li><p>ElasticSearch: Configuration information for the Elasticsearch adapter. You can specify all the nodes in the cluster using the &quot;hosts&quot; array. If your cluster has auto-discovery configured you can specify a &quot;host&quot; and &quot;port&quot; set of keys and the rest of the cluster nodes will be dynamically found and used. Example:</p>
-<pre><code>&quot;ElasticSearch&quot;: {
+<pre><code class="lang-json">&quot;ElasticSearch&quot;: {
     &quot;hosts&quot;: [&quot;172.31.49.149:9200&quot;],
     &quot;index&quot;: &quot;default&quot;
-}
-</code></pre></li>
+};
+</code></pre>
+</li>
 <li><p>redis: Configuration information for the redis instance, used by Telepat to hold subscription and device information. Example:</p>
-<pre><code>&quot;redis&quot;: {
+<pre><code class="lang-json">&quot;redis&quot;: {
     &quot;host&quot;: &quot;172.31.49.149&quot;,
     &quot;port&quot;: 6379
-}
-</code></pre></li>
+};
+</code></pre>
+</li>
 <li><p>redisCache: Configuration information for the redis instance used for data caching (such as count calls results). You can use the same instance as for state information, or a separate one, for distributing load.</p>
-<pre><code>&quot;redisCache&quot;: {
+<pre><code class="lang-json">&quot;redisCache&quot;: {
     &quot;host&quot;: &quot;172.31.49.149&quot;,
     &quot;port&quot;: 6379
-}
-</code></pre></li>
+};
+</code></pre>
+</li>
 <li><p>login_providers: Configuration information for facebook and twitter login providers.</p>
-<pre><code>&quot;login_providers&quot;: {
+<pre><code class="lang-json">&quot;login_providers&quot;: {
     &quot;facebook&quot;: {
       &quot;client_id&quot;: &quot;&quot;,
       &quot;client_secret&quot;: &quot;&quot;
@@ -215,28 +230,34 @@ sudo docker-compose up
       &quot;consumer_key&quot;: &quot;&quot;,
       &quot;consumer_secret&quot;: &quot;&quot;
     }
-}
-</code></pre><p>Note: for configuring this setting on your Telepat Cloud instance, send us a request to <a href="mailto:support@telepat.io">support@telepat.io</a></p>
+};
+</code></pre>
 </li>
+</ul>
+<p><strong>Note</strong>: for configuring this setting on your Telepat Cloud instance, send us a request to <a href="mailto:support@telepat.io">support@telepat.io</a></p>
+<ul>
 <li><p>amqp: Configuration information for the AMQP queue adapter (RabbitMQ or ActiveMQ). Example:</p>
-<pre><code>&quot;amqp&quot;: {
+<pre><code class="lang-json">&quot;amqp&quot;: {
     &quot;host&quot;: &quot;172.31.49.149&quot;,
     &quot;user&quot;: &quot;guest&quot;,
     &quot;password&quot;: &quot;guest&quot;
-}
-</code></pre></li>
+};
+</code></pre>
+</li>
 <li><p>password_salt: A password salt used by bcrypt to secure user passwords against dictionary attacks. The hash has the following format: <code>$&lt;id&gt;$&lt;cost&gt;$&lt;salt&gt;&lt;digest&gt;</code> and can be generated in bash using the commands below:</p>
-<pre><code>node
+<pre><code class="lang-bash">node
 bcrypt = require(&#39;bcrypt&#39;)    
 bcrypt.genSaltSync()
-</code></pre></li>
+</code></pre>
+</li>
 <li><p>mandrill: Telepat uses Mandrill for sending transactional emails, such as account confirmation emails or password reset messages. The API key can be configured similarly to the following example:</p>
-<pre><code>&quot;mandrill&quot;: {
+<pre><code class="lang-json">&quot;mandrill&quot;: {
     &quot;api_key&quot;: &quot;&quot;
-}
-</code></pre><p>Note: for configuring this setting on your Telepat Cloud instance, send us a request to <a href="mailto:support@telepat.io">support@telepat.io</a></p>
+};
+</code></pre>
 </li>
 </ul>
+<p><strong>Note</strong>: for configuring this setting on your Telepat Cloud instance, send us a request to <a href="mailto:support@telepat.io">support@telepat.io</a></p>
 <p><strong>Environment variables</strong></p>
 <p>Alternatively, you can configure Telepat using environment variables. Here are the environment variables that you can set:</p>
 <ul>
@@ -259,17 +280,21 @@ bcrypt.genSaltSync()
 <p>After bootup, you need to create a new administration user account - Telepat CLI can help you setup your new app in no time. Here are the steps you need to take to create a new app:</p>
 <ul>
 <li><p>Register a new admin:</p>
-<pre><code>telepat add admin --email EMAIL --password PASSWORD
-</code></pre></li>
+<pre><code class="lang-bash">  telepat add admin --email EMAIL --password PASSWORD
+</code></pre>
+</li>
 <li><p>Create the app:</p>
-<pre><code>telepat add app --name APP_NAME --apiKey API_KEY
-</code></pre></li>
+<pre><code class="lang-bash">  telepat add app --name APP_NAME --apiKey API_KEY
+</code></pre>
+</li>
 <li><p>Create at least one context (as a container for your objects):</p>
-<pre><code>telepat add context --contextName CONTEXT_NAME
-</code></pre></li>
+<pre><code class="lang-bash">  telepat add context --contextName CONTEXT_NAME
+</code></pre>
+</li>
 <li><p>Create a schema file, and feed it into your app, so Telepat knows the types of objects you&#39;ll be working with. You need to have a schema that defines at the very least the types of objects; you can optionally also add information about object parameter names or relationships.</p>
-<pre><code>telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
-</code></pre></li>
+<pre><code class="lang-bash">telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
+</code></pre>
+</li>
 </ul>
 <h1 id="a-word-on-stability">A word on stability</h1>
 <p>Telepat is beta software. Although specific versions of Telepat are stable and running production applications right now, we are still in the stage of making design and interface decisions based on trials and feedback, so please keep in mind:</p>
