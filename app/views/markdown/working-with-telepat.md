@@ -6,18 +6,22 @@ You operate with Telepat by sending requests to the API endpoint. You can see a 
 
 A success response from the API has the following structure:
 
-    {
-      "status": ..., // Operation result status code - usually, 200 or 202 for success
-      "content": ... // Content can be a string, Object or Array, depending on the operation
-    }
+```json
+{
+  "status": ..., // Operation result status code - usually, 200 or 202 for success
+  "content": ... // Content can be a string, Object or Array, depending on the operation
+}
+```
 
 An error response from the API has the following structure:
 
-    {
-      "status": ..., // Operation error status code
-      "code": ..., // The code of the error encountered while processing operation
-      "message": ... // String describing encountered error
-    }
+```json
+{
+  "status": ..., // Operation error status code
+  "code": ..., // The code of the error encountered while processing operation
+  "message": ... // String describing encountered error
+}
+```
 
 ### Authentication
 Some routes require sending additional authentication header parameters in order to work. These parameters are:
@@ -57,11 +61,12 @@ To register a device with the Telepat backend, you need to follow a two step pro
 
 * After registration, if the socket transport is required, you need to connect to the socket endpoint and then send a `bind_device` message to the server, with the following content:
 
-
+    ```json
     {
       device_id: 'DEVICE-ID', // Set this to the UDID received from Telepat on first registration
       application_id: 'APPLICATION-ID' // Set this to the id of the connected app
     }
+    ```
 
 ### Update notifications
 When objects that fall within one of a device's subscriptions are updated, the Telepat backend sends patches back to subscribers, containing deltas that describe the updates made. This allows clients to synchronize their local state with the global one at all times.
@@ -93,101 +98,95 @@ The structure of a patch object is:
 
 Example of an update notification containing a newly created object:
 
-    {
-       "data":{
-          "new":[
-             {
-                "op":"create",
-                "object":{
-                   "image":null,
-                   "title":"text",
-                   "user":null,
-                   "user_id":"d34d6fc1-bfb7-438d-bba6-8685fec199b2",
-                   "type":"model",
-                   "context_id":"e50089d5-a4fc-4997-9eae-af7b7147c8f8",
-                   "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
-                   "id":"5fedc735-c0ac-4f48-85c2-7338048820c3",
-                   "created":1473175101,
-                   "modified":1473175101
-                },
-                "subscriptions":[
-                   "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
-                ],
-                "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
-                "timestamp":1473175082952686
-             }
-          ],
-          "updated":[
-
-          ],
-          "deleted":[
-
-          ]
-       }
-    }
+```json
+{
+   "data":{
+      "new":[
+         {
+            "op":"create",
+            "object":{
+               "image":null,
+               "title":"text",
+               "user":null,
+               "user_id":"d34d6fc1-bfb7-438d-bba6-8685fec199b2",
+               "type":"model",
+               "context_id":"e50089d5-a4fc-4997-9eae-af7b7147c8f8",
+               "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+               "id":"5fedc735-c0ac-4f48-85c2-7338048820c3",
+               "created":1473175101,
+               "modified":1473175101
+            },
+            "subscriptions":[
+               "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
+            ],
+            "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+            "timestamp":1473175082952686
+         }
+      ],
+      "updated":[],
+      "deleted":[]
+   }
+}
+```
 
 Example of an update notification containing data updates:
 
-    {
-       "data":{
-          "new":[
-
-          ],
-          "updated":[
-             {
-                "op":"update",
-                "subscriptions":[
-                   "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
-                ],
-                "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
-                "timestamp":1473175260988508,
-                "patch":{
-                   "op":"replace",
-                   "path":"model/5fedc735-c0ac-4f48-85c2-7338048820c3/title",
-                   "value":"changed text"
-                }
-             }
-          ],
-          "deleted":[
-
-          ]
-       }
-    }
+```json
+{
+   "data":{
+      "new":[],
+      "updated":[
+         {
+            "op":"update",
+            "subscriptions":[
+               "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
+            ],
+            "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+            "timestamp":1473175260988508,
+            "patch":{
+               "op":"replace",
+               "path":"model/5fedc735-c0ac-4f48-85c2-7338048820c3/title",
+               "value":"changed text"
+            }
+         }
+      ],
+      "deleted":[]
+   }
+}
+```
 
 Example of an update notification containing deleted objects:
 
-    {
-       "data":{
-          "new":[
-
-          ],
-          "updated":[
-
-          ],
-          "deleted":[
-             {
-                "op":"delete",
-                "object":{
-                   "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
-                   "context_id":"e50089d5-a4fc-4997-9eae-af7b7147c8f8",
-                   "created":1473175101,
-                   "id":"5fedc735-c0ac-4f48-85c2-7338048820c3",
-                   "image":null,
-                   "modified":1473175279,
-                   "title":"changed text",
-                   "type":"model",
-                   "user":null,
-                   "user_id":"d34d6fc1-bfb7-438d-bba6-8685fec199b2"
-                },
-                "subscriptions":[
-                   "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
-                ],
-                "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
-                "timestamp":1473175313919102
-             }
-          ]
-       }
-    }
+```json
+{
+   "data":{
+      "new":[],
+      "updated":[],
+      "deleted":[
+         {
+            "op":"delete",
+            "object":{
+               "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+               "context_id":"e50089d5-a4fc-4997-9eae-af7b7147c8f8",
+               "created":1473175101,
+               "id":"5fedc735-c0ac-4f48-85c2-7338048820c3",
+               "image":null,
+               "modified":1473175279,
+               "title":"changed text",
+               "type":"model",
+               "user":null,
+               "user_id":"d34d6fc1-bfb7-438d-bba6-8685fec199b2"
+            },
+            "subscriptions":[
+               "blg:5a42d57c-df7c-4a83-a921-7ab2f9f85ae7:context:e50089d5-a4fc-4997-9eae-af7b7147c8f8:model"
+            ],
+            "application_id":"5a42d57c-df7c-4a83-a921-7ab2f9f85ae7",
+            "timestamp":1473175313919102
+         }
+      ]
+   }
+}
+```
 
 ### Configuring push notifications
 To activate persistent transports for mobile devices, Telepat needs to be configured to talk with push notification service providers, like Apple's APN servers and GCM servers. 

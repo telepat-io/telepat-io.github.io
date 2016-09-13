@@ -8,7 +8,7 @@ As opposed to traditional APIs that serve still snapshots of application data to
 Before starting to design your Telepat app, get up to date with the [data fundamentals »](http://docs.telepat.io/data-fundamentals.html).
 
 ### Deploying Telepat
-Telepat is open source software, so you can install it on your own hardware. You can boot up dependencies and Telepat services individually, or use the available Docker Compose files. Read all about it in the [installation guide »](/installation.html).
+Telepat is open source software, so you can install it on your own hardware. You can boot up dependencies and Telepat services individually, or use the available Docker Compose files. Read all about it in the [installation guide »](http://docs.telepat.io/installation.html).
 
 ### Developing with Telepat
 * Use the Telepat API to register with the backend, authenticate users and create subscriptions. The Telepat API is complemented by push transports, like websockets or mobile push notifications. Read more in the [API guide »](http://docs.telepat.io/working-with-telepat.html).

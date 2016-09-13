@@ -41,39 +41,43 @@ The application schema helps you structure and define the data your application 
 
 The schema object is stored on the `schema` key of the application object. Each key in the schema represents a model and holds an object describing the model's properties. 
 
-    app.schema = {
-        article: { // Model descriptor for the article model },
-        comment: { // Model descriptor for the comment model }
-    }
+```js
+app.schema = {
+  article: { /* Model descriptor for the article model */ },
+  comment: { /* Model descriptor for the comment model */ }
+};
+```
 
 Here's a full example of a schema object:
 
-    schema: {  
-        chatroom: {  
-           meta_read_acl:7,
-           properties: {  
-                participant_1: {  type: "user" },
-                participant_2: {  type: "user" },
-                recipient_is_typing: {  type: "bool" },
-                sender_is_typing: {  type: "bool" }
-           },
-           read_acl:7,
-           write_acl:7
-        },
-        message: {  
-           belongsTo: [ { parentModel: "chatroom" } ],
-           meta_read_acl:7,
-           properties: {  
-                received: { type:"bool" },
-                recipient_id: { type:"user" },
-                seen: { type:"bool" },
-                text: {  type:"string" }
-           },
-           read_acl:7,
-           write_acl:7,
-           ios_push_field:"text"
-        }
-     }
+```json
+schema: {  
+  chatroom: {  
+    meta_read_acl:7,
+    properties: {  
+      participant_1: {  type: "user" },
+      participant_2: {  type: "user" },
+      recipient_is_typing: {  type: "bool" },
+      sender_is_typing: {  type: "bool" }
+    },
+    read_acl:7,
+    write_acl:7
+  },
+  message: {  
+    belongsTo: [ { parentModel: "chatroom" } ],
+    meta_read_acl:7,
+    properties: {  
+      received: { type:"bool" },
+      recipient_id: { type:"user" },
+      seen: { type:"bool" },
+      text: {  type:"string" }
+    },
+    read_acl:7,
+    write_acl:7,
+    ios_push_field:"text"
+  }
+}
+```
 
 ### Models
 Every object within Telepat belongs to one of a series of admin defined object categories - the models. The main structure of a model descriptor is:
@@ -86,14 +90,16 @@ Every object within Telepat belongs to one of a series of admin defined object c
 | read_acl           | Numeric bitmask representing permissions for reading objects of this type |
 | write_acl          | Numeric bitmask representing permissions fore updating/deleting objects of this type |
 
-    {
-        properties: { /* Descriptor for model key properties */ },
-        belongsTo: [ /* Array of 'belongs to' relationships */ ],
-        meta_read_acl: 7, /* Permissions for access to metadata like object count */
-        read_acl: 7, /* Permissions for reading objects of this type */
-        write_acl: 7 /* Permissions fore updating/deleting objects of this type */
-    }
-        
+```json
+{
+  properties: { /* Descriptor for model key properties */ },
+  belongsTo: [ /* Array of 'belongs to' relationships */ ],
+  meta_read_acl: 7, /* Permissions for access to metadata like object count */
+  read_acl: 7, /* Permissions for reading objects of this type */
+  write_acl: 7 /* Permissions fore updating/deleting objects of this type */
+}
+```
+
 There are some model names that are special and reserved:
 
 | Name               | Description |
@@ -108,17 +114,19 @@ This is metadata, defining properties that keys set on the current object may ha
 
 Each key name is stored as a key of `app.schema.model.properties` and the value is an object storing the metadata about the respective key.
 
-    application.schema.article.properties = {
-        title: {
-            type: 'string'
-        },
-        content: {
-            type: 'html'
-        },
-        published: {
-            type: 'boolean'
-        }
-    }
+```json
+application.schema.article.properties = {
+  title: {
+    type: 'string'
+  },
+  content: {
+    type: 'html'
+  },
+  published: {
+    type: 'boolean'
+  }
+}
+```
 
 ### Relationships
 In order for Telepat to properly dispatch data updates to subscribers with specific filters, you need to define relationships between objects (using the application schema). As of 0.4.1, only the `belongs to` relationship is implemented.
@@ -130,12 +138,14 @@ Objects that define this kind of relationship with another model have a system-m
 
 You can add multiple `belongs to` relationships on a single model. Populate the `application.schema.model.key.belongsTo` array to define relationships:
 
-    application.schema.comment.belongsTo = [
-        {
-            parentModel: "article"
-        }
-    ];
-    
+```js
+application.schema.comment.belongsTo = [
+  {
+    parentModel: "article"
+  }
+];
+```
+
 ### Permissions
 Permission keys allow defining read, write and 'meta' access levels for each Telepat object belonging to a certain model. Defined permission types are:
 
@@ -144,12 +154,13 @@ Permission keys allow defining read, write and 'meta' access levels for each Tel
 - **meta**, meaning access to model meta information. As of Telepat 0.4.1, the only meta information exposed is object count.
 
 Permission levels are (in increasing order of bit significance for the bitmask value set for the permission):
+
 - **unauthenticated**, for universal access. This corresponds to the least significant bit of the bitmask value created.
 - **authenticated**, for access based on registration with a Telepat user account.
 - **admin**, for administrator access.
 - **author**, for access given just to object authors. The authors are:
-  - the user that created the object;
-  - any other user whose id is stored within the object, on a key that's defined in the schema as having the `author` type.
+    - the user that created the object;
+    - any other user whose id is stored within the object, on a key that's defined in the schema as having the `author` type.
 
 The schema keys defining permissions are:
 
@@ -159,10 +170,12 @@ The schema keys defining permissions are:
 | write_acl          | Bitmask corresponding to the write permission levels |
 | meta_read_acl      | Bitmask corresponding to the meta read permission levels |
 
-    application.schema.comment.read_acl = 15 // any client can read this
-    application.schema.comment.meta_read_acl = 6 // only logged in users and admins
-    application.schema.comment.write_acl = 4 // admins only
-    application.schema.article.write_acl = 8 // authors only
+```js
+application.schema.comment.read_acl = 15 // any client can read this
+application.schema.comment.meta_read_acl = 6 // only logged in users and admins
+application.schema.comment.write_acl = 4 // admins only
+application.schema.article.write_acl = 8 // authors only
+```
 
 ## Objects
 All Telepat data is stored within objects, with JSON as the data format of choice. Every object belongs to a model (as defined in the application schema) and to a collection.
@@ -247,35 +260,41 @@ Defining a channel is required for creating the subscription. Here are the keys 
 
 Here is a simple subscription to all of the articles within a collection:
 
-    {
-        channel: {
-            context: 'collection-unique-identifier',
-            model: 'article'
-        }
-    }
+```js
+{
+  channel: {
+    context: 'collection-unique-identifier',
+    model: 'article'
+  }
+}
+```
 
 Here is a subscription to all of the comments on a specific article:
 
-    {
-        channel: {
-            context: 'collection-unique-identifier',
-            model: 'comment',
-            parent: {
-                id: 'article-id',
-                model: 'article'
-            }
-        }
+```js        
+{
+  channel: {
+    context: 'collection-unique-identifier',
+    model: 'comment',
+    parent: {
+      id: 'article-id',
+      model: 'article'
     }
+  }
+}
+```
 
 And a subscription to all comments from a specific user:
 
-    {
-        channel: {
-            context: 'collection-unique-identifier',
-            model: 'comment',
-            user: 'author-user-id'
-        }
-    }
+```js
+{
+  channel: {
+    context: 'collection-unique-identifier',
+    model: 'comment',
+    user: 'author-user-id'
+  }
+}
+```
 
 ### Filters
 You can expand on the basic queries that a channel allows you to perform using filters. You can define property-level logical conditions that objects must match to become part of the subscription.
@@ -287,56 +306,66 @@ Start your filter with one of these two connectors. Both are arrays that can con
 
 Here is the simplest filter, that checks for objects with the `recipient_id` key equal to a specific user id:
 
-    sub.filters = {
-      and: [
-        {
-          is: {
-            recipient_id: 'user-id',
-          }
-        }
-      ]
+```js
+sub.filters = {
+  and: [
+    {
+      is: {
+        recipient_id: 'user-id',
+      }
     }
+  ]
+}
+```
 
 ##### `is` filter
 Use this to look for an object property equal to a specific value. For example:
 
-    {
-      is: {
-        queried_key: 'queried value'
-      }
-    }
+```js
+{
+  is: {
+    queried_key: 'queried value'
+  }
+}
+```
 
 ##### `range` filter
 Use this to look for an object property that's within a range of acceptable values. For example:
 
-    {
-      range: {
-        queried_key: {
-            gte: 'queried_key must be bigger than this value',
-            lte: 'queried_key must be lower than this value'
-        }
-      }
+```js
+{
+  range: {
+    queried_key: {
+      gte: 'queried_key must be bigger than this value',
+      lte: 'queried_key must be lower than this value'
     }
+  }
+}
+```
 
 ##### `like` filter
 Use this to look for an object property that contains a specific value. For example:
 
-    {
-      like: {
-        queried_key: 'queried contained value'
-      }
-    }
+```js
+{
+  like: {
+    queried_key: 'queried contained value'
+  }
+}
+```
 
 ##### `not` filter
 Use this in combination with the filters above to create negative statements. Simply wrap the filter within a `not` container, like this:
 
-    {
-      not: {
-        is: {
-          queried_key: 'queried value'
-        }
-      }
+```js
+{
+  not: {
+    is: {
+      queried_key: 'queried value'
     }
+  }
+}
+```
 
 ### Sorting
 The sorting object has key names equal to the object key that should be used for sorting. The value of these keys is an object describing the sort operation.
@@ -352,19 +381,21 @@ The sorting object has key names equal to the object key that should be used for
 
 Example:
 
-    sub.sort = {
-      key_name: {
-        order: "asc"
-      },
-      geolocation: {
-        order: "asc",
-        type: "geo",
-        poi: {
-          lat: 0,
-          long: 0
-        }
-      }
+```js
+sub.sort = {
+  key_name: {
+    order: "asc"
+  },
+  geolocation: {
+    order: "asc",
+    type: "geo",
+    poi: {
+      lat: 0,
+      long: 0
     }
+  }
+}
+```
 
 ### Pagination
 Set the `offset` and `limit` keys to adjust the padding of the results that the subscription returns. The default value for the `limit` key is 64.

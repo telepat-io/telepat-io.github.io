@@ -57,9 +57,11 @@ You can find installation instructions for all components on their respective we
 
 Alternatively, we provide Docker Compose files to accelerate deployment. The recipes are separated in two components, shared dependencies and the actual Telepat software. Once you have [docker](https://docs.docker.com/installation/) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine, here are the steps to get dependencies running:
 
-    git clone https://github.com/telepat-io/telepat-docker-compose-files
-    cd telepat-docker-compose-files/shared
-    sudo docker-compose up
+```bash
+git clone https://github.com/telepat-io/telepat-docker-compose-files
+cd telepat-docker-compose-files/shared
+sudo docker-compose up
+```
 
 This will start up all the infrastructure components.
 
@@ -67,10 +69,16 @@ This will start up all the infrastructure components.
 
 Telepat needs to create an Elasticsearch index and a series of mappings next. To help you to this, as well as other management tasks, there's a npm package that you can install:
 
-    npm install telepat-cli
-    telepat set elasticsearch_host ES_HOST // Run these 2 if Docker is not running on localhost
-    telepat set elasticsearch_port ES_PORT // Mac or Windows, for example
-    telepat configure elasticsearch
+```bash
+npm install telepat-cli
+
+# Run these 2 if Docker is not running on localhost
+# Mac or Windows, for example
+telepat set elasticsearch_host ES_HOST 
+telepat set elasticsearch_port ES_PORT
+
+telepat configure elasticsearch
+```
 
 The default hostname is locahost, and the default port is 9200\. If running via docker-machine, you can get the host ip by running `docker-machine ip default`.
 
@@ -78,8 +86,10 @@ The default hostname is locahost, and the default port is 9200\. If running via 
 
 Next, you need to launch the Telepat API and all the other services:
 
-    cd telepat-docker-compose-files/telepat
-    sudo docker-compose up
+```bash
+cd telepat-docker-compose-files/telepat
+sudo docker-compose up
+```
 
 Right now everything should be up and running. The API instance is available on the same IP as your docker machine.
 
@@ -91,12 +101,17 @@ The Telepat backend stack is made up of two components, that will each need conf
 
 *   The API ([https://github.com/telepat-io/telepat-api](https://github.com/telepat-io/telepat-api)). To start this, simply run
 
-        ./bin/www
+    ```bash
+    ./bin/www
+    ```
 
-    You can also set the PORT environment variable to make the API listen on a port different than the default 3000.
+You can also set the PORT environment variable to make the API listen on a port different than the default 3000.
+
 *   The services ([https://github.com/telepat-io/telepat-worker](https://github.com/telepat-io/telepat-worker)). To start, run
 
-        node index.js -t topic_name -i worker_index
+    ```bash
+    node index.js -t topic_name -i worker_index
+    ```
 
     For built-in services, these are the commands to start up:
 
@@ -121,68 +136,86 @@ Depending on your specific workload and concurrency situations, you will find th
 *   message_queue: The adapter type that will be used for the message queue system (use "amqp" or "kafka")
 *   logger: Telepat uses [Winston](https://github.com/winstonjs/winston) for logging activity and error data. Place a Winston configuration object on this key in order to configure logging. Example:
 
-        "logger": {
-            "type": "Console",
-            "settings": {
-              "level": "info"
-            }
+    ```json
+    "logger": {
+        "type": "Console",
+        "settings": {
+          "level": "info"
         }
+    };
+    ```
 
 *   ElasticSearch: Configuration information for the Elasticsearch adapter. You can specify all the nodes in the cluster using the "hosts" array. If your cluster has auto-discovery configured you can specify a "host" and "port" set of keys and the rest of the cluster nodes will be dynamically found and used. Example:
 
-        "ElasticSearch": {
-            "hosts": ["172.31.49.149:9200"],
-            "index": "default"
-        }
+    ```json
+    "ElasticSearch": {
+        "hosts": ["172.31.49.149:9200"],
+        "index": "default"
+    };
+    ```
 
 *   redis: Configuration information for the redis instance, used by Telepat to hold subscription and device information. Example:
 
-        "redis": {
-            "host": "172.31.49.149",
-            "port": 6379
-        }
+    ```json
+    "redis": {
+        "host": "172.31.49.149",
+        "port": 6379
+    };
+    ```
 
 *   redisCache: Configuration information for the redis instance used for data caching (such as count calls results). You can use the same instance as for state information, or a separate one, for distributing load.
 
-        "redisCache": {
-            "host": "172.31.49.149",
-            "port": 6379
-        }
+    ```json
+    "redisCache": {
+        "host": "172.31.49.149",
+        "port": 6379
+    };
+    ```
 
 *   login_providers: Configuration information for facebook and twitter login providers.
 
-        "login_providers": {
-            "facebook": {
-              "client_id": "",
-              "client_secret": ""
-            },
-            "twitter": {
-              "consumer_key": "",
-              "consumer_secret": ""
-            }
+    ```json
+    "login_providers": {
+        "facebook": {
+          "client_id": "",
+          "client_secret": ""
+        },
+        "twitter": {
+          "consumer_key": "",
+          "consumer_secret": ""
         }
-Note: for configuring this setting on your Telepat Cloud instance, send us a request to [support@telepat.io](mailto:support@telepat.io)
+    };
+    ```
+
+**Note**: for configuring this setting on your Telepat Cloud instance, send us a request to [support@telepat.io](mailto:support@telepat.io)
 
 *   amqp: Configuration information for the AMQP queue adapter (RabbitMQ or ActiveMQ). Example:
 
-        "amqp": {
-            "host": "172.31.49.149",
-            "user": "guest",
-            "password": "guest"
-        }
+    ```json
+    "amqp": {
+        "host": "172.31.49.149",
+        "user": "guest",
+        "password": "guest"
+    };
+    ```
 
 *   password_salt: A password salt used by bcrypt to secure user passwords against dictionary attacks. The hash has the following format: `$<id>$<cost>$<salt><digest>` and can be generated in bash using the commands below:
 
-        node
-        bcrypt = require('bcrypt')    
-        bcrypt.genSaltSync()
+    ```bash
+    node
+    bcrypt = require('bcrypt')    
+    bcrypt.genSaltSync()
+    ```
 
 *   mandrill: Telepat uses Mandrill for sending transactional emails, such as account confirmation emails or password reset messages. The API key can be configured similarly to the following example:
 
-        "mandrill": {
-            "api_key": ""
-        }
-Note: for configuring this setting on your Telepat Cloud instance, send us a request to [support@telepat.io](mailto:support@telepat.io)
+    ```json
+    "mandrill": {
+        "api_key": ""
+    };
+    ```
+
+**Note**: for configuring this setting on your Telepat Cloud instance, send us a request to [support@telepat.io](mailto:support@telepat.io)
 
 **Environment variables**
 
@@ -207,21 +240,29 @@ Alternatively, you can configure Telepat using environment variables. Here are t
 
 After bootup, you need to create a new administration user account - Telepat CLI can help you setup your new app in no time. Here are the steps you need to take to create a new app:
 
-*   Register a new admin:
+* Register a new admin:
 
-        telepat add admin --email EMAIL --password PASSWORD
+    ```bash
+    telepat add admin --email EMAIL --password PASSWORD
+    ```
 
-*   Create the app:
+* Create the app:
 
-        telepat add app --name APP_NAME --apiKey API_KEY
+    ```bash
+    telepat add app --name APP_NAME --apiKey API_KEY
+    ```
 
-*   Create at least one context (as a container for your objects):
+* Create at least one context (as a container for your objects):
 
-        telepat add context --contextName CONTEXT_NAME
+    ```bash
+    telepat add context --contextName CONTEXT_NAME
+    ```
 
 *   Create a schema file, and feed it into your app, so Telepat knows the types of objects you'll be working with. You need to have a schema that defines at the very least the types of objects; you can optionally also add information about object parameter names or relationships.
 
-        telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
+    ```bash
+    telepat set schema --filename PATH_TO_SCHEMA_JSON --apiKey API_KEY
+    ```
 
 # A word on stability
 

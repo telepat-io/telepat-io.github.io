@@ -6,13 +6,17 @@ The Telepat CLI is available as an npm package that can be installed globally an
 
 The usage syntax is documented below. Please note that any parameter value that is used often can be globally set and can then be omitted from the command, like below:
 
-		telepat add context --appId 1234 --contextName "New context"
-		telepat set appId 1234
-		telepat add context --contextName "New context"
+```bash
+telepat add context --appId 1234 --contextName "New context"
+telepat set appId 1234
+telepat add context --contextName "New context"
+```
 
 Also, values are automatically remembered when creating new resources. For example, if you use the CLI to create a new admin user, that user will be automatically be used in subsequent calls without the need to specify the credentials each time. In order to see all of the currently globally set values, use the "list configs" command:
 
-		telepat list configs
+```bash
+telepat list configs
+```
 
 ### Available commands
 
@@ -20,9 +24,13 @@ Also, values are automatically remembered when creating new resources. For examp
 	* **elasticsearch**
 	
 	This command will create and configure an Elasticsearch index to be used with Telepat. Prior to calling this, you should run 
-			telepat set elasticsearch_host <es host>
-			telepat set elasticsearch_port <es port>
-			telepat configure elasticsearch
+
+    ```bash
+		telepat set elasticsearch_host <es host>
+		telepat set elasticsearch_port <es port>
+		telepat configure elasticsearch
+    ```
+
 * **set**
 	* **schema**
 	
@@ -31,6 +39,7 @@ Also, values are automatically remembered when creating new resources. For examp
 		* **appId** - the Telepat application ID
 		* **filename** - the path to a json file containing the schema
 		* **schemaData** - an alternative to filename, the JSON schema to be set.
+
 * **add**
 	* **app**
 	
