@@ -8,6 +8,8 @@ As opposed to traditional APIs that serve still snapshots of application data to
 Before starting to design your Telepat app, get up to date with the [data fundamentals »](http://docs.telepat.io/data-fundamentals.html).
 
 ### Deploying Telepat
+The easiest way to connect your app to Telepat in under 5 minutes is by setting up a Cloud instance. Go to the [Telepat homepage](http://telepat.io) to learn more, and get started for free!
+
 Telepat is open source software, so you can install it on your own hardware. You can boot up dependencies and Telepat services individually, or use the available Docker Compose files. Read all about it in the [installation guide »](http://docs.telepat.io/installation.html).
 
 ### Developing with Telepat

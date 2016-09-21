@@ -3,7 +3,7 @@
     .col-lg-3
       ul.sidebar-nav.second
         li
-          a.alpha.active(href="/getting-started.html") Getting started with Telepat
+          a.alpha(href="/getting-started.html") Getting started with Telepat
         li.border-top
           span Developing apps using Telepat
         li.small-margin
@@ -15,7 +15,20 @@
         li.border-top
           span Telepat Cloud
         li.small-margin
-          a.epsilon(href="/cloud-dashboard.html") Using the cloud dashboard
+          a.epsilon.active(href="/cloud-dashboard.html") Using the cloud dashboard
+          ul
+            li
+              a.delta(href="#registration-and-login") Registering and logging in
+            li
+              a.delta(href="#app-management") Creating and managing apps
+            li
+              a.delta(href="#editing-schema") Editing the schema
+            li
+              a.delta(href="#working-with-objects") Working with objects
+            li
+              a.delta(href="#managing-users") Managing users
+            li
+              a.delta(href="#application-settings") Application settings
         li.border-top
           span Telepat Open Source
         li.small-margin
@@ -24,7 +37,6 @@
           a.eta(href="/working-with-telepat.html") Working with Telepat
         li
           a.theta(href="/cli.html") The Telepat CLI
-
 
     #main-content.col-lg-9
       <!-- inject:content:md -->
