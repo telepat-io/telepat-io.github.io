@@ -7,10 +7,10 @@
         *   Creating a new administrator account
         *   Logging in as administrator
         *   CRUD for Telepat apps
-        *   CRUD for contexts
+        *   CRUD for collections
         *   CRUD for schemas and ACL
     *   Registering new and existing devices (browsers or mobile devices)
-    *   Retrieving app contexts
+    *   Retrieving app collections
     *   User management tasks:
         *   Authenticating users using Facebook
         *   Authenticating users using Twitter
@@ -24,6 +24,9 @@
         *   Subscribing and unsubscribing to basic object channels
         *   Restricting access to object read/write based on user status (anonymous, authenticated, admin)
         *   CRUD for objects
+        *   Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
+        *   Support for limits/offsets in object subscriptions
+        *   Allowing objects to have multiple owners and to be access-restricted to their owners
 *   The messaging queue layer, currently offering adapters for [Apache Kafka](http://kafka.apache.org) and [RabbitMQ](https://www.rabbitmq.com/).
 *   The aggregation queue layer, implemented using [](https://nodejs.org). Currently supports "replace" operations on object properties.
 *   The persistence layer, currently offering an adapter for [Elasticsearch](https://www.elastic.co/).
@@ -36,18 +39,15 @@
 
 *   More unit testing!
 *   Scalability benchmark and guide to scaling Telepat
-*   Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
 *   Real-time access to a list of a user's currently logged in friends
 *   Exposing hooks to allow data-manipulation at the aggregation level
 *   Support for developer-defined services
 *   [Couchbase](http://www.couchbase.com/) persistence layer implementation
 *   Support for "increment" operation, as well as operations for array editing
-*   Support for limits/offsets in object subscriptions
 *   Support for 3rd party adapters for the messaging queue layer, persistence layer and synchronization transports
 
 ## Planned
 
-*   Allowing objects to have multiple owners and to be access-restricted to their owners
 *   Real-time access to channel metadata, like instant subscriber or object count
 *   Real-time access to a count of all related objects (know how many objects belong to the current one, as defined in the schema)
 *   The ability to define "actions" (like, view, bump etc.) that can be executed by users on objects
@@ -71,12 +71,13 @@
 ## Implemented
 
 *   Registering new and existing devices
-*   Retrieving app contexts
+*   Retrieving app collections
 *   User management tasks:
     *   Logging users in using a Facebook token
     *   Logging users out
 *   Object management tasks:
     *   Subscribing and unsubscribing to basic object channels
+    *   Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
     *   CRUD for objects
 *   Update notifications emitted by channel object
 
@@ -85,7 +86,6 @@
 *   Unit testing!
 *   Offline data access and synchronization
 *   Update notifications emitted by objects themselves
-*   Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
 *   Real-time access to a list of a user's currently logged in friends
 *   Support for "increment" operation, as well as operations for array editing
 *   Support for limits/offsets in object subscriptions
