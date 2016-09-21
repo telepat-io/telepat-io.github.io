@@ -93,12 +93,12 @@
 <li>Creating a new administrator account</li>
 <li>Logging in as administrator</li>
 <li>CRUD for Telepat apps</li>
-<li>CRUD for contexts</li>
+<li>CRUD for collections</li>
 <li>CRUD for schemas and ACL</li>
 </ul>
 </li>
 <li>Registering new and existing devices (browsers or mobile devices)</li>
-<li>Retrieving app contexts</li>
+<li>Retrieving app collections</li>
 <li>User management tasks:<ul>
 <li>Authenticating users using Facebook</li>
 <li>Authenticating users using Twitter</li>
@@ -114,6 +114,9 @@
 <li>Subscribing and unsubscribing to basic object channels</li>
 <li>Restricting access to object read/write based on user status (anonymous, authenticated, admin)</li>
 <li>CRUD for objects</li>
+<li>Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)</li>
+<li>Support for limits/offsets in object subscriptions</li>
+<li>Allowing objects to have multiple owners and to be access-restricted to their owners</li>
 </ul>
 </li>
 </ul>
@@ -132,18 +135,15 @@
 <ul>
 <li>More unit testing!</li>
 <li>Scalability benchmark and guide to scaling Telepat</li>
-<li>Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)</li>
 <li>Real-time access to a list of a user&#39;s currently logged in friends</li>
 <li>Exposing hooks to allow data-manipulation at the aggregation level</li>
 <li>Support for developer-defined services</li>
 <li><a href="http://www.couchbase.com/">Couchbase</a> persistence layer implementation</li>
 <li>Support for &quot;increment&quot; operation, as well as operations for array editing</li>
-<li>Support for limits/offsets in object subscriptions</li>
 <li>Support for 3rd party adapters for the messaging queue layer, persistence layer and synchronization transports</li>
 </ul>
 <h2 id="planned">Planned</h2>
 <ul>
-<li>Allowing objects to have multiple owners and to be access-restricted to their owners</li>
 <li>Real-time access to channel metadata, like instant subscriber or object count</li>
 <li>Real-time access to a count of all related objects (know how many objects belong to the current one, as defined in the schema)</li>
 <li>The ability to define &quot;actions&quot; (like, view, bump etc.) that can be executed by users on objects</li>
@@ -168,7 +168,7 @@
 <h2 id="implemented">Implemented</h2>
 <ul>
 <li>Registering new and existing devices</li>
-<li>Retrieving app contexts</li>
+<li>Retrieving app collections</li>
 <li>User management tasks:<ul>
 <li>Logging users in using a Facebook token</li>
 <li>Logging users out</li>
@@ -176,6 +176,7 @@
 </li>
 <li>Object management tasks:<ul>
 <li>Subscribing and unsubscribing to basic object channels</li>
+<li>Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)</li>
 <li>CRUD for objects</li>
 </ul>
 </li>
@@ -186,7 +187,6 @@
 <li>Unit testing!</li>
 <li>Offline data access and synchronization</li>
 <li>Update notifications emitted by objects themselves</li>
-<li>Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)</li>
 <li>Real-time access to a list of a user&#39;s currently logged in friends</li>
 <li>Support for &quot;increment&quot; operation, as well as operations for array editing</li>
 <li>Support for limits/offsets in object subscriptions</li>
