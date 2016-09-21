@@ -3,7 +3,6 @@
 var gulp = require('gulp-help')(require('gulp'));
 var runSequence = require('run-sequence');
 var size = require('gulp-size');
-var notifier = require('gulp-notify/node_modules/node-notifier');
 
 var config = require('./../config.js');
 var build = require('./../utils/buildHelper.js');
@@ -40,10 +39,10 @@ gulp.task('build', 'Build project (use with --force to force build)', function(c
     ['styles','pages', 'scripts', 'images'],
     'buildSize',
     function() {
-      notifier.notify({
-        title: 'Build',
-        message: 'Build was successful'
-      });
+      // notifier.notify({
+      //   title: 'Build',
+      //   message: 'Build was successful'
+      // });
       cb();
     }
   );
