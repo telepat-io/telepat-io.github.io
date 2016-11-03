@@ -20,7 +20,7 @@ The main topics this tutorial will be covering are:
 
 ### The server components
 You have two options for this part:
-* Roll your own. See the [install guide](http://docs.telepat.io/install.html) to deploy locally or on your servers;
+* Roll your own. See the [install guide](http://docs.telepat.io/installation.html) to deploy locally or on your servers;
 * Signup for a free cloud instance on the [Telepat homepage](http://telepat.io).
 
 ### Structuring the data
