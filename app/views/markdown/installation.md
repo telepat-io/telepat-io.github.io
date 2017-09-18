@@ -47,8 +47,6 @@
 
 ### Launching dependencies
 
-As of 0.2.8, Telepat requires 3 external dependencies:
-
 *   A messaging broker. Adapters are provided out of the box for [RabbitMQ](https://www.rabbitmq.com/) and [Kafka](http://kafka.apache.org/).
 *   A JSON datastore. An adapter for [Elasticsearch](https://www.elastic.co/) is provided.
 *   A [Redis](http://redis.io/) instance to hold Telepat state and configuration data.
@@ -74,13 +72,13 @@ npm install telepat-cli
 
 # Run these 2 if Docker is not running on localhost
 # Mac or Windows, for example
-telepat set elasticsearch_host ES_HOST 
+telepat set elasticsearch_host ES_HOST
 telepat set elasticsearch_port ES_PORT
 
 telepat configure elasticsearch
 ```
 
-The default hostname is locahost, and the default port is 9200\. If running via docker-machine, you can get the host ip by running `docker-machine ip default`.
+The default hostname is locahost, and the default port is 9200. If running via docker-machine, you can get the host ip by running `docker-machine ip default`.
 
 ### Install with Docker
 
@@ -99,28 +97,28 @@ The default ports are 3000 for the API and 80 for the websocket service.
 
 The Telepat backend stack is made up of two components, that will each need configuration when installed from source:
 
-*   The API ([https://github.com/telepat-io/telepat-api](https://github.com/telepat-io/telepat-api)). To start this, simply run
+* The API ([https://github.com/telepat-io/telepat-api](https://github.com/telepat-io/telepat-api)). To start this, simply run
 
     ```bash
-    ./bin/www
+    npm start -- --i=0
     ```
 
 You can also set the PORT environment variable to make the API listen on a port different than the default 3000.
 
-*   The services ([https://github.com/telepat-io/telepat-worker](https://github.com/telepat-io/telepat-worker)). To start, run
+* The services ([https://github.com/telepat-io/telepat-worker](https://github.com/telepat-io/telepat-worker)). To start, run
 
     ```bash
-    node index.js -t topic_name -i worker_index
+    npm start -- --i=0 --t=worker_type
     ```
 
-    For built-in services, these are the commands to start up:
+    Where worker_type can be one of the following:
 
-    *   node telepat-worker/index.js -t aggregation -i 0
-    *   node telepat-worker/index.js -t write -i 0
-    *   node telepat-worker/index.js -t transport_manager -i 0
-    *   node telepat-worker/index.js -t android_transport -i 0
-    *   node telepat-worker/index.js -t ios_transport -i 0
-    *   node telepat-worker/index.js -t sockets_transport -i 0
+  * aggregation
+  * write
+  * transport_manager
+  * android_transport
+  * ios_transport
+  * sockets_transport
 
 To configure the components, create a 'config.json' file in the root of each directory. You can start from the 'config.example.json' template and fill in your specific parameters / remove configurations for services not in use.
 
@@ -203,7 +201,7 @@ Depending on your specific workload and concurrency situations, you will find th
 
     ```bash
     node
-    bcrypt = require('bcrypt')    
+    bcrypt = require('bcrypt')
     bcrypt.genSaltSync()
     ```
 

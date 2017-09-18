@@ -45,7 +45,7 @@ To register a device with the Telepat backend, you need to follow a two step pro
 | info.version       | String representing the device OS version (optional). |
 | info.manufacturer  | String representing the device manufacturer (optional). |
 | info.model         | String representing the device model (optional). |
-| info.udid          | Unique device identifier. If applicable, you can set this value instead of the X-BLGREQ-UDID header to make sure that devices that have previously registered get the same identifier back from Telepat. | 
+| info.udid          | Unique device identifier. If applicable, you can set this value instead of the X-BLGREQ-UDID header to make sure that devices that have previously registered get the same identifier back from Telepat. |
 | persistent         | Contains details about persistent connectivity channels (channels that are always active - like push notifications). |
 | persistent.type    | The type of persistent transport to use - one of 'ios' or 'android'. |
 | persistent.token   | The unique device token for the chosen transport - either the iOS PN token, or the GCM registration token. |
@@ -189,10 +189,13 @@ Example of an update notification containing deleted objects:
 ```
 
 ### Configuring push notifications
-To activate persistent transports for mobile devices, Telepat needs to be configured to talk with push notification service providers, like Apple's APN servers and GCM servers. 
+To activate persistent transports for mobile devices, Telepat needs to be configured to talk with push notification service providers, like Apple's APN servers and GCM servers.
 
-Credentials are stored on each individual Telepat app, using the app object that can be accessed and modified by administrators. To do this:
+Credentials are stored on each individual Telepat app, using the app object that can be accessed and modified by administrators. To do this you'll have to set up a few fields on the application object
 
-* Set the `apn_pfx` key of the application object to a base-64 encoded ASCII string, created from the .p12 APN certificate, in which each character in the string is treated as a byte of binary data.
-* Set the `apn_passphrase` key on the application object to the password required in order to open the .p12 file.
-* Set the `gcm_api_key` key on the application object to the API key for the GCM transport.
+* `apn_key`: The private key issued by Apple
+* `apn_key_id`: The ID of the key issued by Apple
+* `apn_team_id`: ID of the team associated with the provider token key
+* `apn_topic`: The app bundle name
+* `apn_passphrase`: The passphrase of the private key file supplied
+* `gcm_api_key` API key for the GCM transport.
