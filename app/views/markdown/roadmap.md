@@ -1,98 +1,45 @@
-# Server Components
+# Rough roadmap
 
 ## Implemented
 
-*   Front-facing endpoint. Implemented using [Express](http://expressjs.com), exposes the following functionality:
-    *   Administration tasks:
-        *   Creating a new administrator account
-        *   Logging in as administrator
-        *   CRUD for Telepat apps
-        *   CRUD for collections
-        *   CRUD for schemas and ACL
-    *   Registering new and existing devices (browsers or mobile devices)
-    *   Retrieving app collections
-    *   User management tasks:
-        *   Authenticating users using Facebook
-        *   Authenticating users using Twitter
-        *   Authenticating users using username/password
-        *   Verifiying account email address by sending email
-        *   Resetting the password with email validation
-        *   Logging users out
-        *   Updating a user profile
-        *   Deleting a user profile
-    *   Object management tasks:
-        *   Subscribing and unsubscribing to basic object channels
-        *   Restricting access to object read/write based on user status (anonymous, authenticated, admin)
-        *   CRUD for objects
-        *   Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
-        *   Support for limits/offsets in object subscriptions
-        *   Allowing objects to have multiple owners and to be access-restricted to their owners
-*   The messaging queue layer, currently offering adapters for [Apache Kafka](http://kafka.apache.org) and [RabbitMQ](https://www.rabbitmq.com/).
-*   The aggregation queue layer, implemented using [](https://nodejs.org). Currently supports "replace" operations on object properties.
-*   The persistence layer, currently offering an adapter for [Elasticsearch](https://www.elastic.co/).
-*   The synchronization layer, using the following available transports:
-    *   [Google Cloud Messaging](https://developers.google.com/cloud-messaging/)
-    *   [Socket.io](http://socket.io/)
-    *   [Apple PN Service](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html)
-
-## Coming soon
-
-*   More unit testing!
-*   Scalability benchmark and guide to scaling Telepat
-*   Real-time access to a list of a user's currently logged in friends
-*   Exposing hooks to allow data-manipulation at the aggregation level
-*   Support for developer-defined services
-*   [Couchbase](http://www.couchbase.com/) persistence layer implementation
-*   Support for "increment" operation, as well as operations for array editing
-*   Support for 3rd party adapters for the messaging queue layer, persistence layer and synchronization transports
+* Front-facing endpoint. Implemented using [Express](http://expressjs.com), exposes the following functionality:
+  * Administration tasks regardin applications, collections and users
+  * Registering new and existing devices (browsers or mobile devices)
+  * User management tasks:
+    * CRUD operations on the currently logged in user
+    * Authenticating users using Facebook
+    * Authenticating users using Twitter
+    * Authenticating users using username/password
+    * Verifiying account email address by sending email
+    * Resetting the password with email validation
+  * Object management tasks:
+    * Subscribing and unsubscribing to basic object channels
+    * Restricting access to object read/write based on user status (anonymous, authenticated, admin)
+    * CRUD for objects
+    * Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
+    * Support for limits/offsets in object subscriptions
+    * Allowing objects to have multiple owners and to be access-restricted to their owners
+* The messaging queue, currently offering adapters for [Apache Kafka](http://kafka.apache.org) and [RabbitMQ](https://www.rabbitmq.com/)
+* The database, currently offering an adapter for [Elasticsearch](https://www.elastic.co/)
+* The notifications layer, using the following available transports:
+  * [Google Cloud Messaging](https://developers.google.com/cloud-messaging/)
+  * [Socket.io](http://socket.io/)
+  * [Apple PN Service](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html)
 
 ## Planned
 
-*   Real-time access to channel metadata, like instant subscriber or object count
-*   Real-time access to a count of all related objects (know how many objects belong to the current one, as defined in the schema)
-*   The ability to define "actions" (like, view, bump etc.) that can be executed by users on objects
-*   Real-time access to action-related metadata on objects and channels
-*   Support for login with Google and GitHub
+* Expanding Telepat CLI to offer tools for deploying telepat (either remotely or locally)
+* Telepat instance supervisor with its own web based dashboard used for monitoring and deploying Telepat
+* Implementation of [Couchbase](https://www.couchbase.com/) database adapter
+* Implement a formal pipeline for the workers where developers can add their own types of workers as well as pre and post processing functions
+* Real-time access to action-related metadata on objects and channels
+* Implementing 3rd party logins with [Passport.js](http://passportjs.org/)
 
 ## Considered
 
-*   Telepat adapters for:
-    *   [Amazon SQS](http://aws.amazon.com/sqs/)
-    *   [Azure Service Bus](http://azure.microsoft.com/en-us/services/service-bus/)
-    *   [PubNub](http://www.pubnub.com)
-    *   [Azure DocumentDB](http://azure.microsoft.com/en-us/services/documentdb/)
-    *   [Amazon DynamoDB](http://aws.amazon.com/dynamodb/)
-    *   [MongoDB](https://www.mongodb.org/)
-    *   [RethinkDB](http://rethinkdb.com/)
-    *   [Parse](https://parse.com/)
-
-# JavaScript Client
-
-## Implemented
-
-*   Registering new and existing devices
-*   Retrieving app collections
-*   User management tasks:
-    *   Logging users in using a Facebook token
-    *   Logging users out
-*   Object management tasks:
-    *   Subscribing and unsubscribing to basic object channels
-    *   Subscribing to channels using advanced filters (less than, greater than, equal to and text search operators)
-    *   CRUD for objects
-*   Update notifications emitted by channel object
-
-## Coming soon
-
-*   Unit testing!
-*   Offline data access and synchronization
-*   Update notifications emitted by objects themselves
-*   Real-time access to a list of a user's currently logged in friends
-*   Support for "increment" operation, as well as operations for array editing
-*   Support for limits/offsets in object subscriptions
-
-## Planned
-
-*   Real-time access to channel metadata, like instant subscriber or object count
-*   Real-time access to a count of all related objects (know how many objects belong to the current one, as defined in the schema)
-*   The ability to define "actions" (like, view, bump etc.) that can be executed by users on objects
-*   Real-time access to action-related metadata on objects and channels
+* Telepat adapters for:
+  * [Amazon SQS](http://aws.amazon.com/sqs/) Amazon's messaging queue
+  * [Neo4j](https://neo4j.com/) A graph based database
+  * [MongoDB](https://www.mongodb.org/)
+  * [RethinkDB](http://rethinkdb.com/)
+  * [Parse](https://parse.com/)
